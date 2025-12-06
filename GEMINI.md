@@ -208,3 +208,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- Node.js 18+, React 18+ (via Docusaurus v3) + Docusaurus v3 (Classic Preset), Spec-Kit Plus (internal), Mermaid (diagrams) (001-docusaurus-book-creation)
+- Git (GitHub) (001-docusaurus-book-creation)
+
+## Recent Changes
+- 001-docusaurus-book-creation: Added Node.js 18+, React 18+ (via Docusaurus v3) + Docusaurus v3 (Classic Preset), Spec-Kit Plus (internal), Mermaid (diagrams)
