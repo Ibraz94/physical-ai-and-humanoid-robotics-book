@@ -1,0 +1,28 @@
+{
+  "id": "03-init",
+  "title": "Initializing Docusaurus",
+  "description": "Placeholder content.",
+  "source": "@site/docs/03-init.md",
+  "sourceDirName": ".",
+  "slug": "/03-init",
+  "permalink": "/hackathon-book/docs/03-init",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/03-init.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "id": "03-init",
+    "title": "Initializing Docusaurus"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Tooling Setup",
+    "permalink": "/hackathon-book/docs/02-tooling"
+  },
+  "next": {
+    "title": "Configuring Spec-Kit",
+    "permalink": "/hackathon-book/docs/04-speckit"
+  }
+}

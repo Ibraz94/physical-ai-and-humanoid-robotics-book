@@ -1,0 +1,24 @@
+{
+  "id": "01-intro",
+  "title": "Introduction & Philosophy",
+  "description": "Placeholder content.",
+  "source": "@site/docs/01-intro.md",
+  "sourceDirName": ".",
+  "slug": "/01-intro",
+  "permalink": "/hackathon-book/docs/01-intro",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/01-intro.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "01-intro",
+    "title": "Introduction & Philosophy"
+  },
+  "sidebar": "bookSidebar",
+  "next": {
+    "title": "Tooling Setup",
+    "permalink": "/hackathon-book/docs/02-tooling"
+  }
+}

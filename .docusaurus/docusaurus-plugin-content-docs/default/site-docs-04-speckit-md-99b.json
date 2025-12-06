@@ -1,0 +1,28 @@
+{
+  "id": "04-speckit",
+  "title": "Configuring Spec-Kit",
+  "description": "Placeholder content.",
+  "source": "@site/docs/04-speckit.md",
+  "sourceDirName": ".",
+  "slug": "/04-speckit",
+  "permalink": "/hackathon-book/docs/04-speckit",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/04-speckit.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "id": "04-speckit",
+    "title": "Configuring Spec-Kit"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Initializing Docusaurus",
+    "permalink": "/hackathon-book/docs/03-init"
+  },
+  "next": {
+    "title": "The CI/CD Pipeline",
+    "permalink": "/hackathon-book/docs/05-cicd"
+  }
+}

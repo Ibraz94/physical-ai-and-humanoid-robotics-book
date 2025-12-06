@@ -1,0 +1,28 @@
+{
+  "id": "05-cicd",
+  "title": "The CI/CD Pipeline",
+  "description": "Placeholder content.",
+  "source": "@site/docs/05-cicd.md",
+  "sourceDirName": ".",
+  "slug": "/05-cicd",
+  "permalink": "/hackathon-book/docs/05-cicd",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/05-cicd.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "id": "05-cicd",
+    "title": "The CI/CD Pipeline"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Configuring Spec-Kit",
+    "permalink": "/hackathon-book/docs/04-speckit"
+  },
+  "next": {
+    "title": "Writing Spec-Driven Content",
+    "permalink": "/hackathon-book/docs/06-writing"
+  }
+}

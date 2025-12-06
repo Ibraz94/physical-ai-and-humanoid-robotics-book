@@ -1,0 +1,28 @@
+{
+  "id": "09-deployment",
+  "title": "Deployment to GitHub Pages",
+  "description": "Placeholder content.",
+  "source": "@site/docs/09-deployment.md",
+  "sourceDirName": ".",
+  "slug": "/09-deployment",
+  "permalink": "/hackathon-book/docs/09-deployment",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/09-deployment.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 9,
+  "frontMatter": {
+    "id": "09-deployment",
+    "title": "Deployment to GitHub Pages"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Automated Validation",
+    "permalink": "/hackathon-book/docs/08-validation"
+  },
+  "next": {
+    "title": "Versioning & Maintenance",
+    "permalink": "/hackathon-book/docs/10-versioning"
+  }
+}

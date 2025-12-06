@@ -1,0 +1,105 @@
+{
+  "/hackathon-book/__docusaurus/debug-c29": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/__docusaurus/debug/config-ead": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/__docusaurus/debug/content-336": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    },
+    "__props": "__props---hackathon-book-docusaurus-debug-content-3-fd-924"
+  },
+  "/hackathon-book/__docusaurus/debug/globalData-bb6": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/__docusaurus/debug/metadata-644": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/__docusaurus/debug/registry-e50": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/__docusaurus/debug/routes-e1b": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+    }
+  },
+  "/hackathon-book/docs-2c7": {
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__context": {
+      "plugin": "plugin---hackathon-book-docsaba-da2"
+    }
+  },
+  "/hackathon-book/docs-233": {
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---hackathon-book-docsb-21-b60"
+  },
+  "/hackathon-book/docs-f13": {
+    "__comp": "__comp---theme-doc-roota-94-67a"
+  },
+  "/hackathon-book/docs/01-intro-304": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-01-introfed-752"
+  },
+  "/hackathon-book/docs/02-tooling-030": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-02-toolingc-69-b8f"
+  },
+  "/hackathon-book/docs/03-init-456": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-03-init-486-8c0"
+  },
+  "/hackathon-book/docs/04-speckit-4b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-04-speckit-99-b-c4b"
+  },
+  "/hackathon-book/docs/05-cicd-e45": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-05-cicd-5-a-5-fe9"
+  },
+  "/hackathon-book/docs/06-writing-354": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-06-writing-867-426"
+  },
+  "/hackathon-book/docs/07-diagrams-671": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-07-diagrams-630-27e"
+  },
+  "/hackathon-book/docs/08-validation-11d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-08-validation-1-f-6-22d"
+  },
+  "/hackathon-book/docs/09-deployment-cd5": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-09-deployment-81-e-85e"
+  },
+  "/hackathon-book/docs/10-versioning-0b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-10-versioningc-12-ef0"
+  },
+  "/hackathon-book/-32a": {
+    "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
+    "__context": {
+      "plugin": "plugin---hackathon-book-a-74-813"
+    },
+    "config": "config---hackathon-book-5-e-9-245"
+  }
+}

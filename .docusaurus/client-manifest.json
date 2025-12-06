@@ -1,0 +1,285 @@
+{
+  "entrypoints": [
+    "main"
+  ],
+  "origins": {
+    "237": [
+      237
+    ],
+    "17896441": [
+      869,
+      401
+    ],
+    "main": [
+      354,
+      869,
+      792
+    ],
+    "runtime~main": [
+      792,
+      869,
+      354
+    ],
+    "1df93b7f": [
+      869,
+      583
+    ],
+    "1f670d07": [
+      204
+    ],
+    "4861bc7e": [
+      49
+    ],
+    "5a54a4a3": [
+      585
+    ],
+    "5e95c892": [
+      647
+    ],
+    "630d1165": [
+      63
+    ],
+    "81e2d7b5": [
+      103
+    ],
+    "867b1a5b": [
+      285
+    ],
+    "99b092cf": [
+      317
+    ],
+    "a7456010": [
+      235
+    ],
+    "a7bd4aaa": [
+      98
+    ],
+    "a94703ab": [
+      869,
+      48
+    ],
+    "aba21aa0": [
+      742
+    ],
+    "b21ca7de": [
+      178
+    ],
+    "c123d7fb": [
+      277
+    ],
+    "c693b495": [
+      788
+    ],
+    "fed7d42c": [
+      54
+    ],
+    "styles": [
+      48,
+      354,
+      401,
+      583,
+      792,
+      869
+    ]
+  },
+  "assets": {
+    "48": {
+      "js": [
+        {
+          "file": "assets/js/a94703ab.d6df46c4.js",
+          "hash": "62700945a1e856ed",
+          "publicPath": "/hackathon-book/assets/js/a94703ab.d6df46c4.js"
+        }
+      ]
+    },
+    "49": {
+      "js": [
+        {
+          "file": "assets/js/4861bc7e.9517229d.js",
+          "hash": "ce43648529ee11be",
+          "publicPath": "/hackathon-book/assets/js/4861bc7e.9517229d.js"
+        }
+      ]
+    },
+    "54": {
+      "js": [
+        {
+          "file": "assets/js/fed7d42c.3a333960.js",
+          "hash": "3c3674def8bcb034",
+          "publicPath": "/hackathon-book/assets/js/fed7d42c.3a333960.js"
+        }
+      ]
+    },
+    "63": {
+      "js": [
+        {
+          "file": "assets/js/630d1165.7ae7ce96.js",
+          "hash": "e500f2391d9836d9",
+          "publicPath": "/hackathon-book/assets/js/630d1165.7ae7ce96.js"
+        }
+      ]
+    },
+    "98": {
+      "js": [
+        {
+          "file": "assets/js/a7bd4aaa.4a14a3f7.js",
+          "hash": "c290c5a535681c7e",
+          "publicPath": "/hackathon-book/assets/js/a7bd4aaa.4a14a3f7.js"
+        }
+      ]
+    },
+    "103": {
+      "js": [
+        {
+          "file": "assets/js/81e2d7b5.4336762f.js",
+          "hash": "0b18ff754e024f5b",
+          "publicPath": "/hackathon-book/assets/js/81e2d7b5.4336762f.js"
+        }
+      ]
+    },
+    "178": {
+      "js": [
+        {
+          "file": "assets/js/b21ca7de.463acdee.js",
+          "hash": "13e8833f48abea70",
+          "publicPath": "/hackathon-book/assets/js/b21ca7de.463acdee.js"
+        }
+      ]
+    },
+    "204": {
+      "js": [
+        {
+          "file": "assets/js/1f670d07.b95e6158.js",
+          "hash": "ad37a4cfd29f8c2b",
+          "publicPath": "/hackathon-book/assets/js/1f670d07.b95e6158.js"
+        }
+      ]
+    },
+    "235": {
+      "js": [
+        {
+          "file": "assets/js/a7456010.437ef1b9.js",
+          "hash": "9d813fc6ac6f8341",
+          "publicPath": "/hackathon-book/assets/js/a7456010.437ef1b9.js"
+        }
+      ]
+    },
+    "237": {
+      "js": [
+        {
+          "file": "assets/js/237.b4432364.js",
+          "hash": "7362261018cb606d",
+          "publicPath": "/hackathon-book/assets/js/237.b4432364.js"
+        }
+      ]
+    },
+    "277": {
+      "js": [
+        {
+          "file": "assets/js/c123d7fb.31a4a216.js",
+          "hash": "f7d4be9ed08f7b67",
+          "publicPath": "/hackathon-book/assets/js/c123d7fb.31a4a216.js"
+        }
+      ]
+    },
+    "285": {
+      "js": [
+        {
+          "file": "assets/js/867b1a5b.153457d0.js",
+          "hash": "53c8c7a9a512d32e",
+          "publicPath": "/hackathon-book/assets/js/867b1a5b.153457d0.js"
+        }
+      ]
+    },
+    "317": {
+      "js": [
+        {
+          "file": "assets/js/99b092cf.f7dbbf52.js",
+          "hash": "e9bc4f545814a145",
+          "publicPath": "/hackathon-book/assets/js/99b092cf.f7dbbf52.js"
+        }
+      ]
+    },
+    "354": {
+      "js": [
+        {
+          "file": "assets/js/runtime~main.46ba8965.js",
+          "hash": "af242ccb9c46b4f6",
+          "publicPath": "/hackathon-book/assets/js/runtime~main.46ba8965.js"
+        }
+      ]
+    },
+    "401": {
+      "js": [
+        {
+          "file": "assets/js/17896441.55e42809.js",
+          "hash": "1aad4f17c4fd23f7",
+          "publicPath": "/hackathon-book/assets/js/17896441.55e42809.js"
+        }
+      ]
+    },
+    "583": {
+      "js": [
+        {
+          "file": "assets/js/1df93b7f.5651392e.js",
+          "hash": "0d3a9607da77f074",
+          "publicPath": "/hackathon-book/assets/js/1df93b7f.5651392e.js"
+        }
+      ]
+    },
+    "585": {
+      "js": [
+        {
+          "file": "assets/js/5a54a4a3.88d99217.js",
+          "hash": "b1f83e22bd11ddca",
+          "publicPath": "/hackathon-book/assets/js/5a54a4a3.88d99217.js"
+        }
+      ]
+    },
+    "647": {
+      "js": [
+        {
+          "file": "assets/js/5e95c892.a2222ab7.js",
+          "hash": "54023079e2563ddd",
+          "publicPath": "/hackathon-book/assets/js/5e95c892.a2222ab7.js"
+        }
+      ]
+    },
+    "742": {
+      "js": [
+        {
+          "file": "assets/js/aba21aa0.7e4d7f58.js",
+          "hash": "da7f85176d5363aa",
+          "publicPath": "/hackathon-book/assets/js/aba21aa0.7e4d7f58.js"
+        }
+      ]
+    },
+    "788": {
+      "js": [
+        {
+          "file": "assets/js/c693b495.3836d57a.js",
+          "hash": "eeedf5cb5174e048",
+          "publicPath": "/hackathon-book/assets/js/c693b495.3836d57a.js"
+        }
+      ]
+    },
+    "792": {
+      "js": [
+        {
+          "file": "assets/js/main.6e6cc7cb.js",
+          "hash": "3bd87d5d868fa2fd",
+          "publicPath": "/hackathon-book/assets/js/main.6e6cc7cb.js"
+        }
+      ]
+    },
+    "869": {
+      "css": [
+        {
+          "file": "assets/css/styles.a21350c5.css",
+          "hash": "b4b48733c34e5642",
+          "publicPath": "/hackathon-book/assets/css/styles.a21350c5.css"
+        }
+      ]
+    }
+  }
+}

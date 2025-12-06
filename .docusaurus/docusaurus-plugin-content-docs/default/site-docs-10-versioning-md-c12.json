@@ -1,0 +1,24 @@
+{
+  "id": "10-versioning",
+  "title": "Versioning & Maintenance",
+  "description": "Placeholder content.",
+  "source": "@site/docs/10-versioning.md",
+  "sourceDirName": ".",
+  "slug": "/10-versioning",
+  "permalink": "/hackathon-book/docs/10-versioning",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/10-versioning.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "id": "10-versioning",
+    "title": "Versioning & Maintenance"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Deployment to GitHub Pages",
+    "permalink": "/hackathon-book/docs/09-deployment"
+  }
+}

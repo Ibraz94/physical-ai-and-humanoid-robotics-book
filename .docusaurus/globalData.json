@@ -1,0 +1,78 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/hackathon-book/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/hackathon-book/docs",
+          "mainDocId": "01-intro",
+          "docs": [
+            {
+              "id": "01-intro",
+              "path": "/hackathon-book/docs/01-intro",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "02-tooling",
+              "path": "/hackathon-book/docs/02-tooling",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "03-init",
+              "path": "/hackathon-book/docs/03-init",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "04-speckit",
+              "path": "/hackathon-book/docs/04-speckit",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "05-cicd",
+              "path": "/hackathon-book/docs/05-cicd",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "06-writing",
+              "path": "/hackathon-book/docs/06-writing",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "07-diagrams",
+              "path": "/hackathon-book/docs/07-diagrams",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "08-validation",
+              "path": "/hackathon-book/docs/08-validation",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "09-deployment",
+              "path": "/hackathon-book/docs/09-deployment",
+              "sidebar": "bookSidebar"
+            },
+            {
+              "id": "10-versioning",
+              "path": "/hackathon-book/docs/10-versioning",
+              "sidebar": "bookSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "bookSidebar": {
+              "link": {
+                "path": "/hackathon-book/docs/01-intro",
+                "label": "01-intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

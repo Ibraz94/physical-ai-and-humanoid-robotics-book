@@ -1,0 +1,28 @@
+{
+  "id": "08-validation",
+  "title": "Automated Validation",
+  "description": "Placeholder content.",
+  "source": "@site/docs/08-validation.md",
+  "sourceDirName": ".",
+  "slug": "/08-validation",
+  "permalink": "/hackathon-book/docs/08-validation",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/08-validation.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 8,
+  "frontMatter": {
+    "id": "08-validation",
+    "title": "Automated Validation"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "Diagramming as Code",
+    "permalink": "/hackathon-book/docs/07-diagrams"
+  },
+  "next": {
+    "title": "Deployment to GitHub Pages",
+    "permalink": "/hackathon-book/docs/09-deployment"
+  }
+}

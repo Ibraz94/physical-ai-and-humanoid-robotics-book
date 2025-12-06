@@ -1,0 +1,28 @@
+{
+  "id": "06-writing",
+  "title": "Writing Spec-Driven Content",
+  "description": "Placeholder content.",
+  "source": "@site/docs/06-writing.md",
+  "sourceDirName": ".",
+  "slug": "/06-writing",
+  "permalink": "/hackathon-book/docs/06-writing",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/username/hackathon-book/tree/main/docs/06-writing.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "id": "06-writing",
+    "title": "Writing Spec-Driven Content"
+  },
+  "sidebar": "bookSidebar",
+  "previous": {
+    "title": "The CI/CD Pipeline",
+    "permalink": "/hackathon-book/docs/05-cicd"
+  },
+  "next": {
+    "title": "Diagramming as Code",
+    "permalink": "/hackathon-book/docs/07-diagrams"
+  }
+}
