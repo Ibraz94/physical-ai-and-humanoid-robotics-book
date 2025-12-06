@@ -3,141 +3,141 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/hackathon-book/__docusaurus/debug',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug', 'c29'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug', 'c1d'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/config',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/config', 'ead'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/config',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/config', '8c6'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/content',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/content', '336'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/content',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/content', '947'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/globalData',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/globalData', 'bb6'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/globalData',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/globalData', '02d'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/metadata',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/metadata', '644'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/metadata',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/metadata', '801'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/registry',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/registry', 'e50'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/registry',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/registry', '847'),
     exact: true
   },
   {
-    path: '/hackathon-book/__docusaurus/debug/routes',
-    component: ComponentCreator('/hackathon-book/__docusaurus/debug/routes', 'e1b'),
+    path: '/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/routes',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/routes', '5df'),
     exact: true
   },
   {
-    path: '/hackathon-book/docs',
-    component: ComponentCreator('/hackathon-book/docs', 'b54'),
+    path: '/Physical-ai-and-humonoid-robotics-book/docs',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs', 'f7b'),
     routes: [
       {
-        path: '/hackathon-book/docs',
-        component: ComponentCreator('/hackathon-book/docs', 'b2a'),
+        path: '/Physical-ai-and-humonoid-robotics-book/docs',
+        component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs', '97a'),
         routes: [
           {
-            path: '/hackathon-book/docs',
-            component: ComponentCreator('/hackathon-book/docs', '426'),
+            path: '/Physical-ai-and-humonoid-robotics-book/docs',
+            component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs', '01c'),
             routes: [
               {
-                path: '/hackathon-book/docs/01-intro',
-                component: ComponentCreator('/hackathon-book/docs/01-intro', 'd72'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/01-intro',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/01-intro', 'b81'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/02-tooling',
-                component: ComponentCreator('/hackathon-book/docs/02-tooling', '93a'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/02-tooling',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/02-tooling', '10d'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/03-init',
-                component: ComponentCreator('/hackathon-book/docs/03-init', '164'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/03-init',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/03-init', 'cfa'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/04-speckit',
-                component: ComponentCreator('/hackathon-book/docs/04-speckit', '5c5'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/04-speckit',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/04-speckit', '587'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/05-cicd',
-                component: ComponentCreator('/hackathon-book/docs/05-cicd', '34e'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/05-cicd',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/05-cicd', 'c11'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/06-writing',
-                component: ComponentCreator('/hackathon-book/docs/06-writing', 'f0f'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/06-writing',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/06-writing', '259'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/07-diagrams',
-                component: ComponentCreator('/hackathon-book/docs/07-diagrams', 'cb6'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams', '61a'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/08-validation',
-                component: ComponentCreator('/hackathon-book/docs/08-validation', '65b'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/08-validation',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/08-validation', '88e'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/09-deployment',
-                component: ComponentCreator('/hackathon-book/docs/09-deployment', '8c0'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/09-deployment',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/09-deployment', 'e30'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/10-versioning',
-                component: ComponentCreator('/hackathon-book/docs/10-versioning', 'acc'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/10-versioning',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/10-versioning', '460'),
                 exact: true
               },
               {
-                path: '/hackathon-book/docs/module-01-foundations/control-theory',
-                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/control-theory', '812'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory', 'f8c'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-01-foundations/nodes-topics',
-                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/nodes-topics', '8be'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics', '069'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-01-foundations/setup-ros2',
-                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/setup-ros2', 'd42'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2', '737'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-01/intro',
-                component: ComponentCreator('/hackathon-book/docs/module-01/intro', '7fc'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro', '6a5'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-02/intro',
-                component: ComponentCreator('/hackathon-book/docs/module-02/intro', '2ad'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro', '66c'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-03/intro',
-                component: ComponentCreator('/hackathon-book/docs/module-03/intro', 'f92'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro', '7e4'),
                 exact: true,
                 sidebar: "courseSidebar"
               },
               {
-                path: '/hackathon-book/docs/module-04/intro',
-                component: ComponentCreator('/hackathon-book/docs/module-04/intro', '30d'),
+                path: '/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro',
+                component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro', '165'),
                 exact: true,
                 sidebar: "courseSidebar"
               }
@@ -148,8 +148,8 @@ export default [
     ]
   },
   {
-    path: '/hackathon-book/',
-    component: ComponentCreator('/hackathon-book/', '32a'),
+    path: '/Physical-ai-and-humonoid-robotics-book/',
+    component: ComponentCreator('/Physical-ai-and-humonoid-robotics-book/', 'cb2'),
     exact: true
   },
   {

@@ -18,7 +18,7 @@ const config: Config = {
   url: 'https://username.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/hackathon-book/',
+  baseUrl: '/Physical-ai-and-humonoid-robotics-book/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -44,7 +44,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/username/hackathon-book/tree/main/',
+            'https://github.com/username/Physical-ai-and-humonoid-robotics-book/tree/main/',
         },
         blog: false,
         theme: {
@@ -74,7 +74,7 @@ const config: Config = {
           label: 'Introduction',
         },
         {
-          href: 'https://github.com/ibraz94/hackathon-book',
+          href: 'https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book',
           label: 'GitHub',
           position: 'right',
         },
@@ -106,7 +106,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/ibraz94/hackathon-book',
+              href: 'https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book',
             },
           ],
         },

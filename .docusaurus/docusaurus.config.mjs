@@ -29,7 +29,7 @@ export default {
     "experimental_router": "browser"
   },
   "url": "https://username.github.io",
-  "baseUrl": "/hackathon-book/",
+  "baseUrl": "/Physical-ai-and-humonoid-robotics-book/",
   "organizationName": "username",
   "projectName": "hackathon-book",
   "onBrokenLinks": "throw",
@@ -47,7 +47,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.ts",
-          "editUrl": "https://github.com/username/hackathon-book/tree/main/"
+          "editUrl": "https://github.com/username/Physical-ai-and-humonoid-robotics-book/tree/main/"
         },
         "blog": false,
         "theme": {
@@ -77,7 +77,7 @@ export default {
           "label": "Introduction"
         },
         {
-          "href": "https://github.com/ibraz94/hackathon-book",
+          "href": "https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book",
           "label": "GitHub",
           "position": "right"
         }
@@ -110,7 +110,7 @@ export default {
           "items": [
             {
               "label": "GitHub",
-              "href": "https://github.com/ibraz94/hackathon-book"
+              "href": "https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book"
             }
           ]
         }

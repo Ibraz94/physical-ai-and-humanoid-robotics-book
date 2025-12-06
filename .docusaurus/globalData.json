@@ -1,88 +1,88 @@
 {
   "docusaurus-plugin-content-docs": {
     "default": {
-      "path": "/hackathon-book/docs",
+      "path": "/Physical-ai-and-humonoid-robotics-book/docs",
       "versions": [
         {
           "name": "current",
           "label": "Next",
           "isLast": true,
-          "path": "/hackathon-book/docs",
+          "path": "/Physical-ai-and-humonoid-robotics-book/docs",
           "mainDocId": "module-01-foundations/intro",
           "docs": [
             {
               "id": "01-intro",
-              "path": "/hackathon-book/docs/01-intro"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/01-intro"
             },
             {
               "id": "02-tooling",
-              "path": "/hackathon-book/docs/02-tooling"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/02-tooling"
             },
             {
               "id": "03-init",
-              "path": "/hackathon-book/docs/03-init"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/03-init"
             },
             {
               "id": "04-speckit",
-              "path": "/hackathon-book/docs/04-speckit"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/04-speckit"
             },
             {
               "id": "05-cicd",
-              "path": "/hackathon-book/docs/05-cicd"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/05-cicd"
             },
             {
               "id": "06-writing",
-              "path": "/hackathon-book/docs/06-writing"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/06-writing"
             },
             {
               "id": "07-diagrams",
-              "path": "/hackathon-book/docs/07-diagrams"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams"
             },
             {
               "id": "08-validation",
-              "path": "/hackathon-book/docs/08-validation"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/08-validation"
             },
             {
               "id": "09-deployment",
-              "path": "/hackathon-book/docs/09-deployment"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/09-deployment"
             },
             {
               "id": "10-versioning",
-              "path": "/hackathon-book/docs/10-versioning"
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/10-versioning"
             },
             {
               "id": "module-01-foundations/control-theory",
-              "path": "/hackathon-book/docs/module-01-foundations/control-theory",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/intro",
-              "path": "/hackathon-book/docs/module-01/intro",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/nodes-topics",
-              "path": "/hackathon-book/docs/module-01-foundations/nodes-topics",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/setup-ros2",
-              "path": "/hackathon-book/docs/module-01-foundations/setup-ros2",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-02-isaac-sim/intro",
-              "path": "/hackathon-book/docs/module-02/intro",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-03-gazebo/intro",
-              "path": "/hackathon-book/docs/module-03/intro",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-04-webots/intro",
-              "path": "/hackathon-book/docs/module-04/intro",
+              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro",
               "sidebar": "courseSidebar"
             }
           ],
@@ -90,7 +90,7 @@
           "sidebars": {
             "courseSidebar": {
               "link": {
-                "path": "/hackathon-book/docs/module-01/intro",
+                "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro",
                 "label": "module-01-foundations/intro"
               }
             }

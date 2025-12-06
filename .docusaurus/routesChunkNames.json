@@ -1,129 +1,129 @@
 {
-  "/hackathon-book/__docusaurus/debug-c29": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug-c1d": {
     "__comp": "__comp---theme-debug-config-23-a-2ff",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/__docusaurus/debug/config-ead": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/config-8c6": {
     "__comp": "__comp---theme-debug-config-23-a-2ff",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/__docusaurus/debug/content-336": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/content-947": {
     "__comp": "__comp---theme-debug-contentba-8-ce7",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     },
-    "__props": "__props---hackathon-book-docusaurus-debug-content-3-fd-924"
+    "__props": "__props---physical-ai-and-humonoid-robotics-book-docusaurus-debug-content-42-e-2ac"
   },
-  "/hackathon-book/__docusaurus/debug/globalData-bb6": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/globalData-02d": {
     "__comp": "__comp---theme-debug-global-dataede-0fa",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/__docusaurus/debug/metadata-644": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/metadata-801": {
     "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/__docusaurus/debug/registry-e50": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/registry-847": {
     "__comp": "__comp---theme-debug-registry-679-501",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/__docusaurus/debug/routes-e1b": {
+  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/routes-5df": {
     "__comp": "__comp---theme-debug-routes-946-699",
     "__context": {
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/docs-b54": {
+  "/Physical-ai-and-humonoid-robotics-book/docs-f7b": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---hackathon-book-docsaba-da2"
     }
   },
-  "/hackathon-book/docs-b2a": {
+  "/Physical-ai-and-humonoid-robotics-book/docs-97a": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---hackathon-book-docsb-21-b60"
+    "__props": "__props---physical-ai-and-humonoid-robotics-book-docs-47-e-1b0"
   },
-  "/hackathon-book/docs-426": {
+  "/Physical-ai-and-humonoid-robotics-book/docs-01c": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
-  "/hackathon-book/docs/01-intro-d72": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/01-intro-b81": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-01-introfed-752"
   },
-  "/hackathon-book/docs/02-tooling-93a": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/02-tooling-10d": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-02-toolingc-69-b8f"
   },
-  "/hackathon-book/docs/03-init-164": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/03-init-cfa": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-03-init-486-8c0"
   },
-  "/hackathon-book/docs/04-speckit-5c5": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/04-speckit-587": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-04-speckit-99-b-c4b"
   },
-  "/hackathon-book/docs/05-cicd-34e": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/05-cicd-c11": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-05-cicd-5-a-5-fe9"
   },
-  "/hackathon-book/docs/06-writing-f0f": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/06-writing-259": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-06-writing-867-426"
   },
-  "/hackathon-book/docs/07-diagrams-cb6": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams-61a": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-07-diagrams-630-27e"
   },
-  "/hackathon-book/docs/08-validation-65b": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/08-validation-88e": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-08-validation-1-f-6-22d"
   },
-  "/hackathon-book/docs/09-deployment-8c0": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/09-deployment-e30": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-09-deployment-81-e-85e"
   },
-  "/hackathon-book/docs/10-versioning-acc": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/10-versioning-460": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-10-versioningc-12-ef0"
   },
-  "/hackathon-book/docs/module-01-foundations/control-theory-812": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory-f8c": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-01-foundations-control-theoryf-78-c31"
   },
-  "/hackathon-book/docs/module-01-foundations/nodes-topics-8be": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics-069": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-01-foundations-nodes-topics-326-479"
   },
-  "/hackathon-book/docs/module-01-foundations/setup-ros2-d42": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2-737": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-01-foundations-setup-ros-2-b-12-024"
   },
-  "/hackathon-book/docs/module-01/intro-7fc": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro-6a5": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-01-intro-171-a30"
   },
-  "/hackathon-book/docs/module-02/intro-2ad": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro-66c": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-02-intro-24-f-4e4"
   },
-  "/hackathon-book/docs/module-03/intro-f92": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro-7e4": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-03-intro-917-b0e"
   },
-  "/hackathon-book/docs/module-04/intro-30d": {
+  "/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro-165": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-module-04-intro-4-c-0-2fe"
   },
-  "/hackathon-book/-32a": {
+  "/Physical-ai-and-humonoid-robotics-book/-cb2": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
     "__context": {
       "plugin": "plugin---hackathon-book-a-74-813"
