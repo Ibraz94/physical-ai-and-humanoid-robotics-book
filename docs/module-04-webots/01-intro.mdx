@@ -1,0 +1,35 @@
+---
+title: Module 4 Intro
+sidebar_position: 1
+slug: /module-04/intro
+---
+
+# Module 4: Rapid Prototyping with Webots
+
+**Learning Objectives**
+- Introduction to Webots.
+- The Supervisor API.
+- Cross-compilation workflow.
+
+```python
+# Webots Controller API
+from controller import Robot
+
+robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+
+while robot.step(timestep) != -1:
+    pass
+```
+
+```python
+# Reading a sensor
+ds = robot.getDevice('distance_sensor')
+ds.enable(timestep)
+val = ds.getValue()
+```
+
+```bash
+# Webots ROS 2 Launcher
+ros2 launch webots_ros2_driver driver_launch.py robot_description:=my_robot.urdf
+```

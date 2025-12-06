@@ -1,27 +1,28 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
+import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import ModuleCards from '@site/src/components/Homepage/ModuleCards';
 import Heading from '@theme/Heading';
+import Link from '@docusaurus/Link';
 
 import styles from './index.module.css';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={styles.heroBanner}>
       <div className="container">
         <Heading as="h1" className="hero__title">
-          {siteConfig.title}
+          Physical AI & Humanoid Robotics
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">
+          Master Embodied Intelligence with ROS 2, Isaac Sim, Gazebo, and Webots.
+        </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
-            to="/docs/01-intro">
-            Start Reading 📖
+            className="button button--primary button--lg"
+            to="/docs/module-01/intro">
+            Start Learning 🚀
           </Link>
         </div>
       </div>
@@ -29,15 +30,23 @@ function HomepageHeader() {
   );
 }
 
-export default function Home(): ReactNode {
+import ResourceList from '@site/src/components/Homepage/ResourceList';
+
+// ... existing imports
+
+export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`Course: ${siteConfig.title}`}
+      description="A code-driven course on Physical AI and Humanoid Robotics">
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <ModuleCards />
+        <div className="container">
+          <hr className="margin-vert--lg" style={{borderColor: 'var(--ifm-color-primary-dark)'}} />
+        </div>
+        <ResourceList />
       </main>
     </Layout>
   );

@@ -1,60 +1,68 @@
 <!--
 Sync Impact Report:
-- Version change: 1.0.0 -> 1.1.0
-- List of modified principles: II. Technical Accuracy (Added MCP server requirement)
+- Version change: 1.1.0 -> 1.2.0
+- List of modified principles: II. Educational Integrity (Renamed from Technical Accuracy), IV. Developer-Centric Documentation (Renamed from Developer-Centric Clarity), VI. Web Ergonomics (New Principle)
 - Added sections: None
 - Removed sections: None
-- Templates requiring updates: None
+- Templates requiring updates: None (Templates are generic)
 - Follow-up TODOs: None
 -->
 
-# AI/Spec-Driven Book Creation using Docusaurus Constitution
+# Physical AI & Humanoid Robotics Course published via Docusaurus + GitHub Pages Constitution
 
 ## Core Principles
 
-### I. Spec-First Development
-Book structure, chapters, and workflows must be defined and approved before content creation begins. This ensures a coherent narrative arc and prevents "content drift" where chapters diverge from the central theme. Changes to the structure require a spec update.
+### I. Spec-First & Modular Design
+Course structure, chapters, and web-site layout must be defined and approved before content creation begins. This ensures a coherent learning path and prevents "scope creep" or disorganized modules. The design must be modular to allow independent updates.
 
-### II. Technical Accuracy
-All technical explanations, especially those related to Docusaurus, GitHub Pages, and documentation tooling, must be validated against official sources. Agents must leverage available MCP servers to retrieve and verify authoritative information directly from official documentation before generation. We do not publish unverified claims. If an official source contradicts a common practice, we follow the official source or explicitly explain the deviation.
+### II. Educational Integrity
+Course content (books, references, exercises) must be curated via verified sources. All technical claims and educational resources must be cross-referenced with authoritative materials. Agents must leverage available MCP servers to search and suggest the "best" AI-course books & resources, which must then be manually reviewed for suitability.
 
-### III. Developer-Centric Clarity
-Content is optimized for software engineers and technical writers. Avoid fluff; focus on actionable, precise instructions. Use standard industry terminology correctly. Assume a reader who values their time and seeks specific technical outcomes.
+### III. Transparency and Traceability
+All included course materials and references must be clearly documented, including source, edition, and license. Users must be able to trace every piece of knowledge back to its origin.
 
-### IV. Workflow Automation
-We enforce reproducibility using Spec-Kit Plus automation primitives. Manual, undocumented steps are prohibited for build and deployment processes. The book creation process itself should serve as an example of the automation principles it teaches.
+### IV. Developer-Centric Documentation
+Content is structured and styled for readability by developers, educators, and technical learners. Avoid academic jargon where simple technical terms suffice. Focus on actionable learning outcomes and reproducible exercises.
 
-### V. Version-Controlled Knowledge
-All content, including text, diagrams, and code examples, must be traceable and diff-friendly in Git repositories. We treat documentation as code. 'Binary blobs' for text content are forbidden; use Markdown.
+### V. Reproducible Content Pipeline
+We enforce reproducibility using Spec-Kit Plus and MCP-server integration. The process of fetching, validating, and integrating course material must be automated and version-controlled.
+
+### VI. Web Ergonomics
+The home page and navigation UX must be designed for clarity. Discoverability of course modules, lessons, and resources is paramount. The site must be responsive and clean.
 
 ## Project Standards & Constraints
 
 ### Standards
-- **Validation**: All instructions must be cross-referenced with official Docusaurus v3, GitHub, and GitHub Actions documentation.
-- **Code Examples**: Must be runnable and tested within a minimal Docusaurus setup.
-- **Style**: Concise, modular, and suitable for static documentation platforms (e.g., avoiding "click here" links, using semantic structure).
-- **Citations**: Use inline hyperlinks to primary sources (official docs preferred).
-- **Visuals**: Visual architecture diagrams must be included where relevant (generated or referenced). Minimum of 3 diagrams (PNG/SVG) required for the book.
+- **Resource Verification**: Course resources (books, papers, tutorials) must be hand-verified: metadata (title, author, edition, publication date, license) included.
+- **Citation Format**: Inline hyperlinks + metadata (author, year, title, publisher) in a reference list (or footnote) — minimally license-compliant if content is non-public domain.
+- **Module Structure**: For each course module: provide learning objectives, required resources, optional resources, estimated time-to-complete, prerequisites (if any).
+- **Style**: Modular, navigable, and consistent with Docusaurus/MDX practices; code examples or sample diagrams when relevant.
+- **Home Page**: Highlights course overview, module list, quick start guide, and resource repository; must be responsive and clean.
 
 ### Constraints
 - **Format**: Standard Docusaurus v3 project structure.
 - **Deployment**: GitHub Pages via automated CI/CD (GitHub Actions).
-- **Scope**: 8–12 chapters, each 600–1200 words.
-- **Visibility**: Repository must be public.
-- **Pipeline**: A working deployment pipeline on push is mandatory.
+- **Structure**: Course content must be organized into modules — minimum 6, maximum 15 modules.
+- **Resources**: For each module: at least 1 required resource (book or paper), up to 3 optional resources. Resources must be licensed appropriately (open license, or permissible for educational reference).
+- **Dependencies**: All content (text, metadata, links) must be stored in Git repository; no external closed-source dependencies required for core course content.
+- **Licensing**: Course content must avoid reliance on proprietary/unlicensed material for core learning (optional resources may reference commercial books if licensing allows referencing).
 
 ## Success Criteria & Definition of Done
 
-- **Build Success**: Book builds successfully locally and via GitHub Actions without warnings or errors.
-- **Live Deployment**: GitHub Pages deployment URL is live, stable, and matches the specification.
-- **Verification**: All instructions are confirmed by official docs or verified examples.
-- **Tooling**: Spec-Kit Plus is used to generate, validate, and maintain the project structure.
-- **Value**: Content is assessed as clear, accurate, and useful for developers building documentation pipelines.
+- **Deployment**: Course homepage deployed successfully — shows course title, short description, module listing, quick start instructions, resource link database.
+- **Accessibility**: All modules accessible through site navigation with clearly labeled resources, learning objectives, and resource metadata.
+- **Content Quality**: Resource database (fetched via MCP-server then reviewed) contains at least 12 distinct, high-quality AI course resources (books/papers/tutorials) relevant to the course focus.
+- **Usability**: Users (educators or learners) can clone the repo and navigate modules locally or via GitHub Pages without missing files or broken links.
+- **Validation**: The entire site passes link-checks, build validation, and renders correctly on deployment.
+- **Compliance**: All resource references are traceable (metadata + link) and license-compliant.
 
 ## Governance
 
 Constitution supersedes all other practices. Amendments require documentation, approval, and a migration plan.
 
-All Pull Requests and reviews must verify compliance with these principles. Complexity in the workflow or content must be justified against the principle of Developer-Centric Clarity.
+- **Resource Review**: All additions of new course resources must go through a “resource review” step: verify license, metadata, relevance, and record source details in a resource registry.
+- **Versioning**: Version control and changelog maintained — major updates to modules or resources versioned (e.g. v1.0, v1.1).
+- **Community**: Community contributions allowed via pull requests — any added modules, resources, or homepage changes must comply with core principles and standards.
+- **Maintenance**: Periodic review cycles (every 6 months) to refresh resource list, remove obsolete links, and update deprecated references.
 
-**Version**: 1.1.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06
+**Version**: 1.2.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06

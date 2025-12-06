@@ -69,7 +69,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'bookSidebar',
+          sidebarId: 'courseSidebar',
           position: 'left',
           label: 'The Book',
         },
@@ -88,7 +88,7 @@ const config: Config = {
           items: [
             {
               label: 'The Book',
-              to: '/docs/01-intro',
+              to: '/docs/module-01/intro',
             },
           ],
         },

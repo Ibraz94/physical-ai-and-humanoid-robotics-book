@@ -1,0 +1,66 @@
+---
+title: Introduction
+description: Welcome to Physical AI & Humanoid Robotics
+sidebar_position: 1
+slug: /module-01/intro
+---
+
+# Introduction to Physical AI
+
+**Learning Objectives**
+- Define Physical AI and Embodied Intelligence.
+- Understand the role of ROS 2 in modern robotics.
+- Set up your development environment.
+
+## What is Physical AI?
+
+Physical AI refers to systems where artificial intelligence algorithms interact directly with the physical world through sensors and actuators.
+
+```python
+# Physical AI Concept: Sensor-Action Loop
+class Robot:
+    def __init__(self):
+        self.state = "idle"
+
+    def sense(self, sensor_data):
+        # AI processing of physical data
+        return self.process(sensor_data)
+
+    def act(self, command):
+        # Physical actuation
+        print(f"Executing: {command}")
+```
+
+## Why ROS 2?
+
+ROS 2 (Robot Operating System 2) is the industry standard middleware for robotics. We will use the **Jazzy Jalisco** distribution.
+
+```bash
+# Check your ROS 2 installation
+printenv | grep ROS
+# Expected output: ROS_DISTRO=jazzy
+```
+
+## Your First Node
+
+Here is a simple Python node in ROS 2:
+
+```python
+import rclpy
+from rclpy.node import Node
+
+class MinimalNode(Node):
+    def __init__(self):
+        super().__init__('minimal_node')
+        self.get_logger().info('Physical AI Course Node Started!')
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MinimalNode()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+```
