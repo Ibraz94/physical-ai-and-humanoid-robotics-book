@@ -1,0 +1,54 @@
+---
+title: Setting Up ROS 2 Jazzy
+sidebar_position: 2
+---
+
+# Setting Up ROS 2 Jazzy
+
+**Learning Objectives**
+- Install ROS 2 Jazzy Jalisco on Ubuntu 24.04.
+- Configure your workspace.
+- Verify installation with a demo listener.
+
+## Installation
+
+We assume a standard Ubuntu 24.04 (Noble Numbat) environment.
+
+```bash
+# 1. Set locale
+locale  # check for UTF-8
+
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+
+```bash
+# 2. Add the ROS 2 apt repository
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+
+sudo apt update && sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
+```bash
+# 3. Install ROS 2 Jazzy
+sudo apt update
+sudo apt install ros-jazzy-desktop
+```
+
+## Environment Setup
+
+Add the sourcing script to your `.bashrc`:
+
+```bash
+# Source the setup script
+source /opt/ros/jazzy/setup.bash
+
+# Add to bashrc for permanence
+echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+```

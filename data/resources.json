@@ -1,0 +1,98 @@
+[
+  {
+    "title": "ROS 2 Documentation (Jazzy)",
+    "author": "Open Robotics",
+    "type": "Official Doc",
+    "url": "https://docs.ros.org/en/jazzy/",
+    "category": "ROS 2",
+    "year": "2024"
+  },
+  {
+    "title": "Isaac Sim Documentation",
+    "author": "NVIDIA",
+    "type": "Official Doc",
+    "url": "https://docs.omniverse.nvidia.com/isaacsim/latest/index.html",
+    "category": "Simulators",
+    "year": "2024"
+  },
+  {
+    "title": "Webots User Guide",
+    "author": "Cyberbotics",
+    "type": "Official Doc",
+    "url": "https://cyberbotics.com/doc/guide/index",
+    "category": "Simulators",
+    "year": "2024"
+  },
+  {
+    "title": "Gazebo Documentation",
+    "author": "Open Robotics",
+    "type": "Official Doc",
+    "url": "https://gazebosim.org/docs",
+    "category": "Simulators",
+    "year": "2024"
+  },
+  {
+    "title": "Robotics: Modelling, Planning and Control",
+    "author": "Bruno Siciliano et al.",
+    "type": "Book",
+    "url": "https://link.springer.com/book/10.1007/978-1-84628-642-1",
+    "category": "Physical AI",
+    "year": "2009"
+  },
+  {
+    "title": "Modern Robotics",
+    "author": "Kevin M. Lynch and Frank C. Park",
+    "type": "Book",
+    "url": "http://hades.mech.northwestern.edu/index.php/Modern_Robotics",
+    "category": "Physical AI",
+    "year": "2017"
+  },
+  {
+    "title": "Probabilistic Robotics",
+    "author": "Sebastian Thrun, Wolfram Burgard, and Dieter Fox",
+    "type": "Book",
+    "url": "http://www.probabilistic-robotics.org/",
+    "category": "Physical AI",
+    "year": "2005"
+  },
+  {
+    "title": "Deep Reinforcement Learning for Robotics",
+    "author": "Jens Kober et al.",
+    "type": "Paper",
+    "url": "https://www.internal-journal-robotics.com/",
+    "category": "Physical AI",
+    "year": "2013"
+  },
+  {
+    "title": "ROS 2 Design",
+    "author": "ROS 2 Team",
+    "type": "Official Doc",
+    "url": "http://design.ros2.org/",
+    "category": "ROS 2",
+    "year": "2024"
+  },
+  {
+    "title": "NVIDIA Isaac Gym: High Performance GPU-Based Physics Simulation For Robot Learning",
+    "author": "Viktor Makoviychuk et al.",
+    "type": "Paper",
+    "url": "https://arxiv.org/abs/2108.10470",
+    "category": "Simulators",
+    "year": "2021"
+  },
+  {
+    "title": "Hands-On ROS 2 Programming",
+    "author": "Francisco Martín Rico",
+    "type": "Book",
+    "url": "https://www.packtpub.com/",
+    "category": "ROS 2",
+    "year": "2023"
+  },
+  {
+    "title": "A Review of Robot Learning for Manipulation",
+    "author": "Kroemer et al.",
+    "type": "Paper",
+    "url": "https://www.jmlr.org/",
+    "category": "Physical AI",
+    "year": "2021"
+  }
+]
