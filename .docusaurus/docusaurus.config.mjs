@@ -4,9 +4,9 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "Spec-Driven Development with Docusaurus",
-  "tagline": "A technical book about building books",
-  "favicon": "img/favicon.ico",
+  "title": "Physical AI & Humnoid Robtoics",
+  "tagline": "A technical book about building physical AI systems and humanoid robots.",
+  "favicon": "img/vector.svg",
   "future": {
     "v4": {
       "removeLegacyPostBuildHeadAttribute": true,
@@ -64,20 +64,20 @@ export default {
       "disableSwitch": false
     },
     "navbar": {
-      "title": "Spec-Driven Docusaurus",
+      "title": "Physical AI & Humnoid Robtoics",
       "logo": {
-        "alt": "Spec-Driven Docusaurus Logo",
-        "src": "img/logo.svg"
+        "alt": "Physical AI & Humnoid Robtoics",
+        "src": "img/vector.svg"
       },
       "items": [
         {
           "type": "docSidebar",
-          "sidebarId": "bookSidebar",
+          "sidebarId": "courseSidebar",
           "position": "left",
-          "label": "The Book"
+          "label": "Introduction"
         },
         {
-          "href": "https://github.com/username/hackathon-book",
+          "href": "https://github.com/ibraz94/hackathon-book",
           "label": "GitHub",
           "position": "right"
         }
@@ -92,7 +92,7 @@ export default {
           "items": [
             {
               "label": "The Book",
-              "to": "/docs/01-intro"
+              "to": "/docs/module-01/intro"
             }
           ]
         },
@@ -110,12 +110,12 @@ export default {
           "items": [
             {
               "label": "GitHub",
-              "href": "https://github.com/username/hackathon-book"
+              "href": "https://github.com/ibraz94/hackathon-book"
             }
           ]
         }
       ],
-      "copyright": "Copyright © 2025 Spec-Driven Book Project. Built with Docusaurus."
+      "copyright": "Copyright © 2025 Physical AI & Humnoid Robotics."
     },
     "prism": {
       "theme": {

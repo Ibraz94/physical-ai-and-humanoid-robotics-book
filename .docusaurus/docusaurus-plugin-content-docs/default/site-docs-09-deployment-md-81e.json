@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "09-deployment",
     "title": "Deployment to GitHub Pages"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Automated Validation",
-    "permalink": "/hackathon-book/docs/08-validation"
-  },
-  "next": {
-    "title": "Versioning & Maintenance",
-    "permalink": "/hackathon-book/docs/10-versioning"
   }
 }

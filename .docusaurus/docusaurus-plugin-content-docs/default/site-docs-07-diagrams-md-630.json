@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "07-diagrams",
     "title": "Diagramming as Code"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Writing Spec-Driven Content",
-    "permalink": "/hackathon-book/docs/06-writing"
-  },
-  "next": {
-    "title": "Automated Validation",
-    "permalink": "/hackathon-book/docs/08-validation"
   }
 }

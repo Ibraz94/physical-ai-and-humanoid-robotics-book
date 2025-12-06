@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "06-writing",
     "title": "Writing Spec-Driven Content"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "The CI/CD Pipeline",
-    "permalink": "/hackathon-book/docs/05-cicd"
-  },
-  "next": {
-    "title": "Diagramming as Code",
-    "permalink": "/hackathon-book/docs/07-diagrams"
   }
 }

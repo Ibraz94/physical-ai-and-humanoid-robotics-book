@@ -39,75 +39,107 @@ export default [
   },
   {
     path: '/hackathon-book/docs',
-    component: ComponentCreator('/hackathon-book/docs', '2c7'),
+    component: ComponentCreator('/hackathon-book/docs', 'b54'),
     routes: [
       {
         path: '/hackathon-book/docs',
-        component: ComponentCreator('/hackathon-book/docs', '233'),
+        component: ComponentCreator('/hackathon-book/docs', 'b2a'),
         routes: [
           {
             path: '/hackathon-book/docs',
-            component: ComponentCreator('/hackathon-book/docs', 'f13'),
+            component: ComponentCreator('/hackathon-book/docs', '426'),
             routes: [
               {
                 path: '/hackathon-book/docs/01-intro',
-                component: ComponentCreator('/hackathon-book/docs/01-intro', '304'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/01-intro', 'd72'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/02-tooling',
-                component: ComponentCreator('/hackathon-book/docs/02-tooling', '030'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/02-tooling', '93a'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/03-init',
-                component: ComponentCreator('/hackathon-book/docs/03-init', '456'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/03-init', '164'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/04-speckit',
-                component: ComponentCreator('/hackathon-book/docs/04-speckit', '4b0'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/04-speckit', '5c5'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/05-cicd',
-                component: ComponentCreator('/hackathon-book/docs/05-cicd', 'e45'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/05-cicd', '34e'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/06-writing',
-                component: ComponentCreator('/hackathon-book/docs/06-writing', '354'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/06-writing', 'f0f'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/07-diagrams',
-                component: ComponentCreator('/hackathon-book/docs/07-diagrams', '671'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/07-diagrams', 'cb6'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/08-validation',
-                component: ComponentCreator('/hackathon-book/docs/08-validation', '11d'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/08-validation', '65b'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/09-deployment',
-                component: ComponentCreator('/hackathon-book/docs/09-deployment', 'cd5'),
-                exact: true,
-                sidebar: "bookSidebar"
+                component: ComponentCreator('/hackathon-book/docs/09-deployment', '8c0'),
+                exact: true
               },
               {
                 path: '/hackathon-book/docs/10-versioning',
-                component: ComponentCreator('/hackathon-book/docs/10-versioning', '0b0'),
+                component: ComponentCreator('/hackathon-book/docs/10-versioning', 'acc'),
+                exact: true
+              },
+              {
+                path: '/hackathon-book/docs/module-01-foundations/control-theory',
+                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/control-theory', '812'),
                 exact: true,
-                sidebar: "bookSidebar"
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-01-foundations/nodes-topics',
+                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/nodes-topics', '8be'),
+                exact: true,
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-01-foundations/setup-ros2',
+                component: ComponentCreator('/hackathon-book/docs/module-01-foundations/setup-ros2', 'd42'),
+                exact: true,
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-01/intro',
+                component: ComponentCreator('/hackathon-book/docs/module-01/intro', '7fc'),
+                exact: true,
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-02/intro',
+                component: ComponentCreator('/hackathon-book/docs/module-02/intro', '2ad'),
+                exact: true,
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-03/intro',
+                component: ComponentCreator('/hackathon-book/docs/module-03/intro', 'f92'),
+                exact: true,
+                sidebar: "courseSidebar"
+              },
+              {
+                path: '/hackathon-book/docs/module-04/intro',
+                component: ComponentCreator('/hackathon-book/docs/module-04/intro', '30d'),
+                exact: true,
+                sidebar: "courseSidebar"
               }
             ]
           }

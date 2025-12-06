@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "08-validation",
     "title": "Automated Validation"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Diagramming as Code",
-    "permalink": "/hackathon-book/docs/07-diagrams"
-  },
-  "next": {
-    "title": "Deployment to GitHub Pages",
-    "permalink": "/hackathon-book/docs/09-deployment"
   }
 }

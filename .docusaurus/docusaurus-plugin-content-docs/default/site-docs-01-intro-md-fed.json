@@ -15,10 +15,5 @@
   "frontMatter": {
     "id": "01-intro",
     "title": "Introduction & Philosophy"
-  },
-  "sidebar": "bookSidebar",
-  "next": {
-    "title": "Tooling Setup",
-    "permalink": "/hackathon-book/docs/02-tooling"
   }
 }

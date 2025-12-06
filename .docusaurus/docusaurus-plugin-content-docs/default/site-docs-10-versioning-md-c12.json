@@ -15,10 +15,5 @@
   "frontMatter": {
     "id": "10-versioning",
     "title": "Versioning & Maintenance"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Deployment to GitHub Pages",
-    "permalink": "/hackathon-book/docs/09-deployment"
   }
 }

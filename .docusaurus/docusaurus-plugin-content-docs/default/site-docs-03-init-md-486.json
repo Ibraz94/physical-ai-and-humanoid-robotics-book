@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "03-init",
     "title": "Initializing Docusaurus"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Tooling Setup",
-    "permalink": "/hackathon-book/docs/02-tooling"
-  },
-  "next": {
-    "title": "Configuring Spec-Kit",
-    "permalink": "/hackathon-book/docs/04-speckit"
   }
 }

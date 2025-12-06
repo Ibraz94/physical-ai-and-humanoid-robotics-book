@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "05-cicd",
     "title": "The CI/CD Pipeline"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Configuring Spec-Kit",
-    "permalink": "/hackathon-book/docs/04-speckit"
-  },
-  "next": {
-    "title": "Writing Spec-Driven Content",
-    "permalink": "/hackathon-book/docs/06-writing"
   }
 }

@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "04-speckit",
     "title": "Configuring Spec-Kit"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Initializing Docusaurus",
-    "permalink": "/hackathon-book/docs/03-init"
-  },
-  "next": {
-    "title": "The CI/CD Pipeline",
-    "permalink": "/hackathon-book/docs/05-cicd"
   }
 }

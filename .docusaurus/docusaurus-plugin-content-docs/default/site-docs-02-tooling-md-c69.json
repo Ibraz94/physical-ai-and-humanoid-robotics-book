@@ -15,14 +15,5 @@
   "frontMatter": {
     "id": "02-tooling",
     "title": "Tooling Setup"
-  },
-  "sidebar": "bookSidebar",
-  "previous": {
-    "title": "Introduction & Philosophy",
-    "permalink": "/hackathon-book/docs/01-intro"
-  },
-  "next": {
-    "title": "Initializing Docusaurus",
-    "permalink": "/hackathon-book/docs/03-init"
   }
 }

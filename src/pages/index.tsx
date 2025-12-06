@@ -22,7 +22,7 @@ function HomepageHeader() {
           <Link
             className="button button--primary button--lg"
             to="/docs/module-01/intro">
-            Start Learning 🚀
+            Start Learning Now
           </Link>
         </div>
       </div>
@@ -38,7 +38,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Course: ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="A code-driven course on Physical AI and Humanoid Robotics">
       <HomepageHeader />
       <main>

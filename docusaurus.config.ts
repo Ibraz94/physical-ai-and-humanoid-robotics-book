@@ -5,9 +5,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Spec-Driven Development with Docusaurus',
-  tagline: 'A technical book about building books',
-  favicon: 'img/favicon.ico',
+  title: 'Physical AI & Humnoid Robtoics',
+  tagline: 'A technical book about building physical AI systems and humanoid robots.',
+  favicon: 'img/vector.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -61,20 +61,20 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Spec-Driven Docusaurus',
+      title: 'Physical AI & Humnoid Robtoics',
       logo: {
-        alt: 'Spec-Driven Docusaurus Logo',
-        src: 'img/logo.svg',
+        alt: 'Physical AI & Humnoid Robtoics',
+        src: 'img/vector.svg',
       },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'courseSidebar',
           position: 'left',
-          label: 'The Book',
+          label: 'Introduction',
         },
         {
-          href: 'https://github.com/username/hackathon-book',
+          href: 'https://github.com/ibraz94/hackathon-book',
           label: 'GitHub',
           position: 'right',
         },
@@ -106,12 +106,12 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/username/hackathon-book',
+              href: 'https://github.com/ibraz94/hackathon-book',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Spec-Driven Book Project. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Physical AI & Humnoid Robotics.`,
     },
     prism: {
       theme: prismThemes.github,

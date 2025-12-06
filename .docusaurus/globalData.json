@@ -8,65 +8,90 @@
           "label": "Next",
           "isLast": true,
           "path": "/hackathon-book/docs",
-          "mainDocId": "01-intro",
+          "mainDocId": "module-01-foundations/intro",
           "docs": [
             {
               "id": "01-intro",
-              "path": "/hackathon-book/docs/01-intro",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/01-intro"
             },
             {
               "id": "02-tooling",
-              "path": "/hackathon-book/docs/02-tooling",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/02-tooling"
             },
             {
               "id": "03-init",
-              "path": "/hackathon-book/docs/03-init",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/03-init"
             },
             {
               "id": "04-speckit",
-              "path": "/hackathon-book/docs/04-speckit",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/04-speckit"
             },
             {
               "id": "05-cicd",
-              "path": "/hackathon-book/docs/05-cicd",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/05-cicd"
             },
             {
               "id": "06-writing",
-              "path": "/hackathon-book/docs/06-writing",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/06-writing"
             },
             {
               "id": "07-diagrams",
-              "path": "/hackathon-book/docs/07-diagrams",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/07-diagrams"
             },
             {
               "id": "08-validation",
-              "path": "/hackathon-book/docs/08-validation",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/08-validation"
             },
             {
               "id": "09-deployment",
-              "path": "/hackathon-book/docs/09-deployment",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/09-deployment"
             },
             {
               "id": "10-versioning",
-              "path": "/hackathon-book/docs/10-versioning",
-              "sidebar": "bookSidebar"
+              "path": "/hackathon-book/docs/10-versioning"
+            },
+            {
+              "id": "module-01-foundations/control-theory",
+              "path": "/hackathon-book/docs/module-01-foundations/control-theory",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/intro",
+              "path": "/hackathon-book/docs/module-01/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/nodes-topics",
+              "path": "/hackathon-book/docs/module-01-foundations/nodes-topics",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/setup-ros2",
+              "path": "/hackathon-book/docs/module-01-foundations/setup-ros2",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-isaac-sim/intro",
+              "path": "/hackathon-book/docs/module-02/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-gazebo/intro",
+              "path": "/hackathon-book/docs/module-03/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-webots/intro",
+              "path": "/hackathon-book/docs/module-04/intro",
+              "sidebar": "courseSidebar"
             }
           ],
           "draftIds": [],
           "sidebars": {
-            "bookSidebar": {
+            "courseSidebar": {
               "link": {
-                "path": "/hackathon-book/docs/01-intro",
-                "label": "01-intro"
+                "path": "/hackathon-book/docs/module-01/intro",
+                "label": "module-01-foundations/intro"
               }
             }
           }

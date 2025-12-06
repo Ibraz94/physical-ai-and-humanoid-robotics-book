@@ -42,58 +42,86 @@
       "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
     }
   },
-  "/hackathon-book/docs-2c7": {
+  "/hackathon-book/docs-b54": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---hackathon-book-docsaba-da2"
     }
   },
-  "/hackathon-book/docs-233": {
+  "/hackathon-book/docs-b2a": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---hackathon-book-docsb-21-b60"
   },
-  "/hackathon-book/docs-f13": {
+  "/hackathon-book/docs-426": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
-  "/hackathon-book/docs/01-intro-304": {
+  "/hackathon-book/docs/01-intro-d72": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-01-introfed-752"
   },
-  "/hackathon-book/docs/02-tooling-030": {
+  "/hackathon-book/docs/02-tooling-93a": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-02-toolingc-69-b8f"
   },
-  "/hackathon-book/docs/03-init-456": {
+  "/hackathon-book/docs/03-init-164": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-03-init-486-8c0"
   },
-  "/hackathon-book/docs/04-speckit-4b0": {
+  "/hackathon-book/docs/04-speckit-5c5": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-04-speckit-99-b-c4b"
   },
-  "/hackathon-book/docs/05-cicd-e45": {
+  "/hackathon-book/docs/05-cicd-34e": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-05-cicd-5-a-5-fe9"
   },
-  "/hackathon-book/docs/06-writing-354": {
+  "/hackathon-book/docs/06-writing-f0f": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-06-writing-867-426"
   },
-  "/hackathon-book/docs/07-diagrams-671": {
+  "/hackathon-book/docs/07-diagrams-cb6": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-07-diagrams-630-27e"
   },
-  "/hackathon-book/docs/08-validation-11d": {
+  "/hackathon-book/docs/08-validation-65b": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-08-validation-1-f-6-22d"
   },
-  "/hackathon-book/docs/09-deployment-cd5": {
+  "/hackathon-book/docs/09-deployment-8c0": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-09-deployment-81-e-85e"
   },
-  "/hackathon-book/docs/10-versioning-0b0": {
+  "/hackathon-book/docs/10-versioning-acc": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---hackathon-book-docs-10-versioningc-12-ef0"
+  },
+  "/hackathon-book/docs/module-01-foundations/control-theory-812": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-01-foundations-control-theoryf-78-c31"
+  },
+  "/hackathon-book/docs/module-01-foundations/nodes-topics-8be": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-01-foundations-nodes-topics-326-479"
+  },
+  "/hackathon-book/docs/module-01-foundations/setup-ros2-d42": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-01-foundations-setup-ros-2-b-12-024"
+  },
+  "/hackathon-book/docs/module-01/intro-7fc": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-01-intro-171-a30"
+  },
+  "/hackathon-book/docs/module-02/intro-2ad": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-02-intro-24-f-4e4"
+  },
+  "/hackathon-book/docs/module-03/intro-f92": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-03-intro-917-b0e"
+  },
+  "/hackathon-book/docs/module-04/intro-30d": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---hackathon-book-docs-module-04-intro-4-c-0-2fe"
   },
   "/hackathon-book/-32a": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
