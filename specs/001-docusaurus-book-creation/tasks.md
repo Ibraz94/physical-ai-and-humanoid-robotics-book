@@ -29,10 +29,10 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Initialize Docusaurus v3 project (Classic preset) at repository root
-- [ ] T002 Clean up default scaffold content (remove default docs, blog, pages)
-- [ ] T003 [P] Configure Spec-Kit Plus integration in `.specify/` directory if not present
-- [ ] T004 [P] Create `.gitignore` and ensure node_modules and build artifacts are excluded
+- [x] T001 Initialize Docusaurus v3 project (Classic preset) at repository root
+- [x] T002 Clean up default scaffold content (remove default docs, blog, pages)
+- [x] T003 [P] Configure Spec-Kit Plus integration in `.specify/` directory if not present
+- [x] T004 [P] Create `.gitignore` and ensure node_modules and build artifacts are excluded
 
 ---
 
@@ -42,10 +42,10 @@ description: "Task list template for feature implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Configure `docusaurus.config.js` with basic book metadata (title, url, baseUrl)
-- [ ] T006 Setup `sidebars.js` to support the defined book structure (Part I - IV)
-- [ ] T007 Create directory structure for chapters in `docs/` matching data-model.md
-- [ ] T008 Create `static/img/` directory for diagrams
+- [x] T005 Configure `docusaurus.config.js` with basic book metadata (title, url, baseUrl)
+- [x] T006 Setup `sidebars.js` to support the defined book structure (Part I - IV)
+- [x] T007 Create directory structure for chapters in `docs/` matching data-model.md
+- [x] T008 Create `static/img/` directory for diagrams
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -59,10 +59,10 @@ description: "Task list template for feature implementation"
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Create `.github/workflows/deploy.yml` with build and deploy steps from contracts
-- [ ] T010 [US1] Configure GitHub Pages permissions in repository settings (documentation task)
-- [ ] T011 [US1] Verify local build runs successfully with `npm run build`
-- [ ] T012 [US1] Commit and push to `main` to trigger first CI run
+- [x] T009 [US1] Create `.github/workflows/deploy.yml` with build and deploy steps from contracts
+- [x] T010 [US1] Configure GitHub Pages permissions in repository settings (documentation task)
+- [x] T011 [US1] Verify local build runs successfully with `npm run build`
+- [x] T012 [US1] Commit and push to `main` to trigger first CI run
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -76,18 +76,18 @@ description: "Task list template for feature implementation"
 
 ### Implementation for User Story 2
 
-- [ ] T013 [P] [US2] Create `docs/01-intro.md` (Chapter 1: Introduction & Philosophy)
-- [ ] T014 [P] [US2] Create `docs/02-tooling.md` (Chapter 2: Tooling Setup)
-- [ ] T015 [P] [US2] Create `docs/03-init.md` (Chapter 3: Initializing Docusaurus)
-- [ ] T016 [P] [US2] Create `docs/04-speckit.md` (Chapter 4: Configuring the Spec-Kit)
-- [ ] T017 [P] [US2] Create `docs/05-cicd.md` (Chapter 5: The CI/CD Pipeline)
-- [ ] T018 [P] [US2] Create `docs/06-writing.md` (Chapter 6: Writing Spec-Driven Content)
-- [ ] T019 [P] [US2] Create `docs/07-diagrams.md` (Chapter 7: Diagramming as Code)
-- [ ] T020 [P] [US2] Create `docs/08-validation.md` (Chapter 8: Automated Validation)
-- [ ] T021 [P] [US2] Create `docs/09-deployment.md` (Chapter 9: Deployment to GitHub Pages)
-- [ ] T022 [P] [US2] Create `docs/10-versioning.md` (Chapter 10: Versioning & Maintenance)
-- [ ] T023 [US2] Update `sidebars.js` to explicitly link all created chapters
-- [ ] T024 [P] [US2] Add placeholder diagrams to `static/img/` for chapters requiring visuals
+- [x] T013 [P] [US2] Create `docs/01-intro.md` (Chapter 1: Introduction & Philosophy)
+- [x] T014 [P] [US2] Create `docs/02-tooling.md` (Chapter 2: Tooling Setup)
+- [x] T015 [P] [US2] Create `docs/03-init.md` (Chapter 3: Initializing Docusaurus)
+- [x] T016 [P] [US2] Create `docs/04-speckit.md` (Chapter 4: Configuring the Spec-Kit)
+- [x] T017 [P] [US2] Create `docs/05-cicd.md` (Chapter 5: The CI/CD Pipeline)
+- [x] T018 [P] [US2] Create `docs/06-writing.md` (Chapter 6: Writing Spec-Driven Content)
+- [x] T019 [P] [US2] Create `docs/07-diagrams.md` (Chapter 7: Diagramming as Code)
+- [x] T020 [P] [US2] Create `docs/08-validation.md` (Chapter 8: Automated Validation)
+- [x] T021 [P] [US2] Create `docs/09-deployment.md` (Chapter 9: Deployment to GitHub Pages)
+- [x] T022 [P] [US2] Create `docs/10-versioning.md` (Chapter 10: Versioning & Maintenance)
+- [x] T023 [US2] Update `sidebars.js` to explicitly link all created chapters
+- [x] T024 [P] [US2] Add placeholder diagrams to `static/img/` for chapters requiring visuals
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -101,11 +101,11 @@ description: "Task list template for feature implementation"
 
 ### Implementation for User Story 3
 
-- [ ] T025 [US3] Configure `onBrokenLinks: 'throw'` in `docusaurus.config.js`
-- [ ] T026 [US3] Add link checking step to local `package.json` scripts (`npm run check-links`)
-- [ ] T027 [US3] Verify CI pipeline fails on broken links (manual test with broken link)
-- [ ] T028 [US3] Verify CI pipeline passes with clean build
-- [ ] T029 [US3] Confirm live deployment on GitHub Pages reflects latest main commit
+- [x] T025 [US3] Configure `onBrokenLinks: 'throw'` in `docusaurus.config.js`
+- [x] T026 [US3] Add link checking step to local `package.json` scripts (`npm run check-links`)
+- [x] T027 [US3] Verify CI pipeline fails on broken links (manual test with broken link)
+- [x] T028 [US3] Verify CI pipeline passes with clean build
+- [x] T029 [US3] Confirm live deployment on GitHub Pages reflects latest main commit
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -115,10 +115,10 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T030 Update README.md with project documentation and quickstart
-- [ ] T031 [P] Ensure all diagrams render correctly in production build
-- [ ] T032 [P] Validate accessibility (Lighthouse check)
-- [ ] T033 Final spec compliance check (word counts, chapter counts)
+- [x] T030 Update README.md with project documentation and quickstart
+- [x] T031 [P] Ensure all diagrams render correctly in production build
+- [x] T032 [P] Validate accessibility (Lighthouse check)
+- [x] T033 Final spec compliance check (word counts, chapter counts)
 
 ---
 

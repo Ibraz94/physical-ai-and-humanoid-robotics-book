@@ -1,41 +1,49 @@
-# Website
+# Spec-Driven Development with Docusaurus
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+A technical book about building books, demonstrating Spec-Driven Development (SDD) principles.
 
-## Installation
+## Overview
 
-```bash
-yarn
-```
+This repository contains the source code and content for the "Spec-Driven Development with Docusaurus" book. The project is structured using Docusaurus v3 and follows a rigorous "Spec-First" workflow.
 
-## Local Development
+## Quickstart
 
-```bash
-yarn start
-```
+### Prerequisites
+- Node.js v18+
+- Git
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
+### Installation
 
 ```bash
-yarn build
+npm install
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+### Local Development
+
+```bash
+npm start
+```
+Opens http://localhost:3000
+
+### Build & Validation
+
+```bash
+npm run build
+```
+Checks for broken links and generates static artifacts in `build/`.
+
+## Project Structure
+
+- `docs/`: Book chapters (Markdown/MDX)
+- `src/`: Custom React components and styles
+- `static/`: Static assets (images, diagrams)
+- `.github/workflows/`: CI/CD pipeline definitions
+- `specs/`: Project specifications and plans (SDD artifacts)
 
 ## Deployment
 
-Using SSH:
+This project is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.
 
-```bash
-USE_SSH=true yarn deploy
-```
+## License
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+MIT
