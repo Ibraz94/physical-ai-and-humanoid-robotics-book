@@ -1,0 +1,220 @@
+---
+title: Chapter 7 - Bridging AI Agents to ROS 2 Controllers
+sidebar_position: 7
+
+---
+
+  
+
+Now we reach the critical integration point: connecting your AI models to robot control.
+
+  
+
+Imagine you've trained a reinforcement learning agent that outputs joint commands for a humanoid robot. Or you've built a perception pipeline that identifies objects and determines grasp points. How do these Python-based AI systems interface with ROS 2?
+
+  
+
+The answer: **through topics and services, using rclpy**.
+
+  
+
+### **Example: AI-Driven Motor Control**
+
+  
+
+Let's create a simple scenario: an AI agent that generates motor commands based on sensor input.
+
+  
+
+Create `ai_controller.py`:
+
+  
+
+```python
+
+import rclpy
+
+from rclpy.node import Node
+
+from std_msgs.msg import Float32, Float32MultiArray
+
+import numpy as np
+
+  
+  
+
+class  AIController(Node):
+
+def  __init__(self):
+
+super().__init__('ai_controller')
+
+# Subscribe to sensor data
+
+self.sensor_sub = self.create_subscription(
+
+Float32,
+
+'sensor_input',
+
+self.sensor_callback,
+
+10
+
+)
+
+# Publish motor commands
+
+self.command_pub = self.create_publisher(
+
+Float32MultiArray,
+
+'motor_commands',
+
+10
+
+)
+
+self.get_logger().info('AI Controller initialized')
+
+def  sensor_callback(self, msg):
+
+# Simulate AI processing
+
+sensor_value = msg.data
+
+# Simple policy: generate 3 motor commands based on sensor reading
+
+# In reality, this would be a neural network forward pass
+
+commands = self.compute_policy(sensor_value)
+
+# Publish commands
+
+command_msg = Float32MultiArray()
+
+command_msg.data = commands.tolist()
+
+self.command_pub.publish(command_msg)
+
+self.get_logger().info(f'Sensor: {sensor_value:.2f} -> Commands: {commands}')
+
+def  compute_policy(self, sensor_input):
+
+# Placeholder for actual AI model
+
+# In practice, you'd call model.predict(sensor_input) here
+
+# Simple example: scale sensor input to create three motor commands
+
+motor1 = np.clip(sensor_input * 0.1, -1.0, 1.0)
+
+motor2 = np.clip(sensor_input * 0.05, -1.0, 1.0)
+
+motor3 = np.clip(sensor_input * -0.08, -1.0, 1.0)
+
+return np.array([motor1, motor2, motor3])
+
+  
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = AIController()
+
+rclpy.spin(node)
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
+```
+
+  
+
+### **Integrating PyTorch or TensorFlow**
+
+  
+
+In real applications, `compute_policy` would load a trained neural network:
+
+  
+
+```python
+
+import torch
+
+import torch.nn as nn
+
+  
+
+class  PolicyNetwork(nn.Module):
+
+def  __init__(self):
+
+super().__init__()
+
+self.fc1 = nn.Linear(10, 64) # 10 sensor inputs
+
+self.fc2 = nn.Linear(64, 32)
+
+self.fc3 = nn.Linear(32, 3) # 3 motor outputs
+
+def  forward(self, x):
+
+x = torch.relu(self.fc1(x))
+
+x = torch.relu(self.fc2(x))
+
+return torch.tanh(self.fc3(x)) # Output in [-1, 1]
+
+  
+
+class  AIController(Node):
+
+def  __init__(self):
+
+super().__init__('ai_controller')
+
+# Load trained model
+
+self.model = PolicyNetwork()
+
+self.model.load_state_dict(torch.load('policy.pth'))
+
+self.model.eval()
+
+# ... rest of initialization ...
+
+def  compute_policy(self, sensor_input):
+
+# Convert to tensor
+
+input_tensor = torch.FloatTensor([sensor_input])
+
+# Forward pass
+
+with torch.no_grad():
+
+output = self.model(input_tensor)
+
+return output.numpy()[0]
+
+```
+
+  
+
+This pattern—subscribing to sensor topics, processing with AI models, publishing command topics—is how you integrate learned behaviors into ROS 2 systems.
+
+  
+
+The beauty of this architecture: your AI training code can be completely separate from ROS 2. You train in PyTorch or TensorFlow using your preferred tools, save the model weights, and load them in a ROS 2 node for deployment. The ROS 2 node acts as a thin wrapper, handling communication while your AI model focuses on inference.

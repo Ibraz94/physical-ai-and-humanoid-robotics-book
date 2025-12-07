@@ -4,7 +4,7 @@
  * Modify the docusaurus.config.js file at your site's root instead.
  */
 export default {
-  "title": "Physical AI & Humnoid Robtoics",
+  "title": "Physical AI & Humanoid Robtoics",
   "tagline": "A technical book about building physical AI systems and humanoid robots.",
   "favicon": "img/vector.svg",
   "future": {
@@ -28,8 +28,8 @@ export default {
     },
     "experimental_router": "browser"
   },
-  "url": "https://username.github.io",
-  "baseUrl": "/Physical-ai-and-humonoid-robotics-book/",
+  "url": "https://ibraz94.github.io",
+  "baseUrl": "/physical-ai-and-humanoid-robotics-book/",
   "organizationName": "username",
   "projectName": "hackathon-book",
   "onBrokenLinks": "throw",
@@ -47,7 +47,7 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.ts",
-          "editUrl": "https://github.com/username/Physical-ai-and-humonoid-robotics-book/tree/main/"
+          "editUrl": "https://github.com/ibraz94/physical-ai-and-humanoid-robotics-book/tree/main/"
         },
         "blog": false,
         "theme": {
@@ -57,6 +57,13 @@ export default {
     ]
   ],
   "themeConfig": {
+    "docs": {
+      "sidebar": {
+        "autoCollapseCategories": true,
+        "hideable": false
+      },
+      "versionPersistence": "localStorage"
+    },
     "image": "img/docusaurus-social-card.jpg",
     "colorMode": {
       "respectPrefersColorScheme": true,
@@ -64,9 +71,9 @@ export default {
       "disableSwitch": false
     },
     "navbar": {
-      "title": "Physical AI & Humnoid Robtoics",
+      "title": "Physical AI & Humanoid Robotics",
       "logo": {
-        "alt": "Physical AI & Humnoid Robtoics",
+        "alt": "logo",
         "src": "img/vector.svg"
       },
       "items": [
@@ -74,10 +81,10 @@ export default {
           "type": "docSidebar",
           "sidebarId": "courseSidebar",
           "position": "left",
-          "label": "Introduction"
+          "label": "Get Started"
         },
         {
-          "href": "https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book",
+          "href": "https://github.com/ibraz94/physical-ai-and-humanoid-robotics-book",
           "label": "GitHub",
           "position": "right"
         }
@@ -86,36 +93,8 @@ export default {
     },
     "footer": {
       "style": "dark",
-      "links": [
-        {
-          "title": "Content",
-          "items": [
-            {
-              "label": "The Book",
-              "to": "/docs/module-01/intro"
-            }
-          ]
-        },
-        {
-          "title": "Community",
-          "items": [
-            {
-              "label": "Stack Overflow",
-              "href": "https://stackoverflow.com/questions/tagged/docusaurus"
-            }
-          ]
-        },
-        {
-          "title": "More",
-          "items": [
-            {
-              "label": "GitHub",
-              "href": "https://github.com/ibraz94/Physical-ai-and-humonoid-robotics-book"
-            }
-          ]
-        }
-      ],
-      "copyright": "Copyright © 2025 Physical AI & Humnoid Robotics."
+      "copyright": "Copyright © 2025 Physical AI & Humanoid Robotics.",
+      "links": []
     },
     "prism": {
       "theme": {
@@ -320,13 +299,6 @@ export default {
           }
         }
       ]
-    },
-    "docs": {
-      "versionPersistence": "localStorage",
-      "sidebar": {
-        "hideable": false,
-        "autoCollapseCategories": false
-      }
     },
     "blog": {
       "sidebar": {

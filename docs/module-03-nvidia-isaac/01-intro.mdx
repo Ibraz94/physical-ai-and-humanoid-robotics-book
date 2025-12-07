@@ -1,0 +1,167 @@
+---
+title: Chapter 1 - Introduction to NVIDIA Isaac Platform
+sidebar_position: 1
+slug: /module-03/intro
+---
+
+  
+
+### **The Evolution of Robot Simulation**
+
+  
+
+You've mastered ROS 2 for robot communication and Gazebo/Unity for simulation. Now we enter the realm of cutting-edge Physical AI with **NVIDIA Isaac**—a comprehensive platform specifically designed for developing, training, and deploying AI-powered robots.
+
+  
+
+Isaac isn't just another simulator. It's an integrated ecosystem that leverages NVIDIA's expertise in GPU computing, real-time ray tracing, and AI acceleration to push the boundaries of what's possible in robotics development.
+
+  
+
+### **What is NVIDIA Isaac?**
+
+  
+
+NVIDIA Isaac is not a single tool but an integrated ecosystem of software, libraries, and frameworks:
+
+  
+
+**Isaac Sim** is a photorealistic robot simulator built on NVIDIA Omniverse. Unlike Gazebo, which prioritizes physics accuracy, Isaac Sim delivers **both** accurate physics AND cinema-quality rendering. It's specifically optimized for generating synthetic training data at scale and testing perception algorithms in photorealistic environments.
+
+  
+
+**Isaac ROS** provides hardware-accelerated perception packages that run on NVIDIA GPUs and Jetson edge devices. These aren't just faster implementations—they're fundamentally redesigned to leverage tensor cores, CUDA, and specialized AI hardware. What takes seconds on CPU takes milliseconds on Isaac ROS.
+
+  
+
+**Isaac Gym** is a physics simulation environment designed specifically for reinforcement learning. It can simulate thousands of robot instances in parallel on a single GPU, enabling massively parallel training impossible in traditional simulators.
+
+  
+
+**Isaac SDK** includes pre-built AI models, algorithms, and tools for common robotics tasks: navigation, manipulation, perception, and more.
+
+  
+
+### **Why Isaac for Humanoid Robotics?**
+
+  
+
+Humanoid robots present unique challenges that Isaac addresses:
+
+  
+
+**Computational Intensity:** Humanoid control requires processing multiple camera streams, running SLAM algorithms, planning bipedal gaits, maintaining balance, and executing high-level behaviors—all in real-time. Isaac's GPU acceleration makes this feasible on embedded hardware.
+
+  
+
+**Data Hunger:** Training humanoid behaviors requires millions of interaction samples. Isaac Gym can simulate 4,000 humanoid robots simultaneously on a single GPU, gathering training data 4,000x faster than sequential simulation.
+
+  
+
+**Perception Complexity:** Humanoids need robust computer vision to navigate human environments. Isaac ROS provides optimized perception pipelines running at 30+ FPS even on edge devices.
+
+  
+
+**Sim-to-Real Transfer:** The gap between simulation and reality is especially problematic for humanoids due to complex contact dynamics. Isaac Sim's high-fidelity physics and domain randomization tools help bridge this gap.
+
+  
+
+### **The Isaac Architecture**
+
+  
+
+Understanding how Isaac components fit together:
+
+  
+
+**Development Layer (Your Workstation):**
+
+- Isaac Sim for environment design and testing
+
+- Isaac Gym for reinforcement learning training
+
+- Python/PyTorch for model development
+
+- ROS 2 for algorithm prototyping
+
+  
+
+**Deployment Layer (Robot Hardware):**
+
+- Isaac ROS for real-time perception
+
+- Trained models from Isaac Gym
+
+- ROS 2 for system integration
+
+- Jetson hardware for edge inference
+
+  
+
+**Workflow:** Develop algorithms in ROS 2 → Test in Isaac Sim → Train policies in Isaac Gym → Optimize perception with Isaac ROS → Deploy to Jetson-powered robots.
+
+  
+
+### **Hardware Requirements**
+
+  
+
+Isaac is demanding. Here's what you need:
+
+  
+
+**For Isaac Sim (Workstation):**
+
+- GPU: NVIDIA RTX 4070 Ti or better (minimum 12GB VRAM)
+
+- Recommended: RTX 4090 or A6000 (24GB VRAM)
+
+- CPU: High-performance multi-core (Ryzen 9 / Core i9)
+
+- RAM: 64GB minimum, 128GB recommended
+
+- Storage: NVMe SSD with 500GB+ free space
+
+- OS: Ubuntu 22.04 LTS
+
+  
+
+**For Isaac ROS (Deployment):**
+
+- NVIDIA Jetson Orin Nano (8GB) - entry level
+
+- NVIDIA Jetson Orin NX (16GB) - recommended
+
+- NVIDIA Jetson AGX Orin (32GB/64GB) - high performance
+
+  
+
+**Without RTX hardware, Isaac Sim will not run.** This is non-negotiable. The platform requires ray tracing cores and tensor cores that only exist in RTX GPUs.
+
+  
+
+**Cloud Alternative:** NVIDIA offers Isaac Sim through Omniverse Cloud for those without local hardware.
+
+  
+
+### **What You'll Learn**
+
+  
+
+By the end of this module:
+
+- Install and configure Isaac Sim on Ubuntu
+
+- Create photorealistic simulation environments
+
+- Import and control robots in Isaac Sim
+
+- Use Isaac ROS for hardware-accelerated perception
+
+- Implement Visual SLAM for autonomous navigation
+
+- Deploy optimized perception pipelines to Jetson hardware
+
+  
+
+Let's begin with installation.

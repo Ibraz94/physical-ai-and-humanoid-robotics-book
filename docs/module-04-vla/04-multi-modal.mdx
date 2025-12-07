@@ -1,0 +1,384 @@
+---
+title: Chapter 4 - Multi-Modal Perception and Interaction
+sidebar_position: 4
+slug: /module-04/multi-modal
+---
+
+## **Chapter 4 - Multi-Modal Perception and Interaction**
+
+  
+
+### **Beyond Language: Vision-Language Integration**
+
+  
+
+Commands often reference visual elements:
+
+- "Pick up **that** cup" (requires identifying which cup)
+
+- "Go to the **red** door" (requires color recognition)
+
+- "Bring me the **closest** object" (requires spatial reasoning)
+
+  
+
+We must integrate vision with language.
+
+  
+
+### **Object Detection with YOLO**
+
+  
+
+First, detect objects in the scene:
+
+  
+
+```python
+
+import cv2
+
+from ultralytics import YOLO
+
+  
+
+class  ObjectDetector(Node):
+
+def  __init__(self):
+
+super().__init__('object_detector')
+
+# Load YOLO model
+
+self.model = YOLO('yolov8n.pt')
+
+# Subscribe to camera
+
+self.image_sub = self.create_subscription(
+
+Image,
+
+'/camera/image_raw',
+
+self.image_callback,
+
+10
+
+)
+
+# Publish detected objects
+
+self.objects_pub = self.create_publisher(
+
+String,
+
+'/detected_objects',
+
+10
+
+)
+
+self.bridge = CvBridge()
+
+def  image_callback(self, msg):
+
+# Convert ROS Image to OpenCV
+
+cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
+
+# Run detection
+
+results = self.model(cv_image)
+
+# Extract objects
+
+detected_objects = []
+
+for r in results:
+
+for box in r.boxes:
+
+cls = int(box.cls[0])
+
+conf = float(box.conf[0])
+
+name = self.model.names[cls]
+
+x1, y1, x2, y2 = box.xyxy[0].tolist()
+
+detected_objects.append({
+
+"name": name,
+
+"confidence": conf,
+
+"bbox": [x1, y1, x2, y2]
+
+})
+
+# Publish
+
+msg_out = String()
+
+msg_out.data = json.dumps(detected_objects)
+
+self.objects_pub.publish(msg_out)
+
+```
+
+  
+
+### **Grounding Language to Vision**
+
+  
+
+Use LLM with vision context:
+
+  
+
+```python
+
+def  ground_command(self, command, detected_objects):
+
+prompt = f"""The robot sees these objects:
+
+{json.dumps(detected_objects, indent=2)}
+
+  
+
+User command: "{command}"
+
+  
+
+Identify which object(s) the command refers to. Respond with JSON:
+
+{{
+
+"target_objects": ["object_name1", "object_name2"],
+
+"reasoning": "explanation"
+
+}}"""
+
+  
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}]
+
+)
+
+return json.loads(response.choices[0].message.content)
+
+```
+
+  
+
+**Example:**
+
+  
+
+Command: "Pick up the red cup"
+
+Detected: [`{"name": "cup", "color": "red", "name": "cup", "color": "blue"}`]
+
+
+Output:
+
+```json
+
+{
+
+"target_objects": ["cup"],
+
+"filtering": {"color": "red"},
+
+"reasoning": "User specified the red cup, filtering out the blue one"
+
+}
+
+```
+
+  
+
+### **Spatial Reasoning**
+
+  
+
+Commands involve spatial relationships:
+
+- "the cup **on** the table"
+
+- "the **closest** chair"
+
+- "the book **next to** the lamp"
+
+  
+
+```python
+
+def  spatial_reasoning(self, objects, depth_map):
+
+# Calculate 3D positions from depth
+
+objects_3d = []
+
+for obj in objects:
+
+bbox = obj["bbox"]
+
+center_x = (bbox[0] + bbox[2]) / 2
+
+center_y = (bbox[1] + bbox[3]) / 2
+
+# Get depth at center
+
+depth = depth_map[int(center_y), int(center_x)]
+
+objects_3d.append({
+
+**obj,
+
+"position_3d": {
+
+"x": center_x,
+
+"y": center_y,
+
+"depth": depth
+
+}
+
+})
+
+return objects_3d
+
+```
+
+  
+
+Query spatial relationships:
+
+  
+
+```python
+
+prompt = f"""Objects in 3D space:
+
+{json.dumps(objects_3d, indent=2)}
+
+  
+
+Command: "Pick up the cup on the table"
+
+  
+
+Which object should the robot grasp? Consider spatial relationships.
+
+"""
+
+```
+
+  
+
+### **Multi-Modal Feedback**
+
+  
+
+Robots should provide feedback through multiple channels:
+
+  
+
+**Visual Feedback:**
+
+```python
+
+def  show_detection_overlay(self, image, objects):
+
+for obj in objects:
+
+bbox = obj["bbox"]
+
+cv2.rectangle(image,
+
+(int(bbox[0]), int(bbox[1])),
+
+(int(bbox[2]), int(bbox[3])),
+
+(0, 255, 0), 2)
+
+label = f"{obj['name']} ({obj['confidence']:.2f})"
+
+cv2.putText(image, label,
+
+(int(bbox[0]), int(bbox[1])-10),
+
+cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+
+return image
+
+```
+
+  
+
+**Audio Feedback (Text-to-Speech):**
+
+```python
+
+from gtts import gTTS
+
+import pygame
+
+  
+
+def  speak(self, text):
+
+tts = gTTS(text=text, lang='en')
+
+tts.save("/tmp/response.mp3")
+
+pygame.mixer.init()
+
+pygame.mixer.music.load("/tmp/response.mp3")
+
+pygame.mixer.music.play()
+
+```
+
+  
+
+**Natural Language Status:**
+
+```python
+
+def  generate_status_update(self):
+
+prompt = f"""Robot status:
+
+- Location: {self.world_state['robot_location']}
+
+- Holding: {self.world_state['holding_object'] or  'nothing'}
+
+- Battery: 75%
+
+- Task: {self.current_task}
+
+  
+
+Generate a natural language status update for the user (one sentence)."""
+
+  
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}]
+
+)
+
+status = response.choices[0].message.content
+
+self.speak(status)

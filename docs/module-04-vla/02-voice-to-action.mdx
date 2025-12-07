@@ -1,0 +1,455 @@
+---
+title: Chapter 2 - Voice-to-Action with Whisper
+sidebar_position: 2
+slug: /module-04/voice-to-action
+---
+
+## **Chapter 2: Voice-to-Action with Whisper**
+
+  
+
+### **Why Speech Recognition Matters**
+
+  
+
+Typing commands is impractical for robot interaction. Natural human-robot communication requires speech. Your hands might be full, you might be across the room, or you simply want the convenience of speaking naturally.
+
+  
+
+OpenAI Whisper provides state-of-the-art speech recognition that:
+
+- Works in noisy environments
+
+- Handles multiple languages
+
+- Runs on edge devices (with optimization)
+
+- Achieves near-human transcription accuracy
+
+  
+
+### **Installing Whisper**
+
+  
+
+```bash
+
+pip  install  openai-whisper
+
+```
+
+  
+
+For faster inference on GPU:
+
+  
+
+```bash
+
+pip  install  faster-whisper
+
+```
+
+  
+
+### **Basic Whisper Usage**
+
+  
+
+```python
+
+import whisper
+
+  
+
+# Load model (options: tiny, base, small, medium, large)
+
+model = whisper.load_model("base")
+
+  
+
+# Transcribe audio file
+
+result = model.transcribe("audio.wav")
+
+  
+
+print(result["text"])
+
+# Output: "Go to the kitchen and bring me a glass of water"
+
+```
+
+  
+
+**Model Size Trade-offs:**
+
+  
+
+| Model | Parameters | VRAM | Speed | Accuracy |
+
+|-------|-----------|------|-------|----------|
+
+| tiny | 39M | ~1GB | ~32x realtime | Good |
+
+| base | 74M | ~1GB | ~16x realtime | Better |
+
+| small | 244M | ~2GB | ~6x realtime | Great |
+
+| medium | 769M | ~5GB | ~2x realtime | Excellent |
+
+| large | 1550M | ~10GB | ~1x realtime | Best |
+
+  
+
+For robotics, **base** or **small** provide good balance of speed and accuracy.
+
+  
+
+### **Real-Time Audio Capture**
+
+  
+
+Create a ROS 2 node that captures audio and transcribes:
+
+  
+
+```python
+
+import rclpy
+
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+import whisper
+
+import pyaudio
+
+import wave
+
+import numpy as np
+
+  
+
+class  VoiceCommandNode(Node):
+
+def  __init__(self):
+
+super().__init__('voice_command_node')
+
+# Publisher for transcribed text
+
+self.command_pub = self.create_publisher(String, '/voice_command', 10)
+
+# Load Whisper model
+
+self.get_logger().info('Loading Whisper model...')
+
+self.model = whisper.load_model("base")
+
+self.get_logger().info('Whisper model loaded')
+
+# Audio settings
+
+self.CHUNK = 1024
+
+self.FORMAT = pyaudio.paInt16
+
+self.CHANNELS = 1
+
+self.RATE = 16000
+
+self.RECORD_SECONDS = 5
+
+# Initialize PyAudio
+
+self.audio = pyaudio.PyAudio()
+
+# Start listening
+
+self.timer = self.create_timer(0.1, self.listen)
+
+self.is_recording = False
+
+def  listen(self):
+
+if  not  self.is_recording:
+
+self.get_logger().info('Listening... (speak now)')
+
+self.record_and_transcribe()
+
+def  record_and_transcribe(self):
+
+self.is_recording = True
+
+# Open audio stream
+
+stream = self.audio.open(
+
+format=self.FORMAT,
+
+channels=self.CHANNELS,
+
+rate=self.RATE,
+
+input=True,
+
+frames_per_buffer=self.CHUNK
+
+)
+
+frames = []
+
+# Record audio
+
+for i in  range(0, int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
+
+data = stream.read(self.CHUNK)
+
+frames.append(data)
+
+stream.stop_stream()
+
+stream.close()
+
+# Save to temporary file
+
+temp_file = "/tmp/command.wav"
+
+wf = wave.open(temp_file, 'wb')
+
+wf.setnchannels(self.CHANNELS)
+
+wf.setsampwidth(self.audio.get_sample_size(self.FORMAT))
+
+wf.setframerate(self.RATE)
+
+wf.writeframes(b''.join(frames))
+
+wf.close()
+
+# Transcribe
+
+self.get_logger().info('Transcribing...')
+
+result = self.model.transcribe(temp_file)
+
+text = result["text"].strip()
+
+if text:
+
+self.get_logger().info(f'Recognized: {text}')
+
+# Publish command
+
+msg = String()
+
+msg.data = text
+
+self.command_pub.publish(msg)
+
+self.is_recording = False
+
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = VoiceCommandNode()
+
+rclpy.spin(node)
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+
+if  __name__ == '__main__':
+
+main()
+
+```
+
+  
+
+### **Optimizing for Real-Time**
+
+  
+
+**Use Voice Activity Detection (VAD):**
+
+  
+
+Only transcribe when speech is detected, saving computation.
+
+  
+
+```python
+
+import webrtcvad
+
+  
+
+class  VoiceCommandNode(Node):
+
+def  __init__(self):
+
+super().__init__('voice_command_node')
+
+# ... previous init code ...
+
+# Voice Activity Detection
+
+self.vad = webrtcvad.Vad(2) # Aggressiveness 0-3
+
+self.speech_frames = []
+
+self.is_speech_active = False
+
+def  process_audio_chunk(self, chunk):
+
+# Check if chunk contains speech
+
+is_speech = self.vad.is_speech(chunk, self.RATE)
+
+if is_speech:
+
+if  not  self.is_speech_active:
+
+self.get_logger().info('Speech detected')
+
+self.is_speech_active = True
+
+self.speech_frames = []
+
+self.speech_frames.append(chunk)
+
+elif  self.is_speech_active:
+
+# Speech ended, transcribe accumulated frames
+
+self.is_speech_active = False
+
+self.transcribe_speech()
+
+```
+
+  
+
+**Use Faster-Whisper:**
+
+  
+
+CTranslate2-optimized version is 4x faster:
+
+  
+
+```python
+
+from faster_whisper import WhisperModel
+
+  
+
+model = WhisperModel("base", device="cuda", compute_type="float16")
+
+  
+
+segments, info = model.transcribe("audio.wav")
+
+for segment in segments:
+
+print(segment.text)
+
+```
+
+  
+
+### **Running on Jetson**
+
+  
+
+For edge deployment, optimize aggressively:
+
+  
+
+```python
+
+# Use int8 quantization
+
+model = WhisperModel("base", device="cuda", compute_type="int8")
+
+  
+
+# Reduce audio chunk size
+
+RECORD_SECONDS = 3  # Shorter recording windows
+
+  
+
+# Cache model in memory
+
+# Load once at startup, reuse for all transcriptions
+
+```
+
+  
+
+### **Testing Voice Commands**
+
+  
+
+```bash
+
+# Terminal 1: Start voice command node
+
+ros2  run  simple_robot  voice_command_node
+
+  
+
+# Terminal 2: Subscribe to commands
+
+ros2  topic  echo  /voice_command
+
+  
+
+# Speak into microphone: "Move forward"
+
+# Should see: data: 'Move forward'
+
+```
+
+  
+
+### **Handling Multiple Languages**
+
+  
+
+Whisper supports 99 languages. Specify language for better accuracy:
+
+  
+
+```python
+
+result = model.transcribe("audio.wav", language="en") # English
+
+result = model.transcribe("audio.wav", language="es") # Spanish
+
+result = model.transcribe("audio.wav", language="zh") # Chinese
+
+```
+
+  
+
+Or let it auto-detect:
+
+  
+
+```python
+
+result = model.transcribe("audio.wav")
+
+detected_language = result["language"]

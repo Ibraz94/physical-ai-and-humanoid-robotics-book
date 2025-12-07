@@ -1,66 +1,168 @@
 ---
-title: Control Theory
+title: Chapter 4 - Exploring ROS 2 Tools
 sidebar_position: 4
 ---
 
-# Control Theory for Humanoids
+  
 
-**Learning Objectives**
-- Implement a PID controller in Python.
-- Understand feedback loops.
-- Apply control to a simulated joint.
+ROS 2 provides powerful command-line tools for introspecting running systems. These tools are essential for debugging and understanding complex robot architectures.
 
-## PID Controller Class
+  
 
-The Proportional-Integral-Derivative controller is fundamental.
+### **Inspecting Your System**
 
-```python
-class PID:
-    def __init__(self, Kp, Ki, Kd):
-        self.Kp = Kp
-        self.Ki = Ki
-        self.Kd = Kd
-        self.prev_error = 0
-        self.integral = 0
+  
 
-    def update(self, setpoint, measured_value, dt):
-        error = setpoint - measured_value
-        self.integral += error * dt
-        derivative = (error - self.prev_error) / dt
-        output = (self.Kp * error) + (self.Ki * self.integral) + (self.Kd * derivative)
-        self.prev_error = error
-        return output
+While your temperature system is running, open a new terminal and source your workspace:
+
+  
+
+```bash
+
+source  ~/ros2_ws/install/setup.bash
+
 ```
 
-## Simulation Loop
+  
 
-Simulating a joint responding to the controller.
+**Listing Nodes:**
 
-```python
-import time
+  
 
-def simulate_joint():
-    pid = PID(1.0, 0.1, 0.05)
-    target_angle = 90.0
-    current_angle = 0.0
-    dt = 0.1
+List all active nodes:
 
-    for _ in range(50):
-        control_signal = pid.update(target_angle, current_angle, dt)
-        # Simple plant model: angle changes by control signal * dt
-        current_angle += control_signal * dt
-        print(f"Target: {target_angle}, Current: {current_angle:.2f}")
-        time.sleep(0.01)
+  
+
+```bash
+
+ros2  node  list
+
 ```
 
-## ROS 2 Integration
+  
 
-Using PID inside a ROS Node.
+You should see:
 
-```python
-class JointController(Node):
-    def __init__(self):
-        super().__init__('joint_controller')
-        self.pid = PID(1.0, 0.0, 0.0)
-        # ... subscriber to joint_states, publisher to joint_commands ...
 ```
+
+/temperature_sensor
+
+/temperature_monitor
+
+```
+
+  
+
+**Listing Topics:**
+
+  
+
+See all active topics:
+
+  
+
+```bash
+
+ros2  topic  list
+
+```
+
+  
+
+You'll see the `/temperature` topic along with some system topics that ROS 2 creates automatically.
+
+  
+
+**Inspecting Topic Info:**
+
+  
+
+Get detailed information about a topic:
+
+  
+
+```bash
+
+ros2  topic  info  /temperature
+
+```
+
+  
+
+This shows the message type (`std_msgs/msg/Float32`), number of publishers, and number of subscribers.
+
+  
+
+**Monitoring Messages:**
+
+  
+
+Listen to messages on a topic in real-time:
+
+  
+
+```bash
+
+ros2  topic  echo  /temperature
+
+```
+
+  
+
+You'll see temperature readings streaming by as they're published. This is invaluable for debugging—you can verify that data is flowing without writing any code.
+
+  
+
+**Publishing Manually:**
+
+  
+
+You can even publish messages from the command line:
+
+  
+
+```bash
+
+ros2  topic  pub  /temperature  std_msgs/msg/Float32  "data: 30.5"
+
+```
+
+  
+
+Your monitor node will receive and process this message just like any other.
+
+  
+
+**Viewing the Node Graph:**
+
+  
+
+Install `rqt_graph`, a visualization tool:
+
+  
+
+```bash
+
+sudo  apt  install  ros-humble-rqt-graph
+
+```
+
+  
+
+Run it:
+
+  
+
+```bash
+
+rqt_graph
+
+```
+
+  
+
+This displays a visual graph showing nodes (ovals) and topics (rectangles) with arrows indicating the flow of data. It's incredibly useful for understanding complex systems at a glance.
+
+  
+
+These tools—`ros2 node`, `ros2 topic`, `ros2 service`, `rqt_graph`, and others—form your diagnostic toolkit. Master them, and you'll debug robot systems efficiently.

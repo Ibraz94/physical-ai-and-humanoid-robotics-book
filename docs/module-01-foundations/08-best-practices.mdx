@@ -1,0 +1,53 @@
+---
+title: Chapter 8 - Best Practices and Design Patterns
+sidebar_position: 8
+
+---
+
+
+
+As you build more complex ROS 2 systems, keep these principles in mind:
+
+  
+
+### **Architectural Principles**
+
+  
+
+**Keep nodes focused and single-purpose.** A node should do one thing well. Don't create a "god node" that handles perception, planning, and control. Create separate nodes that compose through well-defined interfaces.
+
+  
+
+**Use standard message types when possible.** ROS 2 defines hundreds of standard message types for common robotics data (sensor_msgs, geometry_msgs, nav_msgs, etc.). Use these instead of creating custom types—it makes your nodes interoperable with the broader ROS ecosystem.
+
+  
+
+**Design topic namespaces hierarchically.** Instead of flat topic names like `/camera`, use hierarchies: `/robot1/sensors/camera/image`, `/robot1/actuators/motor/commands`. This becomes essential when running multiple robots or organizing complex systems.
+
+  
+
+**Leverage parameters for configuration.** ROS 2 nodes can declare parameters that can be set via command line, launch files, or configuration files. Don't hardcode values like sensor calibration constants or control gains—make them parameters.
+
+  
+
+### **Development Best Practices**
+
+  
+
+**Use launch files for multi-node systems.** Instead of manually starting nodes one by one, create launch files that start entire systems with correct parameters and configurations.
+
+  
+
+**Log appropriately.** Use `self.get_logger().debug()` for verbose information, `.info()` for normal operation, `.warn()` for unexpected but handled conditions, and `.error()` for failures. Don't spam logs with high-frequency messages.
+
+  
+
+**Handle shutdown gracefully.** Always implement proper cleanup in your nodes. Close file handles, release hardware resources, and shut down threads cleanly when nodes terminate.
+
+  
+
+**Test incrementally.** Don't build an entire system and then test it. Test each node independently with simulated inputs before integrating with other components.
+
+  
+
+**Version control everything.** Use Git to track your code, configuration files, and launch files. Robot systems are complex—version control helps you track what works and revert when things break.

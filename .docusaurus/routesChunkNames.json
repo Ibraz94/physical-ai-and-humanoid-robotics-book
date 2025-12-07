@@ -1,133 +1,221 @@
 {
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug-c1d": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug-d5f": {
     "__comp": "__comp---theme-debug-config-23-a-2ff",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/config-8c6": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/config-add": {
     "__comp": "__comp---theme-debug-config-23-a-2ff",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/content-947": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/content-35a": {
     "__comp": "__comp---theme-debug-contentba-8-ce7",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     },
-    "__props": "__props---physical-ai-and-humonoid-robotics-book-docusaurus-debug-content-42-e-2ac"
+    "__props": "__props---physical-ai-and-humanoid-robotics-book-docusaurus-debug-content-2-eb-cf0"
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/globalData-02d": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/globalData-c72": {
     "__comp": "__comp---theme-debug-global-dataede-0fa",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/metadata-801": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/metadata-98a": {
     "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/registry-847": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/registry-39b": {
     "__comp": "__comp---theme-debug-registry-679-501",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/__docusaurus/debug/routes-5df": {
+  "/physical-ai-and-humanoid-robotics-book/__docusaurus/debug/routes-290": {
     "__comp": "__comp---theme-debug-routes-946-699",
     "__context": {
-      "plugin": "plugin---hackathon-book-docusaurus-debugb-38-929"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs-f7b": {
+  "/physical-ai-and-humanoid-robotics-book/docs-9b2": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
-      "plugin": "plugin---hackathon-book-docsaba-da2"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docsaba-881"
     }
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs-97a": {
+  "/physical-ai-and-humanoid-robotics-book/docs-a7a": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---physical-ai-and-humonoid-robotics-book-docs-47-e-1b0"
+    "__props": "__props---physical-ai-and-humanoid-robotics-book-docs-010-00d"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs-01c": {
+  "/physical-ai-and-humanoid-robotics-book/docs-f1b": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/01-intro-b81": {
+  "/physical-ai-and-humanoid-robotics-book/docs/02-tooling-ff7": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-01-introfed-752"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-02-toolingc-69-d57"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/02-tooling-10d": {
+  "/physical-ai-and-humanoid-robotics-book/docs/04-speckit-0a9": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-02-toolingc-69-b8f"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-04-speckit-99-b-1c2"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/03-init-cfa": {
+  "/physical-ai-and-humanoid-robotics-book/docs/05-cicd-fb7": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-03-init-486-8c0"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-05-cicd-5-a-5-86f"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/04-speckit-587": {
+  "/physical-ai-and-humanoid-robotics-book/docs/06-writing-1e8": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-04-speckit-99-b-c4b"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-06-writing-867-8d5"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/05-cicd-c11": {
+  "/physical-ai-and-humanoid-robotics-book/docs/07-diagrams-fc9": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-05-cicd-5-a-5-fe9"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-07-diagrams-630-950"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/06-writing-259": {
+  "/physical-ai-and-humanoid-robotics-book/docs/08-validation-cf8": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-06-writing-867-426"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-08-validation-1-f-6-ef4"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams-61a": {
+  "/physical-ai-and-humanoid-robotics-book/docs/09-deployment-771": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-07-diagrams-630-27e"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-09-deployment-81-e-a75"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/08-validation-88e": {
+  "/physical-ai-and-humanoid-robotics-book/docs/10-versioning-a5e": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-08-validation-1-f-6-22d"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-10-versioningc-12-efa"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/09-deployment-e30": {
+  "/physical-ai-and-humanoid-robotics-book/docs/conclusion-2a3": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-09-deployment-81-e-85e"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-conclusion-85-b-ae0"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/10-versioning-460": {
+  "/physical-ai-and-humanoid-robotics-book/docs/intro-9ea": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-10-versioningc-12-ef0"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-intro-0-e-3-ab5"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory-f8c": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/ai-agents-059": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-01-foundations-control-theoryf-78-c31"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-ai-agents-13-e-fee"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics-069": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/best-practices-248": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-01-foundations-nodes-topics-326-479"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-best-practicesbad-a4d"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2-737": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/control-theory-760": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-01-foundations-setup-ros-2-b-12-024"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-control-theoryf-78-2a2"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro-6a5": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/key-takeways-a9a": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-01-intro-171-a30"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-key-takewaysc-03-89e"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro-66c": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/nodes-topics-754": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-02-intro-24-f-4e4"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-nodes-topics-326-45b"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro-7e4": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/service-action-ae5": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-03-intro-917-b0e"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-service-action-15-c-f68"
   },
-  "/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro-165": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/setup-ros2-eae": {
     "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---hackathon-book-docs-module-04-intro-4-c-0-2fe"
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-setup-ros-2-b-12-560"
   },
-  "/Physical-ai-and-humonoid-robotics-book/-cb2": {
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/urdf-877": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-foundations-urdf-0-f-9-27c"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-01/intro-d49": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-01-intro-171-6f8"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/generating-synthetic-e2f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-generating-syntheticea-9-83d"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/intro-f92": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-intro-80-e-3dd"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/mastering-gazebo-simulation-09b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-mastering-gazebo-simulationc-6-e-41f"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/module-summary-75b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-module-summaryddd-a5f"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/physics-simulation-9b2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-physics-simulation-1-af-c64"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/sim-to-real-transfer-ba4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-sim-to-real-transfer-919-b88"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-02/unity-for-photorealistic-b95": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-02-unity-for-photorealistic-77-d-87e"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/autonomous-navigation-e57": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-autonomous-navigationd-2-a-73c"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/building-isaac-34b": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-building-isaaccbe-52f"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/deploying-43a": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-deployingd-0-f-0c7"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/installing-Isaac-d5f": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-installing-isaac-2-c-2-f09"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/intro-2db": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-introbaa-1cb"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/isaac-ros-b32": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-isaac-roscb-0-8df"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-03/summary-50c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-03-summarye-18-487"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/capstone-project-014": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-capstone-projectf-30-b81"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/cognitive-planning-571": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-cognitive-planningcb-0-6e1"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/multi-modal-712": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-multi-modal-911-a75"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/summary-cfe": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-summary-970-aeb"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/vla-e55": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-vla-784-a66"
+  },
+  "/physical-ai-and-humanoid-robotics-book/docs/module-04/voice-to-action-561": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---physical-ai-and-humanoid-robotics-book-docs-module-04-voice-to-action-451-2a2"
+  },
+  "/physical-ai-and-humanoid-robotics-book/-f1c": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
     "__context": {
-      "plugin": "plugin---hackathon-book-a-74-813"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-a-74-ef2"
     },
-    "config": "config---hackathon-book-5-e-9-245"
+    "config": "config---physical-ai-and-humanoid-robotics-book-5-e-9-ba1"
   }
 }

@@ -1,67 +1,459 @@
 ---
-title: Nodes & Topics
+title: Chapter 3 - Nodes and Topics
 sidebar_position: 3
 ---
+  
 
-# Nodes and Topics
+Let's build intuition for ROS 2's fundamental concepts through a simple analogy, then implement them in code.
 
-**Learning Objectives**
-- Create a Publisher node.
-- Create a Subscriber node.
-- Understand topic communication.
+  
 
-## Publisher Node
+### **Understanding the Building Blocks**
 
-A publisher sends data to a topic.
+  
+
+**Nodes: The Workers**
+
+  
+
+Think of nodes as workers in a factory. Each worker has a specific job. One worker operates the camera, monitoring the assembly line. Another worker controls the robotic arm, moving parts into position. Another worker inspects quality, checking for defects. Another worker coordinates logistics, deciding which parts go where.
+
+  
+
+In ROS 2, each of these workers is a node—an independent program running its own process. Nodes don't share memory directly. They communicate by sending messages, just like factory workers might communicate by passing notes or using walkie-talkies.
+
+  
+
+**Topics: The Communication Channels**
+
+  
+
+Topics are named channels over which nodes exchange messages. Think of them as radio frequencies. The camera worker broadcasts on the "camera_feed" channel. Any worker interested in camera data tunes into that channel. The arm controller broadcasts on the "joint_commands" channel, and the motor hardware listens there.
+
+  
+
+Topics implement a **publish-subscribe pattern**. Publishers put messages onto topics without knowing who (if anyone) is listening. Subscribers receive messages from topics without knowing who published them. This loose coupling is powerful—you can add new subscribers without modifying publishers, or swap out publishers without affecting subscribers.
+
+  
+
+**Messages: The Information Packets**
+
+  
+
+Messages are the actual data packets sent over topics. ROS 2 defines standard message types for common data: images, point clouds, odometry, transforms, and more. You can also define custom message types for your specific application.
+
+  
+
+Messages have strictly defined structures. An image message contains width, height, encoding format, and pixel data. An odometry message contains position, velocity, and covariance estimates. This standardization means nodes from different developers can interoperate as long as they use compatible message types.
+
+  
+
+### **Building Your First ROS 2 System**
+
+  
+
+Let's implement a minimal ROS 2 system to make these concepts concrete. We'll create two nodes:
+
+  
+
+1. A **temperature sensor node** that publishes simulated temperature readings
+
+2. A **temperature monitor node** that subscribes to those readings and prints warnings
+
+  
+
+**Creating a ROS 2 Workspace:**
+
+  
+
+First, create a workspace directory structure:
+
+  
+
+```bash
+
+mkdir  -p  ~/ros2_ws/src
+
+cd  ~/ros2_ws/src
+
+```
+
+  
+
+A ROS 2 workspace is a directory containing your packages. The `src` folder holds source code for packages you're developing.
+
+  
+
+**Creating a Package:**
+
+  
+
+Create a package called `temperature_system`:
+
+  
+
+```bash
+
+ros2  pkg  create  --build-type  ament_python  temperature_system
+
+```
+
+  
+
+This creates a package directory with the necessary structure for a Python-based ROS 2 package.
+
+  
+
+Navigate into the package:
+
+  
+
+```bash
+
+cd  temperature_system/temperature_system
+
+```
+
+  
+
+**Writing the Publisher Node:**
+
+  
+
+Create a file called `temperature_sensor.py`:
+
+  
 
 ```python
+
 import rclpy
+
 from rclpy.node import Node
-from std_msgs.msg import String
 
-class MinimalPublisher(Node):
-    def __init__(self):
-        super().__init__('minimal_publisher')
-        self.publisher_ = self.create_publisher(String, 'topic', 10)
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.i = 0
+from std_msgs.msg import Float32
 
-    def timer_callback(self):
-        msg = String()
-        msg.data = 'Hello World: %d' % self.i
-        self.publisher_.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
-        self.i += 1
+import random
+
+  
+  
+
+class  TemperatureSensor(Node):
+
+def  __init__(self):
+
+super().__init__('temperature_sensor')
+
+# Create a publisher on the 'temperature' topic
+
+self.publisher = self.create_publisher(Float32, 'temperature', 10)
+
+# Create a timer that calls our callback every 1 second
+
+self.timer = self.create_timer(1.0, self.publish_temperature)
+
+self.get_logger().info('Temperature sensor node started')
+
+def  publish_temperature(self):
+
+# Simulate temperature reading (20-30 degrees Celsius with some noise)
+
+temperature = 25.0 + random.uniform(-5.0, 5.0)
+
+# Create and populate the message
+
+msg = Float32()
+
+msg.data = temperature
+
+# Publish the message
+
+self.publisher.publish(msg)
+
+self.get_logger().info(f'Publishing temperature: {temperature:.2f}°C')
+
+  
+  
+
+def  main(args=None):
+
+# Initialize the ROS 2 Python client library
+
+rclpy.init(args=args)
+
+# Create the node
+
+node = TemperatureSensor()
+
+# Keep the node running until interrupted
+
+try:
+
+rclpy.spin(node)
+
+except  KeyboardInterrupt:
+
+pass
+
+# Clean shutdown
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
 ```
 
-## Subscriber Node
+  
 
-A subscriber listens to a topic.
+**Understanding the Code:**
+
+  
+
+We import `rclpy`, the ROS 2 Python client library, and the `Node` base class. We also import `Float32`, a standard message type for floating-point numbers.
+
+  
+
+Our `TemperatureSensor` class inherits from `Node`. In the constructor, we give the node a name ('temperature_sensor'), create a publisher on the 'temperature' topic with a queue size of 10, and set up a timer that triggers every second.
+
+  
+
+The `publish_temperature` method generates a simulated temperature reading, packages it into a `Float32` message, and publishes it. The logger outputs information for debugging.
+
+  
+
+The `main` function initializes ROS 2, creates our node, and calls `rclpy.spin()`, which keeps the node running and processing callbacks until we interrupt it with Ctrl+C.
+
+  
+
+**Writing the Subscriber Node:**
+
+  
+
+Create `temperature_monitor.py`:
+
+  
 
 ```python
-class MinimalSubscriber(Node):
-    def __init__(self):
-        super().__init__('minimal_subscriber')
-        self.subscription = self.create_subscription(
-            String,
-            'topic',
-            self.listener_callback,
-            10)
-        self.subscription  # prevent unused variable warning
 
-    def listener_callback(self, msg):
-        self.get_logger().info('I heard: "%s"' % msg.data)
+import rclpy
+
+from rclpy.node import Node
+
+from std_msgs.msg import Float32
+
+  
+  
+
+class  TemperatureMonitor(Node):
+
+def  __init__(self):
+
+super().__init__('temperature_monitor')
+
+# Create a subscription to the 'temperature' topic
+
+self.subscription = self.create_subscription(
+
+Float32,
+
+'temperature',
+
+self.temperature_callback,
+
+10
+
+)
+
+self.high_temp_threshold = 28.0
+
+self.low_temp_threshold = 22.0
+
+self.get_logger().info('Temperature monitor node started')
+
+def  temperature_callback(self, msg):
+
+temperature = msg.data
+
+if temperature > self.high_temp_threshold:
+
+self.get_logger().warn(f'HIGH TEMPERATURE ALERT: {temperature:.2f}°C')
+
+elif temperature < self.low_temp_threshold:
+
+self.get_logger().warn(f'LOW TEMPERATURE ALERT: {temperature:.2f}°C')
+
+else:
+
+self.get_logger().info(f'Temperature normal: {temperature:.2f}°C')
+
+  
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = TemperatureMonitor()
+
+try:
+
+rclpy.spin(node)
+
+except  KeyboardInterrupt:
+
+pass
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
 ```
 
-## Execution
+  
 
-Running the nodes (conceptual):
+The subscriber node creates a subscription to the 'temperature' topic and provides a callback function that executes whenever a message arrives. The callback checks the temperature against thresholds and logs appropriate warnings or confirmations.
+
+  
+
+**Configuring the Package:**
+
+  
+
+Edit the `setup.py` file in the package root to register our nodes as entry points:
+
+  
 
 ```python
-# In main.py
-def main():
-    rclpy.init()
-    # ... spin nodes ...
-    rclpy.shutdown()
+
+from setuptools import setup
+
+  
+
+package_name = 'temperature_system'
+
+  
+
+setup(
+
+name=package_name,
+
+version='0.0.1',
+
+packages=[package_name],
+
+data_files=[
+
+('share/ament_index/resource_index/packages',
+
+['resource/' + package_name]),
+
+('share/' + package_name, ['package.xml']),
+
+],
+
+install_requires=['setuptools'],
+
+zip_safe=True,
+
+maintainer='your_name',
+
+maintainer_email='your_email@example.com',
+
+description='Simple temperature monitoring system',
+
+license='Apache License 2.0',
+
+tests_require=['pytest'],
+
+entry_points={
+
+'console_scripts': [
+
+'temperature_sensor = temperature_system.temperature_sensor:main',
+
+'temperature_monitor = temperature_system.temperature_monitor:main',
+
+],
+
+},
+
+)
+
 ```
+
+  
+
+**Building and Running:**
+
+  
+
+Navigate to your workspace root and build:
+
+  
+
+```bash
+
+cd  ~/ros2_ws
+
+colcon  build  --packages-select  temperature_system
+
+```
+
+  
+
+Source the workspace to make your nodes discoverable:
+
+  
+
+```bash
+
+source  install/setup.bash
+
+```
+
+  
+
+Now run the sensor node in one terminal:
+
+  
+
+```bash
+
+ros2  run  temperature_system  temperature_sensor
+
+```
+
+  
+
+And the monitor node in another terminal (remember to source the workspace first):
+
+  
+
+```bash
+
+source  ~/ros2_ws/install/setup.bash
+
+ros2  run  temperature_system  temperature_monitor
+
+```
+
+  
+
+You should see the sensor publishing temperature readings every second, and the monitor responding with appropriate messages based on the values.
+
+  
+
+**Congratulations!** You've just built your first ROS 2 system. Two independent nodes are communicating through a topic, with no direct coupling between them.

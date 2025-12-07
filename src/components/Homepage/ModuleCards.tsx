@@ -13,41 +13,37 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Module 1: Foundations',
+    title: 'Module 1: Foundation & ROS 2',
     description: (
       <>
-        Master the basics of Physical AI and set up your ROS 2 Jazzy environment.
-        Learn nodes, topics, and control theory code-first.
+        Master the basics of Physical AI, ROS 2 Jazzy setup, nodes, topics, and core control principles.
       </>
     ),
     link: '/docs/module-01/intro',
   },
   {
-    title: 'Module 2: Isaac Sim',
+    title: 'Module 2: Gazebo',
     description: (
       <>
-        Dive into high-fidelity simulation with NVIDIA Isaac Sim.
-        Import URDFs, generate synthetic data, and train RL agents.
+        Build simulation worlds, test sensors, run Nav2, and prototype interactive environments using Unity.
       </>
     ),
     link: '/docs/module-02/intro',
   },
   {
-    title: 'Module 3: Gazebo',
+    title: 'Module 3: NVIDIA Isaac',
     description: (
       <>
-        Explore open-source simulation with Gazebo (Ignition).
-        Build worlds, simulate sensors, and integrate Nav2.
+        Use Isaac Sim for high-fidelity robotics simulation, URDF import, synthetic data generation, and RL training.
       </>
     ),
     link: '/docs/module-03/intro',
   },
   {
-    title: 'Module 4: Webots',
+    title: 'Module 4: VLA',
     description: (
       <>
-        Prototype rapidly with Webots. Use the Supervisor API and
-        cross-compile controllers for real hardware transfer.
+        Explore multimodal robotics with VLA models that connect perception & language understanding.
       </>
     ),
     link: '/docs/module-04/intro',

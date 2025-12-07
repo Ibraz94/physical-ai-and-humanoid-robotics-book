@@ -1,0 +1,375 @@
+---
+title: Chapter 5 - Generating Synthetic Training Data
+sidebar_position: 5
+slug: /module-02/generating-synthetic
+---
+
+  
+
+### **Why Synthetic Data?**
+
+  
+
+Training computer vision models requires thousands of labeled images. Manual labeling is:
+
+- Time-consuming (hours per hundred images)
+
+- Expensive
+
+- Limited in variety
+
+  
+
+Synthetic data solves this by:
+
+- Automatic labeling
+
+- Infinite variations
+
+- Rare scenarios easily captured
+
+  
+
+### **Setting Up Unity Perception**
+
+  
+
+**Add Perception Camera:**
+
+1. Select Main Camera
+
+2. Add Component → Perception Camera
+
+3. Click "Add to Default Simulation"
+
+  
+
+**Create Labeling Configuration:**
+
+1. Assets → Create → Perception → Labeling Configuration
+
+2. Name: "RobotLabels"
+
+3. Add labels: "robot", "obstacle", "floor"
+
+  
+
+**Label Objects:**
+
+1. Select robot → Add Component → Labeling
+
+2. Assign "robot" label
+
+3. Repeat for obstacles with "obstacle" label
+
+  
+
+**Configure Perception Outputs:**
+
+  
+
+In Perception Camera:
+
+- Add Labeler: Bounding Box 2D Labeler
+
+- Add Labeler: Semantic Segmentation Labeler
+
+- Set output directory
+
+  
+
+### **Domain Randomization**
+
+  
+
+Create variation for robust models.
+
+  
+
+**Create Scenario:**
+
+1. GameObject → Create Empty → "Scenario"
+
+2. Add Component → Fixed Length Scenario
+
+3. Total Iterations: 10000
+
+  
+
+**Object Position Randomizer:**
+
+  
+
+```csharp
+
+using  UnityEngine;
+
+using  UnityEngine.Perception.Randomization.Randomizers;
+
+  
+
+[AddRandomizerMenu("Custom/Object Position Randomizer")]
+
+public  class  ObjectPositionRandomizer : Randomizer
+
+{
+
+public  GameObject[] objectsToRandomize;
+
+public  float  spawnRadius = 5f;
+
+public  float  minHeight = 0.5f;
+
+public  float  maxHeight = 2f;
+
+protected  override  void  OnIterationStart()
+
+{
+
+foreach (var  obj  in  objectsToRandomize)
+
+{
+
+Vector3  randomPos = Random.insideUnitCircle * spawnRadius;
+
+randomPos = new  Vector3(
+
+randomPos.x,
+
+Random.Range(minHeight, maxHeight),
+
+randomPos.y
+
+);
+
+obj.transform.position = randomPos;
+
+obj.transform.rotation = Quaternion.Euler(
+
+0,
+
+Random.Range(0f, 360f),
+
+0
+
+);
+
+}
+
+}
+
+}
+
+```
+
+  
+
+**Lighting Randomizer:**
+
+  
+
+```csharp
+
+[AddRandomizerMenu("Custom/Lighting Randomizer")]
+
+public  class  LightingRandomizer : Randomizer
+
+{
+
+public  Light  sunLight;
+
+public  float  minIntensity = 0.5f;
+
+public  float  maxIntensity = 2.0f;
+
+protected  override  void  OnIterationStart()
+
+{
+
+sunLight.intensity = Random.Range(minIntensity, maxIntensity);
+
+sunLight.transform.rotation = Quaternion.Euler(
+
+Random.Range(30f, 80f),
+
+Random.Range(0f, 360f),
+
+0
+
+);
+
+}
+
+}
+
+```
+
+  
+
+**Material Randomizer:**
+
+  
+
+```csharp
+
+[AddRandomizerMenu("Custom/Material Randomizer")]
+
+public  class  MaterialRandomizer : Randomizer
+
+{
+
+public  GameObject[] targetObjects;
+
+public  Material[] materials;
+
+protected  override  void  OnIterationStart()
+
+{
+
+foreach (var  obj  in  targetObjects)
+
+{
+
+var  renderer = obj.GetComponent<Renderer>();
+
+if (renderer != null)
+
+{
+
+renderer.material = materials[Random.Range(0, materials.Length)];
+
+}
+
+}
+
+}
+
+}
+
+```
+
+  
+
+**Add to Scenario:**
+
+1. Select Scenario
+
+2. Add Randomizer (all three)
+
+3. Assign references
+
+  
+
+Press Play—Unity generates thousands of varied images!
+
+  
+
+### **Using Synthetic Data**
+
+  
+
+Unity outputs COCO format:
+
+  
+
+```json
+
+{
+
+"images": [
+
+{"id": 1, "file_name": "rgb_0001.png", "width": 640, "height": 480}
+
+],
+
+"annotations": [
+
+{"id": 1, "image_id": 1, "category_id": 1, "bbox": [120, 150, 200, 180]}
+
+],
+
+"categories": [
+
+{"id": 1, "name": "robot"},
+
+{"id": 2, "name": "obstacle"}
+
+]
+
+}
+
+```
+
+  
+
+**Training with PyTorch:**
+
+  
+
+```python
+
+from torch.utils.data import Dataset
+
+from PIL import Image
+
+import json
+
+  
+
+class  SyntheticDataset(Dataset):
+
+def  __init__(self, annotation_file, image_dir, transform=None):
+
+with  open(annotation_file) as f:
+
+self.coco = json.load(f)
+
+self.image_dir = image_dir
+
+self.transform = transform
+
+def  __len__(self):
+
+return  len(self.coco['images'])
+
+def  __getitem__(self, idx):
+
+img_info = self.coco['images'][idx]
+
+img_path = f"{self.image_dir}/{img_info['file_name']}"
+
+image = Image.open(img_path).convert('RGB')
+
+annotations = [a for a in  self.coco['annotations']
+
+if a['image_id'] == img_info['id']]
+
+boxes = [a['bbox'] for a in annotations]
+
+labels = [a['category_id'] for a in annotations]
+
+if  self.transform:
+
+image = self.transform(image)
+
+return image, {'boxes': boxes, 'labels': labels}
+
+  
+
+# Use with DataLoader
+
+from torch.utils.data import DataLoader
+
+dataset = SyntheticDataset('annotations.json', 'images/')
+
+dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
+
+  
+
+# Train your model
+
+for images, targets in dataloader:
+
+# Your training loop
+
+pass

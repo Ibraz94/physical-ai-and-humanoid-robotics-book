@@ -1,0 +1,268 @@
+---
+title: Chapter 6 - Deploying to Jetson Hardware
+sidebar_position: 6
+slug: /module-03/deploying
+---
+  
+
+### **Why Jetson?**
+
+  
+
+NVIDIA Jetson is the industry standard for edge AI robotics:
+
+  
+
+**Jetson Orin Nano (8GB):**
+
+- 40 TOPS AI performance
+
+- $249
+
+- Perfect for learning and prototyping
+
+  
+
+**Jetson Orin NX (16GB):**
+
+- 100 TOPS
+
+- Recommended for production robots
+
+  
+
+**Jetson AGX Orin (32GB/64GB):**
+
+- 275 TOPS
+
+- High-end humanoid robots
+
+  
+
+### **Setting Up Jetson**
+
+  
+
+**Flash JetPack:**
+
+  
+
+1. Download NVIDIA SDK Manager on host PC
+
+2. Connect Jetson via USB
+
+3. Flash JetPack 5.1.2 or newer
+
+4. Includes Ubuntu 20.04, CUDA, cuDNN, TensorRT
+
+  
+
+**Install ROS 2:**
+
+  
+
+```bash
+
+# On Jetson
+
+sudo  apt  update
+
+sudo  apt  install  ros-humble-desktop
+
+echo  "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+
+```
+
+  
+
+**Install Isaac ROS:**
+
+  
+
+```bash
+
+# On Jetson
+
+mkdir  -p  ~/isaac_ros_ws/src
+
+cd  ~/isaac_ros_ws/src
+
+  
+
+# Clone Isaac ROS packages
+
+git  clone  https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_visual_slam.git
+
+git  clone  https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_image_pipeline.git
+
+  
+
+# Build
+
+cd  ~/isaac_ros_ws
+
+colcon  build  --symlink-install
+
+  
+
+source  install/setup.bash
+
+```
+
+  
+
+### **Deploying Your Robot Code**
+
+  
+
+**Transfer your robot package:**
+
+  
+
+```bash
+
+# On development PC
+
+cd  ~/ros2_ws/src
+
+tar  -czf  simple_robot.tar.gz  simple_robot/
+
+  
+
+scp  simple_robot.tar.gz  jetson@<jetson-ip>:~/
+
+```
+
+  
+
+**On Jetson:**
+
+  
+
+```bash
+
+cd  ~
+
+tar  -xzf  simple_robot.tar.gz
+
+mv  simple_robot  ~/ros2_ws/src/
+
+  
+
+cd  ~/ros2_ws
+
+colcon  build  --packages-select  simple_robot
+
+source  install/setup.bash
+
+```
+
+  
+
+### **Running Perception on Jetson**
+
+  
+
+Connect RealSense camera to Jetson:
+
+  
+
+```bash
+
+# Install RealSense ROS
+
+sudo  apt  install  ros-humble-realsense2-camera
+
+  
+
+# Launch camera
+
+ros2  launch  realsense2_camera  rs_launch.py
+
+  
+
+# Launch Isaac ROS VSLAM
+
+ros2  launch  isaac_ros_visual_slam  isaac_ros_visual_slam.launch.py
+
+```
+
+  
+
+Now your robot runs GPU-accelerated perception on embedded hardware!
+
+  
+
+### **Performance Monitoring**
+
+  
+
+Monitor Jetson performance:
+
+  
+
+```bash
+
+# Install jtop
+
+sudo  pip3  install  jetson-stats
+
+  
+
+# Run
+
+sudo  jtop
+
+```
+
+  
+
+Shows:
+
+- GPU utilization
+
+- CPU usage
+
+- Memory
+
+- Power consumption
+
+- Temperature
+
+  
+
+### **Optimization Tips**
+
+  
+
+**Enable maximum performance:**
+
+  
+
+```bash
+
+sudo  nvpmodel  -m  0
+
+sudo  jetson_clocks
+
+```
+
+  
+
+**Reduce model precision:**
+
+- Use TensorRT for inference
+
+- FP16 precision (2x speedup)
+
+- INT8 quantization (4x speedup)
+
+  
+
+**Optimize pipelines:**
+
+- Reduce camera resolution if possible
+
+- Lower frame rates where acceptable
+
+- Use hardware encode/decode

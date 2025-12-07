@@ -1,0 +1,247 @@
+---
+title: Chapter 2 - Installing and Setting Up Isaac Sim
+sidebar_position: 2
+slug: /module-03/installing-Isaac
+---
+
+## **Chapter 2 - Installing and Setting Up Isaac Sim**
+
+  
+
+### **Prerequisites Check**
+
+  
+
+Before installation, verify your system meets requirements:
+
+  
+
+```bash
+
+# Check GPU
+
+nvidia-smi
+
+# Should show RTX-series GPU with driver 525+
+
+  
+
+# Check CUDA version
+
+nvcc  --version
+
+# CUDA 11.8 or 12.x required
+
+```
+
+  
+
+**If drivers are outdated:**
+
+  
+
+```bash
+
+# Add NVIDIA driver repository
+
+sudo  add-apt-repository  ppa:graphics-drivers/ppa
+
+sudo  apt  update
+
+  
+
+# Install latest driver
+
+sudo  ubuntu-drivers  install
+
+  
+
+# Reboot
+
+sudo  reboot
+
+```
+
+  
+
+After reboot, verify:
+
+  
+
+```bash
+
+nvidia-smi
+
+# Should show updated driver and GPU info
+
+```
+
+  
+
+### **Installing NVIDIA Omniverse**
+
+  
+
+Isaac Sim runs on Omniverse, NVIDIA's platform for 3D simulation.
+
+  
+
+**Download Omniverse Launcher:**
+
+  
+
+Visit [nvidia.com/omniverse](https://www.nvidia.com/en-us/omniverse/)
+
+  
+
+```bash
+
+# Make installer executable
+
+chmod  +x  omniverse-launcher-linux.AppImage
+
+  
+
+# Run installer
+
+./omniverse-launcher-linux.AppImage
+
+```
+
+  
+
+**Install Isaac Sim:**
+
+  
+
+1. Open Omniverse Launcher
+
+2. Navigate to "Exchange" tab
+
+3. Search for "Isaac Sim"
+
+4. Click "Install"
+
+5. Select version 2023.1.1 or newer
+
+6. Wait for installation (15-30 minutes, ~50GB)
+
+  
+
+### **First Launch**
+
+  
+
+1. In Omniverse Launcher → "Library"
+
+2. Find Isaac Sim
+
+3. Click "Launch"
+
+  
+
+Isaac Sim opens with a default scene. The interface:
+
+  
+
+-  **Viewport (center):** 3D scene with ray-traced rendering
+
+-  **Stage (left):** Hierarchical list of objects
+
+-  **Property (right):** Selected object properties
+
+-  **Content Browser (bottom):** Asset library
+
+-  **Toolbar (top):** Simulation controls
+
+  
+
+### **Loading Example Scene**
+
+  
+
+Test your installation:
+
+  
+
+1. File → Open
+
+2. Navigate to Isaac Sim examples
+
+3. Open: `Isaac/Environments/Simple_Warehouse/warehouse.usd`
+
+  
+
+You should see a detailed warehouse with photorealistic rendering. Press **Play** (spacebar) to start physics simulation.
+
+  
+
+**Performance Optimization:**
+
+  
+
+If simulation is slow:
+
+  
+
+**Reduce rendering quality:**
+
+- Viewport → Render Settings
+
+- Set "Samples per Pixel" to 1-2 (default is 4)
+
+- Disable "RTX Real-Time" if needed
+
+  
+
+**Adjust physics:**
+
+- Edit → Preferences → Physics
+
+- Decrease "Num Substeps" if too slow
+
+- Increase "Time Steps Per Second" if unstable
+
+  
+
+### **Understanding USD Format**
+
+  
+
+Isaac Sim uses **USD (Universal Scene Description)**, Pixar's format for 3D scenes.
+
+  
+
+**USD advantages over URDF:**
+
+- Complex visual effects (ray tracing, advanced materials)
+
+- Large-scale scenes (millions of objects)
+
+- Non-destructive layering
+
+- Animation and sequencing
+
+  
+
+URDF files can be imported and converted to USD, preserving physics while adding rendering capabilities.
+
+  
+
+### **Verifying Installation**
+
+  
+
+Create a simple test:
+
+  
+
+1. Create → Shape → Sphere
+
+2. Position at (0, 0, 2)
+
+3. Press Play
+
+  
+
+The sphere should fall and bounce realistically. If it does, your installation is working!

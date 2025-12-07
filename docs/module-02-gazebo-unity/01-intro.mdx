@@ -1,0 +1,97 @@
+---
+title: Chapter 1 - Introduction to Simulation in Physical AI
+sidebar_position: 1
+slug: /module-02/intro
+---
+
+  
+
+### **Why Simulation Matters**
+
+  
+
+Building robots in the physical world is expensive, slow, and risky. A single humanoid robot can cost tens of thousands of dollars. Testing a walking algorithm on real hardware means accepting that the robot will fall—repeatedly—potentially damaging motors, sensors, and structural components. Training a manipulation policy through trial-and-error on physical objects requires someone to manually reset the environment after every attempt.
+
+  
+
+This is the fundamental challenge of Physical AI: **the real world doesn't have an undo button**.
+
+  
+
+Simulation changes everything. In a simulated environment, robots can fall a thousand times without breaking. You can test navigation algorithms in complex environments without building physical spaces. You can train manipulation policies by running millions of grasping attempts in parallel. You can validate safety-critical behaviors before deploying to hardware.
+
+  
+
+### **What is a Digital Twin?**
+
+  
+
+A digital twin isn't just a 3D model. It's a complete simulation that captures:
+
+  
+
+**Physics behavior:** How gravity, friction, collisions, and forces affect the robot and its environment. When a simulated robot arm pushes a box, the box moves according to real physical laws.
+
+  
+
+**Sensor simulation:** What the robot perceives through its cameras, LiDAR, depth sensors, and IMUs. The simulated camera sees the environment from the robot's perspective, complete with lighting and shadows.
+
+  
+
+**Actuation dynamics:** How motors respond to commands, including latency, torque limits, and mechanical constraints.
+
+  
+
+**Environmental interaction:** Objects can be grasped, pushed, placed, and manipulated. Doors open. Obstacles block paths.
+
+  
+
+When these elements combine accurately, behaviors learned in simulation transfer to physical robots—a capability called **sim-to-real transfer**.
+
+  
+
+### **The Simulation Stack**
+
+  
+
+In this module, you'll master two complementary platforms:
+
+  
+
+**Gazebo** is the industry-standard physics simulator for robotics. It excels at accurate physics simulation, sensor modeling, and integration with ROS 2. Gazebo is where you'll develop and test robot control algorithms.
+
+  
+
+**Unity** is a professional game engine that excels at photorealistic rendering and complex scene design. Unity is where you'll test perception algorithms and generate synthetic training data.
+
+  
+
+Together, Gazebo and Unity form a complete simulation toolkit: Gazebo for engineering validation, Unity for perception and presentation.
+
+  
+
+### **Learning Outcomes**
+
+  
+
+By the end of this module, you'll be able to:
+
+- Set up Gazebo simulation environments with custom worlds
+
+- Create accurate physics models for robots and objects
+
+- Simulate realistic sensors (cameras, LiDAR, depth sensors, IMUs)
+
+- Build and import URDF robot models into simulation
+
+- Control simulated robots through ROS 2 interfaces
+
+- Create photorealistic Unity environments
+
+- Generate synthetic training data for perception models
+
+- Understand and implement sim-to-real transfer strategies
+
+  
+
+Let's begin with Gazebo.

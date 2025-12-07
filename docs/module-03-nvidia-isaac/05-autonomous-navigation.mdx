@@ -1,0 +1,366 @@
+---
+title: Chapter 5 - Autonomous Navigation with Nav2 and Isaac ROS
+sidebar_position: 5
+slug: /module-03/autonomous-navigation
+---
+
+  
+### **Understanding Nav2**
+
+  
+
+Nav2 (Navigation2) is the ROS 2 navigation stack providing:
+
+  
+
+**Costmap Generation:** Creates 2D occupancy grids from sensor data
+
+  
+
+**Global Planner:** Computes paths from current position to goal
+
+  
+
+**Local Planner:** Adjusts path dynamically for obstacles
+
+  
+
+**Recovery Behaviors:** Handles stuck situations
+
+  
+
+**Behavior Trees:** Orchestrates navigation behaviors
+
+  
+
+### **Installing Nav2**
+
+  
+
+```bash
+
+sudo  apt  install  ros-humble-navigation2  ros-humble-nav2-bringup
+
+```
+
+  
+
+### **Configuring Nav2**
+
+  
+
+Create parameter file `nav2_params.yaml`:
+
+  
+
+```yaml
+
+bt_navigator:
+
+ros__parameters:
+
+use_sim_time: True
+
+global_frame: map
+
+robot_base_frame: base_link
+
+controller_server:
+
+ros__parameters:
+
+use_sim_time: True
+
+controller_frequency: 20.0
+
+min_vel_x: 0.0
+
+max_vel_x: 0.5
+
+min_vel_theta: -1.0
+
+max_vel_theta: 1.0
+
+FollowPath:
+
+plugin: "dwb_core::DWBLocalPlanner"
+
+min_speed_xy: 0.0
+
+max_speed_xy: 0.5
+
+  
+
+planner_server:
+
+ros__parameters:
+
+use_sim_time: True
+
+planner_plugins: ["GridBased"]
+
+GridBased:
+
+plugin: "nav2_navfn_planner/NavfnPlanner"
+
+tolerance: 0.5
+
+use_astar: false
+
+  
+
+costmap_common:
+
+ros__parameters:
+
+global_frame: map
+
+robot_radius: 0.3
+
+inflation_radius: 0.55
+
+obstacle_layer:
+
+plugin: "nav2_costmap_2d::ObstacleLayer"
+
+observation_sources: scan
+
+scan:
+
+topic: /scan
+
+max_obstacle_height: 2.0
+
+clearing: True
+
+marking: True
+
+```
+
+  
+
+### **Launching Navigation**
+
+  
+
+Create `nav2_launch.py`:
+
+  
+
+```python
+
+from launch import LaunchDescription
+
+from launch_ros.actions import Node
+
+from ament_index_python.packages import get_package_share_directory
+
+import os
+
+  
+
+def  generate_launch_description():
+
+nav2_params = os.path.join(
+
+get_package_share_directory('simple_robot'),
+
+'config',
+
+'nav2_params.yaml'
+
+)
+
+return LaunchDescription([
+
+Node(
+
+package='nav2_map_server',
+
+executable='map_server',
+
+parameters=[nav2_params, {'yaml_filename': 'map.yaml'}]
+
+),
+
+Node(
+
+package='nav2_planner',
+
+executable='planner_server',
+
+parameters=[nav2_params]
+
+),
+
+Node(
+
+package='nav2_controller',
+
+executable='controller_server',
+
+parameters=[nav2_params]
+
+),
+
+Node(
+
+package='nav2_bt_navigator',
+
+executable='bt_navigator',
+
+parameters=[nav2_params]
+
+),
+
+Node(
+
+package='nav2_lifecycle_manager',
+
+executable='lifecycle_manager',
+
+parameters=[{
+
+'autostart': True,
+
+'node_names': ['map_server', 'planner_server',
+
+'controller_server', 'bt_navigator']
+
+}]
+
+),
+
+])
+
+```
+
+  
+
+### **Creating a Map**
+
+  
+
+Use SLAM to create a map first:
+
+  
+
+```bash
+
+# Start Isaac Sim with robot
+
+  
+
+# Terminal 1: Isaac ROS VSLAM
+
+ros2  launch  isaac_ros_visual_slam  isaac_ros_visual_slam.launch.py
+
+  
+
+# Terminal 2: Teleop to drive around
+
+ros2  run  teleop_twist_keyboard  teleop_twist_keyboard
+
+  
+
+# Drive around the environment to build map
+
+  
+
+# Terminal 3: Save map
+
+ros2  run  nav2_map_server  map_saver_cli  -f  my_map
+
+```
+
+  
+
+This creates `my_map.yaml` and `my_map.pgm`.
+
+  
+
+### **Autonomous Navigation**
+
+  
+
+Launch everything:
+
+  
+
+```bash
+
+# Terminal 1: Isaac Sim (running)
+
+  
+
+# Terminal 2: Isaac ROS VSLAM
+
+ros2  launch  isaac_ros_visual_slam  isaac_ros_visual_slam.launch.py
+
+  
+
+# Terminal 3: Nav2
+
+ros2  launch  simple_robot  nav2_launch.py
+
+  
+
+# Terminal 4: RViz
+
+ros2  run  rviz2  rviz2
+
+```
+
+  
+
+In RViz:
+
+1. Add Map display
+
+2. Add Path display (global and local)
+
+3. Add Robot Model
+
+4. Add LaserScan
+
+5. Use **"2D Goal Pose"** tool to set target
+
+  
+
+Click anywhere on the map—robot autonomously navigates there, avoiding obstacles!
+
+  
+
+### **Integrating Isaac ROS Perception**
+
+  
+
+Replace standard costmap with Isaac ROS accelerated perception:
+
+  
+
+```yaml
+
+costmap_common:
+
+ros__parameters:
+
+obstacle_layer:
+
+plugin: "nav2_costmap_2d::VoxelLayer"
+
+observation_sources: pointcloud
+
+pointcloud:
+
+topic: /visual_slam/tracking/slam_cloud
+
+sensor_frame: camera_link
+
+max_obstacle_height: 2.0
+
+```
+
+  
+
+Now navigation uses GPU-accelerated 3D perception!

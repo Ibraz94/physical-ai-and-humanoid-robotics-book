@@ -1,0 +1,302 @@
+---
+title: Chapter 5 - Services and Actions
+sidebar_position: 4
+---
+
+  
+
+### **Services: Request-Response Communication**
+
+  
+
+Topics work well for continuous data streams (sensor readings, motor commands, state updates), but sometimes you need different communication patterns.
+
+  
+
+Imagine a robot needs to turn on its headlights. This isn't a continuous stream—it's a discrete request that expects a response confirming success or failure. Using a topic would be awkward; the robot would publish a "turn on lights" message and hope someone receives it, with no confirmation.
+
+  
+
+This is where **services** come in.
+
+  
+
+Services implement a **request-response pattern**. A client node sends a request to a service server and blocks waiting for a response. The server processes the request and returns a result. This is synchronous communication—perfect for remote procedure calls, configuration queries, or triggering discrete actions.
+
+  
+
+### **Example: Adding Two Numbers**
+
+  
+
+Let's create a simple addition service to illustrate the pattern using a standard service type.
+
+  
+
+Create `adder_service.py`:
+
+  
+
+```python
+
+import rclpy
+
+from rclpy.node import Node
+
+from example_interfaces.srv import AddTwoInts
+
+  
+  
+
+class  AdderService(Node):
+
+def  __init__(self):
+
+super().__init__('adder_service')
+
+# Create the service
+
+self.srv = self.create_service(
+
+AddTwoInts,
+
+'add_two_ints',
+
+self.add_callback
+
+)
+
+self.get_logger().info('Adder service ready')
+
+def  add_callback(self, request, response):
+
+# Process the request
+
+response.sum = request.a + request.b
+
+self.get_logger().info(
+
+f'Request: {request.a} + {request.b} = {response.sum}'
+
+)
+
+return response
+
+  
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = AdderService()
+
+rclpy.spin(node)
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
+```
+
+  
+
+Create `adder_client.py`:
+
+  
+
+```python
+
+import rclpy
+
+from rclpy.node import Node
+
+from example_interfaces.srv import AddTwoInts
+
+import sys
+
+  
+  
+
+class  AdderClient(Node):
+
+def  __init__(self):
+
+super().__init__('adder_client')
+
+# Create a client for the service
+
+self.client = self.create_client(AddTwoInts, 'add_two_ints')
+
+# Wait for the service to be available
+
+while  not  self.client.wait_for_service(timeout_sec=1.0):
+
+self.get_logger().info('Waiting for service...')
+
+def  send_request(self, a, b):
+
+# Create the request
+
+request = AddTwoInts.Request()
+
+request.a = a
+
+request.b = b
+
+# Send the request asynchronously
+
+future = self.client.call_async(request)
+
+return future
+
+  
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+if  len(sys.argv) != 3:
+
+print('Usage: adder_client <int> <int>')
+
+return
+
+node = AdderClient()
+
+a = int(sys.argv[1])
+
+b = int(sys.argv[2])
+
+future = node.send_request(a, b)
+
+# Wait for the result
+
+rclpy.spin_until_future_complete(node, future)
+
+if future.result() is  not  None:
+
+response = future.result()
+
+node.get_logger().info(f'Result: {a} + {b} = {response.sum}')
+
+else:
+
+node.get_logger().error('Service call failed')
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
+```
+
+  
+
+Update `setup.py` to include these entry points, rebuild, and test:
+
+  
+
+```bash
+
+cd  ~/ros2_ws
+
+colcon  build  --packages-select  temperature_system
+
+source  install/setup.bash
+
+```
+
+  
+
+Run the service in one terminal:
+
+  
+
+```bash
+
+ros2  run  temperature_system  adder_service
+
+```
+
+  
+
+Call it from another:
+
+  
+
+```bash
+
+ros2  run  temperature_system  adder_client  15  27
+
+```
+
+  
+
+You should see the result: `15 + 27 = 42`.
+
+  
+
+Services are perfect for:
+
+- Triggering behaviors (start/stop motors, capture image, reset state)
+
+- Querying information (get robot status, read configuration)
+
+- Synchronous operations that need confirmation
+
+  
+
+### **Actions: Long-Running Tasks**
+
+  
+
+Topics stream data. Services handle quick request-response exchanges. But what about tasks that take time and need progress feedback?
+
+  
+
+Consider a robot navigating to a goal location. This might take 30 seconds. You don't want to block for 30 seconds waiting for a service response. You want to:
+
+1. Send the goal
+
+2. Receive periodic progress updates ("25% complete")
+
+3. Get the final result
+
+4. Optionally cancel the goal mid-execution
+
+  
+
+**Actions** provide exactly this capability. They're like services but designed for long-running, preemptible tasks with feedback.
+
+  
+
+An action consists of three message types:
+
+-  **Goal**: The request sent to initiate the action
+
+-  **Feedback**: Periodic updates sent while the action executes
+
+-  **Result**: The final outcome when the action completes
+
+  
+
+We won't implement a custom action here (it requires more setup), but you'll use actions extensively when working with navigation stacks, manipulation planners, and other robot behaviors that unfold over time.
+
+  
+
+The key takeaway: ROS 2 provides the right communication primitive for different scenarios. Topics for streams, services for quick calls, actions for long-running tasks.

@@ -1,0 +1,1381 @@
+---
+title: Chapter 5 - The Capstone Project - Autonomous Humanoid
+sidebar_position: 5
+slug: /module-04/capstone-project
+---
+
+  
+
+### **Project Overview**
+
+  
+
+Build a complete VLA system where a humanoid robot:
+
+  
+
+1.  **Receives voice command:** "Go to the kitchen, find a cup, and bring it to me"
+
+2.  **Plans actions:** Navigate → Scan → Identify → Grasp → Return → Place
+
+3.  **Executes autonomously:** Uses Nav2, Isaac ROS perception, manipulation
+
+4.  **Handles failures:** Replans when obstacles appear or objects not found
+
+5.  **Provides feedback:** Natural language updates on progress
+
+  
+
+### **System Architecture**
+
+  
+
+```
+
+┌─────────────────┐
+
+│ Voice Command │
+
+│ (Whisper) │
+
+└────────┬────────┘
+
+│
+
+▼
+
+┌─────────────────┐
+
+│ Task Planner │
+
+│ (GPT-4) │
+
+└────────┬────────┘
+
+│
+
+├──────────────┬──────────────┬──────────────┐
+
+▼ ▼ ▼ ▼
+
+┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐
+
+│Navigate │ │ Perceive│ │ Grasp │ │ Place │
+
+│ (Nav2) │ │(YOLO+LLM│ │ (MoveIt)│ │ │
+
+└─────────┘ └─────────┘ └─────────┘ └─────────┘
+
+```
+
+  
+
+### **Complete Integration**
+
+  
+
+Create the main controller:
+
+  
+
+```python
+
+import rclpy
+
+from rclpy.node import Node
+
+from std_msgs.msg import String
+
+from geometry_msgs.msg import PoseStamped
+
+import openai
+
+import json
+
+import time
+
+  
+
+class  AutonomousHumanoidNode(Node):
+
+def  __init__(self):
+
+super().__init__('autonomous_humanoid')
+
+# Voice command subscription
+
+self.command_sub = self.create_subscription(
+
+String,
+
+'/voice_command',
+
+self.command_callback,
+
+10
+
+)
+
+# Publishers
+
+self.nav_goal_pub = self.create_publisher(
+
+PoseStamped,
+
+'/goal_pose',
+
+10
+
+)
+
+self.action_pub = self.create_publisher(
+
+String,
+
+'/robot_action',
+
+10
+
+)
+
+self.status_pub = self.create_publisher(
+
+String,
+
+'/robot_status',
+
+10
+
+)
+
+# Subscriptions for feedback
+
+self.objects_sub = self.create_subscription(
+
+String,
+
+'/detected_objects',
+
+self.objects_callback,
+
+10
+
+)
+
+self.nav_feedback_sub = self.create_subscription(
+
+String,
+
+'/navigation_status',
+
+self.nav_feedback_callback,
+
+10
+
+)
+
+# State management
+
+self.current_plan = None
+
+self.current_step = 0
+
+self.detected_objects = []
+
+self.is_executing = False
+
+self.navigation_complete = False
+
+self.world_state = {
+
+"location": "home",
+
+"holding": None,
+
+"battery": 100,
+
+"last_action": None,
+
+"objects_seen": []
+
+}
+
+# Conversation history for context
+
+self.conversation_history = []
+
+# Known locations (can be loaded from config)
+
+self.known_locations = {
+
+"home": {"x": 0.0, "y": 0.0},
+
+"kitchen": {"x": 5.0, "y": 2.0},
+
+"living_room": {"x": -3.0, "y": 4.0},
+
+"bedroom": {"x": 8.0, "y": -2.0},
+
+"table": {"x": 5.5, "y": 2.5}
+
+}
+
+# Set OpenAI API key
+
+openai.api_key = "your-api-key-here"  # Replace with your actual key
+
+self.get_logger().info('Autonomous Humanoid Node initialized and ready!')
+
+def  command_callback(self, msg):
+
+"""Handle incoming voice commands"""
+
+command = msg.data
+
+self.get_logger().info(f'Received command: "{command}"')
+
+# Add to conversation history
+
+self.conversation_history.append({
+
+"role": "user",
+
+"content": command,
+
+"timestamp": time.time()
+
+})
+
+# Report acknowledgment
+
+self.report(f"Understood: {command}")
+
+# Generate action plan
+
+self.current_plan = self.generate_plan(command)
+
+if  self.current_plan and  "steps"  in  self.current_plan:
+
+self.current_step = 0
+
+self.is_executing = True
+
+self.report(f"Starting task: {self.current_plan.get('goal', 'execution')}")
+
+# Start execution
+
+self.execute_next_step()
+
+else:
+
+self.report("Sorry, I couldn't understand that command.")
+
+def  generate_plan(self, command):
+
+"""Generate action plan using LLM"""
+
+try:
+
+# Build context-aware prompt
+
+prompt = f"""You are a humanoid robot task planner. Convert the user command into a sequence of executable actions.
+
+  
+
+Current robot state:
+
+{json.dumps(self.world_state, indent=2)}
+
+  
+
+Known locations:
+
+{json.dumps(list(self.known_locations.keys()))}
+
+  
+
+Recently seen objects:
+
+{json.dumps(self.world_state['objects_seen'][-10:], indent=2) if  self.world_state['objects_seen'] else  "None"}
+
+  
+
+Available actions:
+
+- navigate: Move to a location (params: location)
+
+- scan: Look for objects in current area
+
+- identify: Confirm specific object presence (params: object_name)
+
+- grasp: Pick up an object (params: object_name)
+
+- place: Put down held object (params: location)
+
+- report: Tell user something (params: message)
+
+- wait: Pause for a duration (params: seconds)
+
+  
+
+User command: "{command}"
+
+  
+
+Generate a JSON action plan with this exact format:
+
+{{
+
+"goal": "brief description of overall goal",
+
+"steps": [
+
+{{"action": "navigate", "params": {{"location": "kitchen"}}, "description": "Go to the kitchen"}},
+
+{{"action": "scan", "params": {{}}, "description": "Look for objects"}},
+
+{{"action": "grasp", "params": {{"object_name": "cup"}}, "description": "Pick up the cup"}}
+
+]
+
+}}
+
+  
+
+Important:
+
+- Keep plans simple and achievable
+
+- Use only actions listed above
+
+- Location names must match known locations
+
+- Respond ONLY with valid JSON, no other text
+
+"""
+
+  
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[
+
+{"role": "system", "content": "You are a helpful robot task planner. Always respond with valid JSON only."},
+
+{"role": "user", "content": prompt}
+
+],
+
+temperature=0.3,
+
+max_tokens=1000
+
+)
+
+plan_text = response.choices[0].message.content.strip()
+
+# Remove markdown code blocks if present
+
+if plan_text.startswith("```json"):
+
+plan_text = plan_text.replace("```json", "").replace("```", "").strip()
+
+# Parse JSON
+
+plan = json.loads(plan_text)
+
+self.get_logger().info(f'Generated plan: {json.dumps(plan, indent=2)}')
+
+# Add to conversation history
+
+self.conversation_history.append({
+
+"role": "assistant",
+
+"content": f"Plan: {plan['goal']}",
+
+"timestamp": time.time()
+
+})
+
+return plan
+
+except json.JSONDecodeError as e:
+
+self.get_logger().error(f'Failed to parse plan JSON: {e}\nResponse: {plan_text}')
+
+return  None
+
+except  Exception  as e:
+
+self.get_logger().error(f'Error generating plan: {e}')
+
+return  None
+
+def  execute_next_step(self):
+
+"""Execute the next step in the current plan"""
+
+if  not  self.current_plan or  not  self.is_executing:
+
+return
+
+steps = self.current_plan.get("steps", [])
+
+if  self.current_step >= len(steps):
+
+self.get_logger().info('Plan execution complete!')
+
+self.report_completion()
+
+self.is_executing = False
+
+return
+
+step = steps[self.current_step]
+
+action = step.get("action")
+
+params = step.get("params", {})
+
+description = step.get("description", action)
+
+self.get_logger().info(f'Step {self.current_step + 1}/{len(steps)}: {description}')
+
+self.report(f"Step {self.current_step + 1}: {description}")
+
+# Execute action
+
+success = False
+
+if action == "navigate":
+
+success = self.execute_navigate(params.get("location"))
+
+elif action == "scan":
+
+success = self.execute_scan()
+
+elif action == "identify":
+
+success = self.execute_identify(params.get("object_name"))
+
+elif action == "grasp":
+
+success = self.execute_grasp(params.get("object_name"))
+
+elif action == "place":
+
+success = self.execute_place(params.get("location"))
+
+elif action == "report":
+
+success = self.execute_report(params.get("message"))
+
+elif action == "wait":
+
+success = self.execute_wait(params.get("seconds", 2))
+
+else:
+
+self.get_logger().warn(f'Unknown action: {action}')
+
+success = False
+
+# Handle success/failure
+
+if success:
+
+self.current_step += 1
+
+self.world_state["last_action"] = action
+
+# Schedule next step with delay
+
+delay = 2.0  if action == "navigate"  else  1.0
+
+self.create_timer(delay, self.execute_next_step, once=True)
+
+else:
+
+self.get_logger().warn(f'Step {self.current_step + 1} failed, attempting recovery...')
+
+self.handle_failure(step)
+
+def  execute_navigate(self, location):
+
+"""Navigate to a specified location"""
+
+if  not location:
+
+self.get_logger().error('No location specified for navigation')
+
+return  False
+
+if location not  in  self.known_locations:
+
+self.get_logger().error(f'Unknown location: {location}')
+
+self.report(f"I don't know where {location} is")
+
+return  False
+
+coords = self.known_locations[location]
+
+goal = PoseStamped()
+
+goal.header.frame_id = "map"
+
+goal.header.stamp = self.get_clock().now().to_msg()
+
+goal.pose.position.x = coords["x"]
+
+goal.pose.position.y = coords["y"]
+
+goal.pose.position.z = 0.0
+
+goal.pose.orientation.w = 1.0
+
+self.nav_goal_pub.publish(goal)
+
+self.world_state["location"] = location
+
+self.get_logger().info(f'Navigating to {location} at ({coords["x"]}, {coords["y"]})')
+
+return  True
+
+def  execute_scan(self):
+
+"""Scan environment for objects"""
+
+msg = String()
+
+msg.data = "scan"
+
+self.action_pub.publish(msg)
+
+self.get_logger().info('Scanning environment for objects')
+
+# Wait for object detection results
+
+time.sleep(1.5)
+
+if  self.detected_objects:
+
+object_names = [obj["name"] for obj in  self.detected_objects]
+
+self.world_state["objects_seen"].extend(object_names)
+
+self.report(f"I see: {', '.join(set(object_names))}")
+
+else:
+
+self.report("I don't see any objects here")
+
+return  True
+
+def  execute_identify(self, object_name):
+
+"""Check if specific object is visible"""
+
+if  not object_name:
+
+return  False
+
+visible = any(obj["name"].lower() == object_name.lower()
+
+for obj in  self.detected_objects)
+
+if visible:
+
+self.report(f"Yes, I can see the {object_name}")
+
+return  True
+
+else:
+
+self.report(f"I cannot find the {object_name}")
+
+return  False
+
+def  execute_grasp(self, object_name):
+
+"""Grasp an object"""
+
+if  not object_name:
+
+self.get_logger().error('No object specified for grasping')
+
+return  False
+
+# Check if object is visible
+
+visible = any(obj["name"].lower() == object_name.lower()
+
+for obj in  self.detected_objects)
+
+if  not visible:
+
+self.report(f"Cannot find {object_name} to grasp")
+
+return  False
+
+# Check if already holding something
+
+if  self.world_state["holding"]:
+
+self.report(f"Already holding {self.world_state['holding']}")
+
+return  False
+
+# Send grasp command
+
+msg = String()
+
+msg.data = f"grasp:{object_name}"
+
+self.action_pub.publish(msg)
+
+self.world_state["holding"] = object_name
+
+self.report(f"Grasping {object_name}")
+
+return  True
+
+def  execute_place(self, location=None):
+
+"""Place held object"""
+
+if  not  self.world_state["holding"]:
+
+self.report("I'm not holding anything to place")
+
+return  False
+
+# Send place command
+
+msg = String()
+
+msg.data = f"place:{location if location else  'current_location'}"
+
+self.action_pub.publish(msg)
+
+held_object = self.world_state["holding"]
+
+self.report(f"Placing {held_object}")
+
+self.world_state["holding"] = None
+
+return  True
+
+def  execute_report(self, message):
+
+"""Report message to user"""
+
+if message:
+
+self.report(message)
+
+return  True
+
+def  execute_wait(self, seconds):
+
+"""Wait for specified duration"""
+
+self.get_logger().info(f'Waiting for {seconds} seconds')
+
+time.sleep(seconds)
+
+return  True
+
+def  objects_callback(self, msg):
+
+"""Handle detected objects updates"""
+
+try:
+
+self.detected_objects = json.loads(msg.data)
+
+self.get_logger().debug(f'Detected {len(self.detected_objects)} objects')
+
+except json.JSONDecodeError:
+
+self.get_logger().error('Failed to parse detected objects')
+
+def  nav_feedback_callback(self, msg):
+
+"""Handle navigation feedback"""
+
+status = msg.data
+
+if  "succeeded"  in status.lower():
+
+self.navigation_complete = True
+
+self.get_logger().info('Navigation completed successfully')
+
+elif  "failed"  in status.lower():
+
+self.get_logger().warn('Navigation failed')
+
+def  report(self, message):
+
+"""Send status report"""
+
+self.get_logger().info(f'Status: {message}')
+
+msg = String()
+
+msg.data = message
+
+self.status_pub.publish(msg)
+
+# Optional: Add text-to-speech here
+
+# self.text_to_speech(message)
+
+def  report_completion(self):
+
+"""Report task completion"""
+
+goal = self.current_plan.get("goal", "task")
+
+self.report(f"Task complete: {goal}")
+
+# Add to conversation history
+
+self.conversation_history.append({
+
+"role": "assistant",
+
+"content": f"Completed: {goal}",
+
+"timestamp": time.time()
+
+})
+
+def  handle_failure(self, failed_step):
+
+"""Handle step failure and attempt recovery"""
+
+self.report("Encountered a problem, let me try another approach...")
+
+try:
+
+# Generate recovery plan
+
+prompt = f"""The robot failed at this step:
+
+{json.dumps(failed_step, indent=2)}
+
+  
+
+Original goal: {self.current_plan.get('goal')}
+
+Current state: {json.dumps(self.world_state, indent=2)}
+
+  
+
+Generate an alternative approach to achieve the same goal.
+
+Return JSON with same format as before."""
+
+  
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}],
+
+temperature=0.5
+
+)
+
+recovery_plan = json.loads(response.choices[0].message.content)
+
+self.current_plan = recovery_plan
+
+self.current_step = 0
+
+self.execute_next_step()
+
+except  Exception  as e:
+
+self.get_logger().error(f'Recovery failed: {e}')
+
+self.report("I couldn't find a way to complete the task")
+
+self.is_executing = False
+
+  
+  
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = AutonomousHumanoidNode()
+
+try:
+
+rclpy.spin(node)
+
+except  KeyboardInterrupt:
+
+pass
+
+finally:
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+  
+  
+
+if  __name__ == '__main__':
+
+main()
+
+  
+
+# Publishers
+
+self.nav_goal_pub = self.create_publisher(PoseStamped, '/goal_pose', 10)
+
+self.action_pub = self.create_publisher(String, '/robot_action', 10)
+
+self.status_pub = self.create_publisher(String, '/robot_status', 10)
+
+# Subscriptions
+
+self.objects_sub = self.create_subscription(
+
+String, '/detected_objects', self.objects_callback, 10)
+
+# State
+
+self.current_plan = None
+
+self.current_step = 0
+
+self.detected_objects = []
+
+self.world_state = {
+
+"location": "home",
+
+"holding": None,
+
+"battery": 100
+
+}
+
+openai.api_key = "your-api-key"
+
+self.get_logger().info('Autonomous Humanoid ready!')
+
+  
+
+def  command_callback(self, msg):
+
+command = msg.data
+
+self.get_logger().info(f'Command: {command}')
+
+# Generate plan
+
+self.current_plan = self.generate_plan(command)
+
+self.current_step = 0
+
+# Start execution
+
+self.execute_next_step()
+
+  
+
+def  generate_plan(self, command):
+
+prompt = f"""Create a detailed action plan for this command: "{command}"
+
+Current state:
+
+{json.dumps(self.world_state, indent=2)}
+
+Available actions:
+
+  
+
+navigate(location): Move to location
+
+scan(): Look for objects
+
+identify(object): Confirm object presence
+
+grasp(object): Pick up object
+
+place(location): Put down object
+
+report(message): Tell user something
+
+  
+
+Return JSON only:
+
+{{
+
+"steps": [
+
+{{"action": "navigate", "params": {{"location": "kitchen"}}, "description": "Go to kitchen"}},
+
+...
+
+],
+
+"goal": "brief description"
+
+}}"""
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}],
+
+temperature=0.3
+
+)
+
+plan = json.loads(response.choices[0].message.content)
+
+self.get_logger().info(f'Plan generated: {plan["goal"]}')
+
+return plan
+
+  
+
+def  execute_next_step(self):
+
+if  not  self.current_plan or  self.current_step >= len(self.current_plan["steps"]):
+
+self.get_logger().info('Plan complete!')
+
+self.report_completion()
+
+return
+
+step = self.current_plan["steps"][self.current_step]
+
+action = step["action"]
+
+params = step.get("params", {})
+
+self.get_logger().info(f'Step {self.current_step + 1}: {step["description"]}')
+
+if action == "navigate":
+
+self.execute_navigate(params["location"])
+
+elif action == "scan":
+
+self.execute_scan()
+
+elif action == "grasp":
+
+self.execute_grasp(params["object"])
+
+elif action == "place":
+
+self.execute_place(params.get("location"))
+
+elif action == "report":
+
+self.report(params["message"])
+
+self.current_step += 1
+
+# Continue to next step after delay
+
+self.create_timer(3.0, self.execute_next_step, once=True)
+
+  
+
+def  execute_navigate(self, location):
+
+locations = {
+
+"kitchen": (5.0, 2.0),
+
+"living_room": (-3.0, 4.0),
+
+"home": (0.0, 0.0)
+
+}
+
+if location in locations:
+
+x, y = locations[location]
+
+goal = PoseStamped()
+
+goal.header.frame_id = "map"
+
+goal.pose.position.x = x
+
+goal.pose.position.y = y
+
+goal.pose.orientation.w = 1.0
+
+self.nav_goal_pub.publish(goal)
+
+self.world_state["location"] = location
+
+self.report(f"Navigating to {location}")
+
+  
+
+def  execute_scan(self):
+
+msg = String()
+
+msg.data = "scan"
+
+self.action_pub.publish(msg)
+
+self.report("Scanning environment")
+
+  
+
+def  execute_grasp(self, object_name):
+
+# Check if object is visible
+
+visible = any(obj["name"] == object_name for obj in  self.detected_objects)
+
+if visible:
+
+msg = String()
+
+msg.data = f"grasp:{object_name}"
+
+self.action_pub.publish(msg)
+
+self.world_state["holding"] = object_name
+
+self.report(f"Grasping {object_name}")
+
+else:
+
+self.report(f"Cannot find {object_name}, replanning...")
+
+self.replan_due_to_failure(f"Object {object_name} not found")
+
+  
+
+def  execute_place(self, location):
+
+if  self.world_state["holding"]:
+
+msg = String()
+
+msg.data = f"place:{location}"
+
+self.action_pub.publish(msg)
+
+self.report(f"Placing {self.world_state['holding']}")
+
+self.world_state["holding"] = None
+
+else:
+
+self.report("Nothing to place!")
+
+  
+
+def  objects_callback(self, msg):
+
+self.detected_objects = json.loads(msg.data)
+
+  
+
+def  report(self, message):
+
+self.get_logger().info(f'Status: {message}')
+
+msg = String()
+
+msg.data = message
+
+self.status_pub.publish(msg)
+
+# Optional: text-to-speech
+
+# self.speak(message)
+
+  
+
+def  report_completion(self):
+
+self.report(f"Task complete! {self.current_plan['goal']}")
+
+  
+
+def  replan_due_to_failure(self, reason):
+
+prompt = f"""The plan failed: {reason}
+
+Original plan:
+
+{json.dumps(self.current_plan, indent=2)}
+
+Current step: {self.current_step}
+
+Current state: {json.dumps(self.world_state, indent=2)}
+
+Generate a new plan to achieve the same goal, accounting for the failure.
+
+Return JSON only."""
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}],
+
+temperature=0.5
+
+)
+
+self.current_plan = json.loads(response.choices[0].message.content)
+
+self.current_step = 0
+
+self.execute_next_step()
+
+def  main(args=None):
+
+rclpy.init(args=args)
+
+node = AutonomousHumanoidNode()
+
+rclpy.spin(node)
+
+node.destroy_node()
+
+rclpy.shutdown()
+
+if name == 'main':
+
+main()
+
+  
+
+### **Testing the Complete System**
+
+  
+
+**Launch all components:**
+
+```bash
+
+# Terminal 1: Isaac Sim or Gazebo (robot simulation)
+
+  
+
+# Terminal 2: Isaac ROS perception
+
+ros2 launch isaac_ros_visual_slam isaac_ros_visual_slam.launch.py
+
+  
+
+# Terminal 3: Object detection
+
+ros2 run simple_robot object_detector
+
+  
+
+# Terminal 4: Voice command
+
+ros2 run simple_robot voice_command_node
+
+  
+
+# Terminal 5: Main controller
+
+ros2 run simple_robot autonomous_humanoid
+
+  
+
+# Terminal 6: RViz visualization
+
+ros2 run rviz2 rviz2
+
+```
+
+  
+
+**Give commands:**
+
+  
+
+Speak into microphone:
+
+- "Go to the kitchen and find a cup"
+
+- "Bring the red cup to the living room"
+
+- "Scan the environment and tell me what you see"
+
+  
+
+Watch as the robot:
+
+1. Transcribes your speech
+
+2. Generates a plan
+
+3. Navigates autonomously
+
+4. Identifies objects
+
+5. Executes manipulation
+
+6. Reports status
+
+  
+
+### **Adding Conversation Memory**
+
+  
+
+For multi-turn interactions:
+
+```python
+
+class  AutonomousHumanoidNode(Node):
+
+def  __init__(self):
+
+super().__init__('autonomous_humanoid')
+
+# ... previous init ...
+
+self.conversation_history = []
+
+def  command_callback(self, msg):
+
+command = msg.data
+
+# Add to history
+
+self.conversation_history.append({
+
+"role": "user",
+
+"content": command,
+
+"timestamp": self.get_clock().now().to_msg()
+
+})
+
+# Include context in planning
+
+recent_context = self.conversation_history[-5:]
+
+plan = self.generate_plan_with_context(command, recent_context)
+
+# Execute
+
+self.current_plan = plan
+
+self.execute_next_step()
+
+```
+
+  
+
+**Example conversation:**
+
+  
+
+User: "Go to the kitchen"
+
+Robot: "Navigating to kitchen"
+
+  
+
+User: "What do you see?"
+
+Robot: "I see a table, two chairs, and several cups"
+
+  
+
+User: "Bring me a cup"
+
+Robot: *understands context - already in kitchen, picks closest cup*
+
+  
+
+### **Performance Optimization**
+
+  
+
+**Reduce LLM latency:**
+
+```python
+
+# Cache common plans
+
+self.plan_cache = {}
+
+  
+
+def  generate_plan(self, command):
+
+# Check cache first
+
+cache_key = self.simplify_command(command)
+
+if cache_key in  self.plan_cache:
+
+return  self.plan_cache[cache_key]
+
+# Generate new plan
+
+plan = self.call_llm(command)
+
+self.plan_cache[cache_key] = plan
+
+return plan
+
+```
+
+  
+
+**Use streaming for real-time feedback:**
+
+```python
+
+response = openai.ChatCompletion.create(
+
+model="gpt-4",
+
+messages=[{"role": "user", "content": prompt}],
+
+stream=True
+
+)
+
+  
+
+for chunk in response:
+
+if chunk.choices[0].delta.content:
+
+# Process incremental response
+
+self.process_partial_plan(chunk.choices[0].delta.content)

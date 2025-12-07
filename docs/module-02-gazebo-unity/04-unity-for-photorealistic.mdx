@@ -1,0 +1,314 @@
+---
+title: Chapter 4 - Unity for Photorealistic Simulation
+sidebar_position: 4
+slug: /module-02/unity-for-photorealistic
+---
+  
+
+### **Why Unity for Robotics?**
+
+  
+
+While Gazebo excels at physics, Unity offers:
+
+- Photorealistic rendering
+
+- Advanced graphics and lighting
+
+- Synthetic data generation
+
+- Intuitive scene building
+
+  
+
+### **Setting Up Unity**
+
+  
+
+**Install Unity Hub:**
+
+Download from [unity.com/download](https://unity.com/download)
+
+  
+
+**Install Unity Editor:**
+
+- Unity 2021.3 LTS or 2022.3 LTS
+
+- Linux Build Support
+
+- Visual Studio or VS Code
+
+  
+
+**Create Project:**
+
+1. Open Unity Hub
+
+2. New Project → 3D (URP)
+
+3. Name: "RobotSimulation"
+
+  
+
+### **Installing Unity Robotics Packages**
+
+  
+
+In Unity, Window → Package Manager → + → Add from git URL:
+
+  
+
+```
+
+https://github.com/Unity-Technologies/ROS-TCP-Connector.git?path=/com.unity.robotics.ros-tcp-connector
+
+https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer
+
+https://github.com/Unity-Technologies/Robotics-Object-Pose-Estimation.git?path=/com.unity.perception
+
+```
+
+  
+
+### **Creating a Scene**
+
+  
+
+1.  **Ground:** GameObject → 3D Object → Plane, scale to (10, 1, 10)
+
+2.  **Lighting:** Adjust Directional Light rotation to (50, -30, 0)
+
+3.  **Objects:** Add cubes as obstacles
+
+4.  **Materials:** Create materials for realistic surfaces
+
+  
+
+### **Importing URDF**
+
+  
+
+1. Assets → Import Robot from URDF
+
+2. Select your `mobile_robot.urdf`
+
+3. Import settings: Y-Up, VHACD decomposer
+
+4. Click Import
+
+  
+
+### **Controlling Robot in Unity**
+
+  
+
+Create `DifferentialDriveController.cs`:
+
+  
+
+```csharp
+
+using  UnityEngine;
+
+  
+
+public  class  DifferentialDriveController : MonoBehaviour
+
+{
+
+public  ArticulationBody  leftWheel;
+
+public  ArticulationBody  rightWheel;
+
+public  float  wheelRadius = 0.1f;
+
+public  float  wheelSeparation = 0.5f;
+
+public  float  maxSpeed = 2.0f;
+
+void  Start()
+
+{
+
+SetWheelDriveMode(leftWheel);
+
+SetWheelDriveMode(rightWheel);
+
+}
+
+void  Update()
+
+{
+
+float  linearVel = Input.GetAxis("Vertical") * maxSpeed;
+
+float  angularVel = Input.GetAxis("Horizontal") * maxSpeed;
+
+float  leftVel = (linearVel - angularVel * wheelSeparation / 2f) / wheelRadius;
+
+float  rightVel = (linearVel + angularVel * wheelSeparation / 2f) / wheelRadius;
+
+SetWheelVelocity(leftWheel, leftVel);
+
+SetWheelVelocity(rightWheel, rightVel);
+
+}
+
+void  SetWheelDriveMode(ArticulationBody  wheel)
+
+{
+
+var  drive = wheel.xDrive;
+
+drive.driveType = ArticulationDriveType.Velocity;
+
+wheel.xDrive = drive;
+
+}
+
+void  SetWheelVelocity(ArticulationBody  wheel, float  velocity)
+
+{
+
+var  drive = wheel.xDrive;
+
+drive.targetVelocity = velocity * Mathf.Rad2Deg;
+
+wheel.xDrive = drive;
+
+}
+
+}
+
+```
+
+  
+
+Attach to robot, assign wheel references, press Play, and drive with arrow keys!
+
+  
+
+### **Connecting Unity to ROS 2**
+
+  
+
+**On ROS 2 system:**
+
+  
+
+```bash
+
+cd  ~/ros2_ws/src
+
+git  clone  https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
+
+cd  ~/ros2_ws
+
+colcon  build  --packages-select  ros_tcp_endpoint
+
+source  install/setup.bash
+
+ros2  run  ros_tcp_endpoint  default_server_endpoint  --ros-args  -p  ROS_IP:=0.0.0.0
+
+```
+
+  
+
+**In Unity:**
+
+1. Robotics → ROS Settings
+
+2. ROS IP: `127.0.0.1` (if same machine) or actual IP
+
+3. Port: 10000
+
+4. Protocol: ROS2
+
+  
+
+**Subscribe to ROS commands:**
+
+  
+
+```csharp
+
+using  Unity.Robotics.ROSTCPConnector;
+
+using  RosMessageTypes.Geometry;
+
+  
+
+public  class  VelocitySubscriber : MonoBehaviour
+
+{
+
+public  ArticulationBody  leftWheel;
+
+public  ArticulationBody  rightWheel;
+
+public  float  wheelRadius = 0.1f;
+
+public  float  wheelSeparation = 0.5f;
+
+private  float  linearVel = 0f;
+
+private  float  angularVel = 0f;
+
+void  Start()
+
+{
+
+ROSConnection.GetOrCreateInstance().Subscribe<TwistMsg>("/cmd_vel", OnVelocityCommand);
+
+}
+
+void  OnVelocityCommand(TwistMsg  msg)
+
+{
+
+linearVel = (float)msg.linear.x;
+
+angularVel = (float)msg.angular.z;
+
+}
+
+void  FixedUpdate()
+
+{
+
+float  leftVel = (linearVel - angularVel * wheelSeparation / 2f) / wheelRadius;
+
+float  rightVel = (linearVel + angularVel * wheelSeparation / 2f) / wheelRadius;
+
+SetWheelVelocity(leftWheel, leftVel);
+
+SetWheelVelocity(rightWheel, rightVel);
+
+}
+
+void  SetWheelVelocity(ArticulationBody  wheel, float  velocity)
+
+{
+
+var  drive = wheel.xDrive;
+
+drive.targetVelocity = velocity * Mathf.Rad2Deg;
+
+wheel.xDrive = drive;
+
+}
+
+}
+
+```
+
+  
+
+Now control Unity robot from ROS 2:
+
+  
+
+```bash
+
+ros2  topic  pub  /cmd_vel  geometry_msgs/msg/Twist  "{linear: {x: 0.5}}"

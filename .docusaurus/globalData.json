@@ -1,88 +1,200 @@
 {
   "docusaurus-plugin-content-docs": {
     "default": {
-      "path": "/Physical-ai-and-humonoid-robotics-book/docs",
+      "path": "/physical-ai-and-humanoid-robotics-book/docs",
       "versions": [
         {
           "name": "current",
           "label": "Next",
           "isLast": true,
-          "path": "/Physical-ai-and-humonoid-robotics-book/docs",
-          "mainDocId": "module-01-foundations/intro",
+          "path": "/physical-ai-and-humanoid-robotics-book/docs",
+          "mainDocId": "intro",
           "docs": [
             {
-              "id": "01-intro",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/01-intro"
-            },
-            {
               "id": "02-tooling",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/02-tooling"
-            },
-            {
-              "id": "03-init",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/03-init"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/02-tooling"
             },
             {
               "id": "04-speckit",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/04-speckit"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/04-speckit"
             },
             {
               "id": "05-cicd",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/05-cicd"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/05-cicd"
             },
             {
               "id": "06-writing",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/06-writing"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/06-writing"
             },
             {
               "id": "07-diagrams",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/07-diagrams"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/07-diagrams"
             },
             {
               "id": "08-validation",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/08-validation"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/08-validation"
             },
             {
               "id": "09-deployment",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/09-deployment"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/09-deployment"
             },
             {
               "id": "10-versioning",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/10-versioning"
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/10-versioning"
+            },
+            {
+              "id": "conclusion",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/conclusion",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/ai-agents",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/ai-agents",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/best-practices",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/best-practices",
+              "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/control-theory",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/control-theory",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/control-theory",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/intro",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/key-takeways",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/key-takeways",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/nodes-topics",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/nodes-topics",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/nodes-topics",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-01-foundations/service-action",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/service-action",
               "sidebar": "courseSidebar"
             },
             {
               "id": "module-01-foundations/setup-ros2",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01-foundations/setup-ros2",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/setup-ros2",
               "sidebar": "courseSidebar"
             },
             {
-              "id": "module-02-isaac-sim/intro",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-02/intro",
+              "id": "module-01-foundations/urdf",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-01-foundations/urdf",
               "sidebar": "courseSidebar"
             },
             {
-              "id": "module-03-gazebo/intro",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-03/intro",
+              "id": "module-02-gazebo-unity/generating-synthetic",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/generating-synthetic",
               "sidebar": "courseSidebar"
             },
             {
-              "id": "module-04-webots/intro",
-              "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-04/intro",
+              "id": "module-02-gazebo-unity/intro",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-gazebo-unity/mastering-gazebo",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/mastering-gazebo-simulation",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-gazebo-unity/module-2-summary",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/module-summary",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-gazebo-unity/physics-simulation",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/physics-simulation",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-gazebo-unity/sim-to-real-transfer copy",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/sim-to-real-transfer",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-02-gazebo-unity/unity-for-photorealistic",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-02/unity-for-photorealistic",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/autonomous-navigation",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/autonomous-navigation",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/building-isaac",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/building-isaac",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/deploying",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/deploying",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/installing-isaac",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/installing-Isaac",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/intro",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/isaac-ros",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/isaac-ros",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-03-nvidia-isaac/summary",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-03/summary",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/capstone-project",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/capstone-project",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/cognitive-planning",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/cognitive-planning",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/multi-modal",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/multi-modal",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/summary",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/summary",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/vla",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/vla",
+              "sidebar": "courseSidebar"
+            },
+            {
+              "id": "module-04-vla/voice-to-action",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/voice-to-action",
               "sidebar": "courseSidebar"
             }
           ],
@@ -90,8 +202,8 @@
           "sidebars": {
             "courseSidebar": {
               "link": {
-                "path": "/Physical-ai-and-humonoid-robotics-book/docs/module-01/intro",
-                "label": "module-01-foundations/intro"
+                "path": "/physical-ai-and-humanoid-robotics-book/docs/intro",
+                "label": "Get Started"
               }
             }
           }

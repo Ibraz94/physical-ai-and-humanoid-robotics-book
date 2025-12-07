@@ -1,0 +1,1034 @@
+---
+title: Chapter 2 - Mastering Gazebo Simulation
+sidebar_position: 2
+slug: /module-02/mastering-gazebo-simulation
+---
+  
+
+### **Installing and Setting Up Gazebo**
+
+  
+
+Gazebo is an open-source 3D robotics simulator that provides accurate physics simulation and tight integration with ROS 2.
+
+  
+
+**Installation:**
+
+  
+
+```bash
+
+sudo  apt  update
+
+sudo  apt  install  ros-humble-gazebo-ros-pkgs  ros-humble-gazebo-ros2-control
+
+```
+
+  
+
+Verify installation:
+
+  
+
+```bash
+
+gazebo
+
+```
+
+  
+
+You should see the Gazebo interface with an empty world.
+
+  
+
+### **Creating Your First World**
+
+  
+
+Create a directory for Gazebo worlds:
+
+  
+
+```bash
+
+mkdir  -p  ~/gazebo_worlds
+
+cd  ~/gazebo_worlds
+
+```
+
+  
+
+Create `simple_world.world`:
+
+  
+
+```xml
+
+<?xml version="1.0"?>
+
+<sdf  version="1.6">
+
+<world  name="simple_world">
+
+<!-- Physics settings -->
+
+<physics  type="ode">
+
+<max_step_size>0.001</max_step_size>
+
+<real_time_factor>1.0</real_time_factor>
+
+<real_time_update_rate>1000</real_time_update_rate>
+
+</physics>
+
+<!-- Lighting -->
+
+<light  name="sun"  type="directional">
+
+<cast_shadows>true</cast_shadows>
+
+<pose>0 0 10 0 0 0</pose>
+
+<diffuse>0.8 0.8 0.8 1</diffuse>
+
+<specular>0.2 0.2 0.2 1</specular>
+
+<direction>-0.5 0.1 -0.9</direction>
+
+</light>
+
+<!-- Ground plane -->
+
+<model  name="ground_plane">
+
+<static>true</static>
+
+<link  name="link">
+
+<collision  name="collision">
+
+<geometry>
+
+<plane>
+
+<normal>0 0 1</normal>
+
+<size>100 100</size>
+
+</plane>
+
+</geometry>
+
+</collision>
+
+<visual  name="visual">
+
+<geometry>
+
+<plane>
+
+<normal>0 0 1</normal>
+
+<size>100 100</size>
+
+</plane>
+
+</geometry>
+
+<material>
+
+<ambient>0.8 0.8 0.8 1</ambient>
+
+<diffuse>0.8 0.8 0.8 1</diffuse>
+
+</material>
+
+</visual>
+
+</link>
+
+</model>
+
+<!-- A simple box obstacle -->
+
+<model  name="box_obstacle">
+
+<pose>2 0 0.5 0 0 0</pose>
+
+<link  name="link">
+
+<collision  name="collision">
+
+<geometry>
+
+<box>
+
+<size>1 1 1</size>
+
+</box>
+
+</geometry>
+
+</collision>
+
+<visual  name="visual">
+
+<geometry>
+
+<box>
+
+<size>1 1 1</size>
+
+</box>
+
+</geometry>
+
+<material>
+
+<ambient>1 0 0 1</ambient>
+
+<diffuse>1 0 0 1</diffuse>
+
+</material>
+
+</visual>
+
+<inertial>
+
+<mass>10.0</mass>
+
+<inertia>
+
+<ixx>1.67</ixx>
+
+<ixy>0.0</ixy>
+
+<ixz>0.0</ixz>
+
+<iyy>1.67</iyy>
+
+<iyz>0.0</iyz>
+
+<izz>1.67</izz>
+
+</inertia>
+
+</inertial>
+
+</link>
+
+</model>
+
+</world>
+
+</sdf>
+
+```
+
+  
+
+Launch the world:
+
+  
+
+```bash
+
+gazebo  ~/gazebo_worlds/simple_world.world
+
+```
+
+  
+
+### **Creating a Mobile Robot**
+
+  
+
+Let's create a differential drive robot. Create the package structure:
+
+  
+
+```bash
+
+mkdir  -p  ~/ros2_ws/src/simple_robot/urdf
+
+cd  ~/ros2_ws/src
+
+ros2  pkg  create  --build-type  ament_python  simple_robot
+
+```
+
+  
+
+Create `mobile_robot.urdf`:
+
+  
+
+```xml
+
+<?xml version="1.0"?>
+
+<robot  name="mobile_robot">
+
+<!-- Base link -->
+
+<link  name="base_link">
+
+<visual>
+
+<geometry>
+
+<box  size="0.6 0.4 0.2"/>
+
+</geometry>
+
+<material  name="blue">
+
+<color  rgba="0 0 0.8 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<box  size="0.6 0.4 0.2"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<mass  value="10.0"/>
+
+<inertia  ixx="0.183"  ixy="0.0"  ixz="0.0"  iyy="0.367"  iyz="0.0"  izz="0.5"/>
+
+</inertial>
+
+</link>
+
+<!-- Left wheel -->
+
+<link  name="left_wheel">
+
+<visual>
+
+<geometry>
+
+<cylinder  length="0.05"  radius="0.1"/>
+
+</geometry>
+
+<material  name="black">
+
+<color  rgba="0.1 0.1 0.1 1"/>
+
+</material>
+
+<origin  xyz="0 0 0"  rpy="1.5708 0 0"/>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<cylinder  length="0.05"  radius="0.1"/>
+
+</geometry>
+
+<origin  xyz="0 0 0"  rpy="1.5708 0 0"/>
+
+</collision>
+
+<inertial>
+
+<mass  value="1.0"/>
+
+<inertia  ixx="0.0026"  ixy="0.0"  ixz="0.0"  iyy="0.0026"  iyz="0.0"  izz="0.005"/>
+
+</inertial>
+
+</link>
+
+<joint  name="left_wheel_joint"  type="continuous">
+
+<parent  link="base_link"/>
+
+<child  link="left_wheel"/>
+
+<origin  xyz="0.1 0.25 0"  rpy="0 0 0"/>
+
+<axis  xyz="0 1 0"/>
+
+</joint>
+
+<!-- Right wheel -->
+
+<link  name="right_wheel">
+
+<visual>
+
+<geometry>
+
+<cylinder  length="0.05"  radius="0.1"/>
+
+</geometry>
+
+<material  name="black">
+
+<color  rgba="0.1 0.1 0.1 1"/>
+
+</material>
+
+<origin  xyz="0 0 0"  rpy="1.5708 0 0"/>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<cylinder  length="0.05"  radius="0.1"/>
+
+</geometry>
+
+<origin  xyz="0 0 0"  rpy="1.5708 0 0"/>
+
+</collision>
+
+<inertial>
+
+<mass  value="1.0"/>
+
+<inertia  ixx="0.0026"  ixy="0.0"  ixz="0.0"  iyy="0.0026"  iyz="0.0"  izz="0.005"/>
+
+</inertial>
+
+</link>
+
+<joint  name="right_wheel_joint"  type="continuous">
+
+<parent  link="base_link"/>
+
+<child  link="right_wheel"/>
+
+<origin  xyz="0.1 -0.25 0"  rpy="0 0 0"/>
+
+<axis  xyz="0 1 0"/>
+
+</joint>
+
+<!-- Caster wheel -->
+
+<link  name="caster">
+
+<visual>
+
+<geometry>
+
+<sphere  radius="0.05"/>
+
+</geometry>
+
+<material  name="gray">
+
+<color  rgba="0.5 0.5 0.5 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<sphere  radius="0.05"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<mass  value="0.5"/>
+
+<inertia  ixx="0.0005"  ixy="0.0"  ixz="0.0"  iyy="0.0005"  iyz="0.0"  izz="0.0005"/>
+
+</inertial>
+
+</link>
+
+<joint  name="caster_joint"  type="fixed">
+
+<parent  link="base_link"/>
+
+<child  link="caster"/>
+
+<origin  xyz="-0.2 0 -0.15"  rpy="0 0 0"/>
+
+</joint>
+
+<!-- Gazebo properties -->
+
+<gazebo  reference="base_link">
+
+<material>Gazebo/Blue</material>
+
+</gazebo>
+
+<gazebo  reference="left_wheel">
+
+<material>Gazebo/Black</material>
+
+<mu1>1.0</mu1>
+
+<mu2>1.0</mu2>
+
+</gazebo>
+
+<gazebo  reference="right_wheel">
+
+<material>Gazebo/Black</material>
+
+<mu1>1.0</mu1>
+
+<mu2>1.0</mu2>
+
+</gazebo>
+
+<gazebo  reference="caster">
+
+<material>Gazebo/Gray</material>
+
+<mu1>0.0</mu1>
+
+<mu2>0.0</mu2>
+
+</gazebo>
+
+<!-- Differential drive controller -->
+
+<gazebo>
+
+<plugin  name="differential_drive_controller"  filename="libgazebo_ros_diff_drive.so">
+
+<update_rate>20</update_rate>
+
+<left_joint>left_wheel_joint</left_joint>
+
+<right_joint>right_wheel_joint</right_joint>
+
+<wheel_separation>0.5</wheel_separation>
+
+<wheel_diameter>0.2</wheel_diameter>
+
+<max_wheel_torque>20</max_wheel_torque>
+
+<command_topic>cmd_vel</command_topic>
+
+<odometry_topic>odom</odometry_topic>
+
+<odometry_frame>odom</odometry_frame>
+
+<robot_base_frame>base_link</robot_base_frame>
+
+<publish_odom>true</publish_odom>
+
+<publish_odom_tf>true</publish_odom_tf>
+
+<publish_wheel_tf>false</publish_wheel_tf>
+
+</plugin>
+
+</gazebo>
+
+</robot>
+
+```
+
+  
+
+### **Launching the Robot**
+
+  
+
+Create a launch file `spawn_robot.launch.py`:
+
+  
+
+```python
+
+import os
+
+from launch import LaunchDescription
+
+from launch.actions import ExecuteProcess
+
+from launch_ros.actions import Node
+
+from ament_index_python.packages import get_package_share_directory
+
+  
+
+def  generate_launch_description():
+
+urdf_file = os.path.join(
+
+get_package_share_directory('simple_robot'),
+
+'urdf',
+
+'mobile_robot.urdf'
+
+)
+
+with  open(urdf_file, 'r') as file:
+
+robot_desc = file.read()
+
+return LaunchDescription([
+
+ExecuteProcess(
+
+cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'],
+
+output='screen'
+
+),
+
+Node(
+
+package='gazebo_ros',
+
+executable='spawn_entity.py',
+
+arguments=['-entity', 'mobile_robot', '-topic', 'robot_description'],
+
+output='screen'
+
+),
+
+Node(
+
+package='robot_state_publisher',
+
+executable='robot_state_publisher',
+
+output='screen',
+
+parameters=[{'robot_description': robot_desc}]
+
+),
+
+])
+
+```
+
+  
+
+Update `setup.py`:
+
+  
+
+```python
+
+import os
+
+from glob import glob
+
+from setuptools import setup
+
+  
+
+package_name = 'simple_robot'
+
+  
+
+setup(
+
+name=package_name,
+
+version='0.0.1',
+
+packages=[package_name],
+
+data_files=[
+
+('share/ament_index/resource_index/packages',
+
+['resource/' + package_name]),
+
+('share/' + package_name, ['package.xml']),
+
+(os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+
+(os.path.join('share', package_name, 'urdf'), glob('urdf/*.urdf')),
+
+],
+
+install_requires=['setuptools'],
+
+zip_safe=True,
+
+maintainer='your_name',
+
+maintainer_email='your_email@example.com',
+
+description='Simple mobile robot',
+
+license='Apache License 2.0',
+
+)
+
+```
+
+  
+
+Build and launch:
+
+  
+
+```bash
+
+cd  ~/ros2_ws
+
+colcon  build  --packages-select  simple_robot
+
+source  install/setup.bash
+
+ros2  launch  simple_robot  spawn_robot.launch.py
+
+```
+
+  
+
+### **Controlling the Robot**
+
+  
+
+Test robot control:
+
+  
+
+```bash
+
+# Move forward
+
+ros2  topic  pub  /cmd_vel  geometry_msgs/msg/Twist  "{linear: {x: 0.5}, angular: {z: 0.0}}"
+
+  
+
+# Turn in place
+
+ros2  topic  pub  /cmd_vel  geometry_msgs/msg/Twist  "{linear: {x: 0.0}, angular: {z: 0.5}}"
+
+  
+
+# Drive in circle
+
+ros2  topic  pub  /cmd_vel  geometry_msgs/msg/Twist  "{linear: {x: 0.3}, angular: {z: 0.3}}"
+
+```
+
+  
+
+### **Adding Sensors**
+
+  
+
+**Camera:**
+
+  
+
+```xml
+
+<link  name="camera_link">
+
+<visual>
+
+<geometry>
+
+<box  size="0.05 0.05 0.05"/>
+
+</geometry>
+
+<material  name="red">
+
+<color  rgba="1 0 0 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<box  size="0.05 0.05 0.05"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<mass  value="0.1"/>
+
+<inertia  ixx="0.000004"  ixy="0.0"  ixz="0.0"  iyy="0.000004"  iyz="0.0"  izz="0.000004"/>
+
+</inertial>
+
+</link>
+
+<joint  name="camera_joint"  type="fixed">
+
+<parent  link="base_link"/>
+
+<child  link="camera_link"/>
+
+<origin  xyz="0.3 0 0.1"  rpy="0 0 0"/>
+
+</joint>
+
+<gazebo  reference="camera_link">
+
+<sensor  name="camera"  type="camera">
+
+<update_rate>30</update_rate>
+
+<camera>
+
+<horizontal_fov>1.3962634</horizontal_fov>
+
+<image>
+
+<width>640</width>
+
+<height>480</height>
+
+<format>R8G8B8</format>
+
+</image>
+
+<clip>
+
+<near>0.02</near>
+
+<far>300</far>
+
+</clip>
+
+<noise>
+
+<type>gaussian</type>
+
+<mean>0.0</mean>
+
+<stddev>0.007</stddev>
+
+</noise>
+
+</camera>
+
+<plugin  name="camera_controller"  filename="libgazebo_ros_camera.so">
+
+<frame_name>camera_link</frame_name>
+
+</plugin>
+
+</sensor>
+
+</gazebo>
+
+```
+
+  
+
+**LiDAR:**
+
+  
+
+```xml
+
+<link  name="lidar_link">
+
+<visual>
+
+<geometry>
+
+<cylinder  length="0.04"  radius="0.05"/>
+
+</geometry>
+
+<material  name="black">
+
+<color  rgba="0.1 0.1 0.1 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<cylinder  length="0.04"  radius="0.05"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<mass  value="0.1"/>
+
+<inertia  ixx="0.0001"  ixy="0.0"  ixz="0.0"  iyy="0.0001"  iyz="0.0"  izz="0.0001"/>
+
+</inertial>
+
+</link>
+
+<joint  name="lidar_joint"  type="fixed">
+
+<parent  link="base_link"/>
+
+<child  link="lidar_link"/>
+
+<origin  xyz="0 0 0.15"  rpy="0 0 0"/>
+
+</joint>
+
+<gazebo  reference="lidar_link">
+
+<sensor  name="lidar"  type="ray">
+
+<always_on>true</always_on>
+
+<update_rate>10</update_rate>
+
+<ray>
+
+<scan>
+
+<horizontal>
+
+<samples>360</samples>
+
+<resolution>1</resolution>
+
+<min_angle>-3.14159</min_angle>
+
+<max_angle>3.14159</max_angle>
+
+</horizontal>
+
+</scan>
+
+<range>
+
+<min>0.12</min>
+
+<max>10.0</max>
+
+<resolution>0.01</resolution>
+
+</range>
+
+<noise>
+
+<type>gaussian</type>
+
+<mean>0.0</mean>
+
+<stddev>0.01</stddev>
+
+</noise>
+
+</ray>
+
+<plugin  name="lidar_controller"  filename="libgazebo_ros_ray_sensor.so">
+
+<frame_name>lidar_link</frame_name>
+
+<output_type>sensor_msgs/LaserScan</output_type>
+
+</plugin>
+
+</sensor>
+
+</gazebo>
+
+```
+
+  
+
+**IMU:**
+
+  
+
+```xml
+
+<link  name="imu_link">
+
+<inertial>
+
+<mass  value="0.01"/>
+
+<inertia  ixx="0.000001"  ixy="0.0"  ixz="0.0"  iyy="0.000001"  iyz="0.0"  izz="0.000001"/>
+
+</inertial>
+
+</link>
+
+<joint  name="imu_joint"  type="fixed">
+
+<parent  link="base_link"/>
+
+<child  link="imu_link"/>
+
+<origin  xyz="0 0 0"  rpy="0 0 0"/>
+
+</joint>
+
+<gazebo  reference="imu_link">
+
+<sensor  name="imu_sensor"  type="imu">
+
+<always_on>true</always_on>
+
+<update_rate>100</update_rate>
+
+<plugin  name="imu_plugin"  filename="libgazebo_ros_imu_sensor.so">
+
+<frame_name>imu_link</frame_name>
+
+</plugin>
+
+</sensor>
+
+</gazebo>
+
+```
+
+  
+
+Visualize sensors in RViz:
+
+  
+
+```bash
+
+ros2  run  rviz2  rviz2
+
+```
+
+  
+
+Add displays for LaserScan, Camera, and IMU data.

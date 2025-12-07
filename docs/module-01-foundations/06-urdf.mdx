@@ -1,0 +1,236 @@
+---
+title: Chapter 6 - Understanding URDF
+sidebar_position: 6
+---
+
+  
+
+So far, we've focused on software communication. But robots have physical structure—links (rigid bodies) connected by joints (actuated or fixed connections). How do we describe this anatomy to ROS 2?
+
+  
+
+**URDF (Unified Robot Description Format)** is an XML specification for robot models. It defines:
+
+-  **Links**: Rigid bodies with physical properties (mass, inertia, visual geometry, collision geometry)
+
+-  **Joints**: Connections between links (revolute, prismatic, fixed, continuous)
+
+-  **Sensors**: Cameras, LiDAR, IMUs attached to links
+
+-  **Actuators**: Motors that drive joints
+
+  
+
+A humanoid robot URDF might include links for the torso, head, upper arms, forearms, hands, thighs, calves, and feet, connected by joints for shoulders, elbows, wrists, hips, knees, and ankles.
+
+  
+
+### **A Simple Example: A Two-Link Arm**
+
+  
+
+Let's create a minimal URDF for a robotic arm with two links.
+
+  
+
+Create `simple_arm.urdf`:
+
+  
+
+```xml
+
+<?xml version="1.0"?>
+
+<robot  name="simple_arm">
+
+<!-- Base link (fixed to ground) -->
+
+<link  name="base_link">
+
+<visual>
+
+<geometry>
+
+<cylinder  length="0.1"  radius="0.05"/>
+
+</geometry>
+
+<material  name="blue">
+
+<color  rgba="0 0 0.8 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<geometry>
+
+<cylinder  length="0.1"  radius="0.05"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<mass  value="1.0"/>
+
+<inertia  ixx="0.001"  ixy="0.0"  ixz="0.0"  iyy="0.001"  iyz="0.0"  izz="0.001"/>
+
+</inertial>
+
+</link>
+
+<!-- First arm link -->
+
+<link  name="link1">
+
+<visual>
+
+<origin  xyz="0 0 0.25"  rpy="0 0 0"/>
+
+<geometry>
+
+<cylinder  length="0.5"  radius="0.03"/>
+
+</geometry>
+
+<material  name="red">
+
+<color  rgba="0.8 0 0 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<origin  xyz="0 0 0.25"  rpy="0 0 0"/>
+
+<geometry>
+
+<cylinder  length="0.5"  radius="0.03"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<origin  xyz="0 0 0.25"  rpy="0 0 0"/>
+
+<mass  value="0.5"/>
+
+<inertia  ixx="0.01"  ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.001"/>
+
+</inertial>
+
+</link>
+
+<!-- Joint connecting base to first link -->
+
+<joint  name="joint1"  type="revolute">
+
+<parent  link="base_link"/>
+
+<child  link="link1"/>
+
+<origin  xyz="0 0 0.05"  rpy="0 0 0"/>
+
+<axis  xyz="0 0 1"/>
+
+<limit  lower="-3.14"  upper="3.14"  effort="10"  velocity="1.0"/>
+
+</joint>
+
+<!-- Second arm link -->
+
+<link  name="link2">
+
+<visual>
+
+<origin  xyz="0 0 0.2"  rpy="0 0 0"/>
+
+<geometry>
+
+<cylinder  length="0.4"  radius="0.025"/>
+
+</geometry>
+
+<material  name="green">
+
+<color  rgba="0 0.8 0 1"/>
+
+</material>
+
+</visual>
+
+<collision>
+
+<origin  xyz="0 0 0.2"  rpy="0 0 0"/>
+
+<geometry>
+
+<cylinder  length="0.4"  radius="0.025"/>
+
+</geometry>
+
+</collision>
+
+<inertial>
+
+<origin  xyz="0 0 0.2"  rpy="0 0 0"/>
+
+<mass  value="0.3"/>
+
+<inertia  ixx="0.005"  ixy="0.0"  ixz="0.0"  iyy="0.005"  iyz="0.0"  izz="0.0005"/>
+
+</inertial>
+
+</link>
+
+<!-- Joint connecting first link to second link -->
+
+<joint  name="joint2"  type="revolute">
+
+<parent  link="link1"/>
+
+<child  link="link2"/>
+
+<origin  xyz="0 0 0.5"  rpy="0 0 0"/>
+
+<axis  xyz="0 1 0"/>
+
+<limit  lower="-1.57"  upper="1.57"  effort="10"  velocity="1.0"/>
+
+</joint>
+
+</robot>
+
+```
+
+  
+
+This URDF defines a simple two-link arm. The base is fixed. Joint1 allows rotation around the Z-axis (yaw). Joint2 allows rotation around the Y-axis (pitch), creating an elbow.
+
+  
+
+### **Visualizing the URDF**
+
+  
+
+Install the joint state publisher and robot state publisher:
+
+  
+
+```bash
+
+sudo  apt  install  ros-humble-joint-state-publisher-gui  ros-humble-robot-state-publisher
+
+```
+
+  
+
+You can visualize this robot in RViz using appropriate launch files. The robot state publisher reads the URDF and publishes transforms describing where each link is in space. Other nodes (planners, controllers, visualizers) use these transforms to understand the robot's configuration.
