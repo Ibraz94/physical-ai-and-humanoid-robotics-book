@@ -178,6 +178,11 @@
               "sidebar": "courseSidebar"
             },
             {
+              "id": "module-04-vla/intro",
+              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/intro",
+              "sidebar": "courseSidebar"
+            },
+            {
               "id": "module-04-vla/multi-modal",
               "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/multi-modal",
               "sidebar": "courseSidebar"
@@ -185,11 +190,6 @@
             {
               "id": "module-04-vla/summary",
               "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/summary",
-              "sidebar": "courseSidebar"
-            },
-            {
-              "id": "module-04-vla/vla",
-              "path": "/physical-ai-and-humanoid-robotics-book/docs/module-04/vla",
               "sidebar": "courseSidebar"
             },
             {
