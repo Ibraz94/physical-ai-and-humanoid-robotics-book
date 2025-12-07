@@ -16,7 +16,7 @@ function HomepageHeader() {
           Physical AI & Humanoid Robotics
         </Heading>
         <p className="hero__subtitle">
-          Master Embodied Intelligence with ROS 2, Isaac Sim, Gazebo, and Webots.
+          Master Embodied Intelligence with ROS 2, Gazebo & Unity, Isaac Sim and VLA.
         </p>
         <div className={styles.buttons}>
           <Link
