@@ -1,68 +1,92 @@
 <!--
 Sync Impact Report:
-- Version change: 1.1.0 -> 1.2.0
-- List of modified principles: II. Educational Integrity (Renamed from Technical Accuracy), IV. Developer-Centric Documentation (Renamed from Developer-Centric Clarity), VI. Web Ergonomics (New Principle)
-- Added sections: None
-- Removed sections: None
-- Templates requiring updates: None (Templates are generic)
+- Version change: 2.1.0 → 3.0.0
+- Summary: Complete overhaul of project principles to support the RAG Chatbot Integration. All previous principles are superseded.
+- Added Principles:
+  - Principle 1: Grounded & Reproducible AI
+  - Principle 2: Mandated Technology Stack
+  - Principle 3: Structured Development & Execution
+  - Principle 4: Documentation & Verification
+  - Principle 5: Backend & Frontend Standards
+- Removed Principles:
+  - All principles from v2.1.0 were removed and replaced.
+- Templates requiring updates:
+  - ✅ .specify/templates/plan-template.md (Checked, no update needed)
+  - ✅ .specify/templates/spec-template.md (Checked, no update needed)
+  - ✅ .specify/templates/tasks-template.md (Checked, no update needed)
 - Follow-up TODOs: None
 -->
 
-# Physical AI & Humanoid Robotics Course published via Docusaurus + GitHub Pages Constitution
+# Constitution for RAG Chatbot Integration for a Published Docusaurus Course Book
 
-## Core Principles
+## Preamble
 
-### I. Spec-First & Modular Design
-Course structure, chapters, and web-site layout must be defined and approved before content creation begins. This ensures a coherent learning path and prevents "scope creep" or disorganized modules. The design must be modular to allow independent updates.
+This document outlines the governing principles, mandatory technologies, and development standards for the **RAG Chatbot Integration for a Published Docusaurus Course Book** project. Adherence to this constitution is mandatory for all project activities to ensure alignment, quality, and maintainability.
 
-### II. Educational Integrity
-Course content (books, references, exercises) must be curated via verified sources. All technical claims and educational resources must be cross-referenced with authoritative materials. Agents must leverage available MCP servers to search and suggest the "best" AI-course books & resources, which must then be manually reviewed for suitability.
+---
 
-### III. Transparency and Traceability
-All included course materials and references must be clearly documented, including source, edition, and license. Users must be able to trace every piece of knowledge back to its origin.
+## 1. Governance
 
-### IV. Developer-Centric Documentation
-Content is structured and styled for readability by developers, educators, and technical learners. Avoid academic jargon where simple technical terms suffice. Focus on actionable learning outcomes and reproducible exercises.
+- **Constitution Version**: 3.0.0
+- **Ratification Date**: 2025-12-12
+- **Last Amended Date**: 2025-12-13
+- **Amendment Process**: Changes require review and approval via a pull request. Major changes increment the version number.
 
-### V. Reproducible Content Pipeline
-We enforce reproducibility using Spec-Kit Plus and MCP-server integration. The process of fetching, validating, and integrating course material must be automated and version-controlled.
+---
 
-### VI. Web Ergonomics
-The home page and navigation UX must be designed for clarity. Discoverability of course modules, lessons, and resources is paramount. The site must be responsive and clean.
+## 2. Core Principles
 
-## Project Standards & Constraints
+### Principle 1: Grounded & Reproducible AI
 
-### Standards
-- **Resource Verification**: Course resources (books, papers, tutorials) must be hand-verified: metadata (title, author, edition, publication date, license) included.
-- **Citation Format**: Inline hyperlinks + metadata (author, year, title, publisher) in a reference list (or footnote) — minimally license-compliant if content is non-public domain.
-- **Module Structure**: For each course module: provide learning objectives, required resources, optional resources, estimated time-to-complete, prerequisites (if any).
-- **Style**: Modular, navigable, and consistent with Docusaurus/MDX practices; code examples or sample diagrams when relevant.
-- **Home Page**: Highlights course overview, module list, quick start guide, and resource repository; must be responsive and clean.
+- **Rule**: All AI-generated answers MUST be grounded in the Docusaurus course book content or user-selected text ONLY. The system is forbidden from using external knowledge, accessing the web for answers, or hallucinating information.
+- **Rationale**: The primary function of the chatbot is to provide a faithful and accurate interface to the existing course material. Trust and reliability are paramount.
 
-### Constraints
-- **Format**: Standard Docusaurus v3 project structure.
-- **Deployment**: GitHub Pages via automated CI/CD (GitHub Actions).
-- **Structure**: Course content must be organized into modules — minimum 6, maximum 15 modules.
-- **Resources**: For each module: at least 1 required resource (book or paper), up to 3 optional resources. Resources must be licensed appropriately (open license, or permissible for educational reference).
-- **Dependencies**: All content (text, metadata, links) must be stored in Git repository; no external closed-source dependencies required for core course content.
-- **Licensing**: Course content must avoid reliance on proprietary/unlicensed material for core learning (optional resources may reference commercial books if licensing allows referencing).
+- **Rule**: All data pipelines for ingestion, retrieval, and inference MUST be reproducible.
+- **Rationale**: Ensures that the AI's behavior is consistent and allows for debugging and auditing of the content processing and retrieval mechanisms.
 
-## Success Criteria & Definition of Done
+### Principle 2: Mandated Technology Stack
 
-- **Deployment**: Course homepage deployed successfully — shows course title, short description, module listing, quick start instructions, resource link database.
-- **Accessibility**: All modules accessible through site navigation with clearly labeled resources, learning objectives, and resource metadata.
-- **Content Quality**: Resource database (fetched via MCP-server then reviewed) contains at least 12 distinct, high-quality AI course resources (books/papers/tutorials) relevant to the course focus.
-- **Usability**: Users (educators or learners) can clone the repo and navigate modules locally or via GitHub Pages without missing files or broken links.
-- **Validation**: The entire site passes link-checks, build validation, and renders correctly on deployment.
-- **Compliance**: All resource references are traceable (metadata + link) and license-compliant.
+- **Rule**: The project MUST use the following technologies. No substitutes are permitted.
+  - **Embeddings**: Cohere
+  - **Vector Database**: Qdrant Cloud (Free Tier)
+  - **LLM**: Gemini
+  - **Backend API**: FastAPI
+  - **Backend Agent Framework**: OpenAI Agents SDK
+  - **Frontend Chat UI**: OpenAI ChatKit SDK
+  - **Metadata & Sessions**: Neon Serverless Postgres
+  - **Containerization**: Docker
+  - **Python Package Manager**: uv
+  - **Documentation Source**: Context7 MCP Server
+  - **Authentication**: Better Auth (to be implemented *after* core chatbot functionality is complete)
+- **Rationale**: Standardization on a pre-vetted, modern stack ensures component compatibility, focuses development effort, and simplifies operational management. `uv` is chosen for its performance, and `Context7 MCP Server` is mandated to prevent API misuse.
 
-## Governance
+### Principle 3: Structured Development & Execution
 
-Constitution supersedes all other practices. Amendments require documentation, approval, and a migration plan.
+- **Rule**: Development MUST follow a strict, sequential, and chunked execution order.
+  - **Phase 1 (Specs 1-4)**: Implement the end-to-end RAG chatbot functionality.
+  - **Phase 2 (Post-Spec-4)**: Implement authentication and user persistence using Better Auth in separate, well-defined specs (5A, 5B, 5C).
+- **Rationale**: This phased approach de-risks the project by focusing on delivering the core value proposition first. It prevents scope creep and ensures the foundational chatbot is stable before adding secondary features like authentication.
 
-- **Resource Review**: All additions of new course resources must go through a “resource review” step: verify license, metadata, relevance, and record source details in a resource registry.
-- **Versioning**: Version control and changelog maintained — major updates to modules or resources versioned (e.g. v1.0, v1.1).
-- **Community**: Community contributions allowed via pull requests — any added modules, resources, or homepage changes must comply with core principles and standards.
-- **Maintenance**: Periodic review cycles (every 6 months) to refresh resource list, remove obsolete links, and update deprecated references.
+### Principle 4: Documentation & Verification
 
-**Version**: 1.2.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06
+- **Rule**: Before using any SDK or external API, developers MUST fetch the latest, up-to-date documentation from the **Context7 MCP Server**. Guessing, using cached knowledge, or relying on web search for API contracts is forbidden.
+- **Rationale**: APIs and SDKs evolve. The Context7 MCP Server acts as the single source of truth for dependencies, preventing bugs caused by outdated or incorrect API usage.
+
+- **Rule**: A comprehensive environment documentation file MUST be maintained at `/docs/rag/env_urls.md`. It must list all service URLs, endpoints, and setup instructions, with all values verified against the Context7 MCP Server.
+- **Rationale**: Centralizes critical configuration information, simplifying setup for new developers and ensuring consistency across environments.
+
+### Principle 5: Backend & Frontend Standards
+
+- **Rule (Backend)**: The backend MUST be a FastAPI application running in a Docker container with dependencies managed by `uv`. It must expose the specified endpoints (`/query`, `/select`, etc.), restrict CORS to the deployed book domain, and have no external web access.
+- **Rationale**: Enforces a secure, isolated, and scalable backend architecture.
+
+- **Rule (Frontend)**: The ChatKit UI MUST be themed to match the futuristic design of the Docusaurus book. It must support both general queries and Q&A based on user-selected text and render clear citations.
+- **Rationale**: Provides a seamless and consistent user experience that feels like an integrated part of the course book.
+
+### Principle 6: Privacy & Data Integrity
+
+- **Rule**: The system MUST NOT store Personally Identifiable Information (PII) without explicit, affirmative user consent. The core RAG chatbot functionality must remain usable anonymously.
+- **Rationale**: Protects user privacy and reduces compliance overhead.
+
+- **Rule**: The RAG pipeline must use versioned collections in Qdrant, a chunk size between 400-700 tokens with overlap, and extract content source URLs from the book's sitemap.
+- **Rationale**: Ensures data integrity, traceability, and optimal retrieval performance.
