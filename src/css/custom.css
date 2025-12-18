@@ -43,3 +43,20 @@
   box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
   transform: translateY(-5px);
 }
+
+/* Light mode: Start Module button hover */
+[data-theme='light'] .button--primary {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+[data-theme='light'] .button--primary:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+/* Dark mode: Keep cyan theme */
+[data-theme='dark'] .button--primary:hover {
+  background-color: var(--ifm-color-primary-darker);
+  border-color: var(--ifm-color-primary-darker);
+}

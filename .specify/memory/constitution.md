@@ -1,68 +1,40 @@
 <!--
-Sync Impact Report:
-- Version change: 1.1.0 -> 1.2.0
-- List of modified principles: II. Educational Integrity (Renamed from Technical Accuracy), IV. Developer-Centric Documentation (Renamed from Developer-Centric Clarity), VI. Web Ergonomics (New Principle)
-- Added sections: None
-- Removed sections: None
-- Templates requiring updates: None (Templates are generic)
-- Follow-up TODOs: None
+SYNC IMPACT REPORT:
+Version change: N/A -> 1.0.0
+Added sections: All principles and sections specific to RAG Chatbot
+Removed sections: Template placeholders
+Templates requiring updates: ⚠ pending (.specify/templates/plan-template.md, .specify/templates/spec-template.md, .specify/templates/tasks-template.md)
+Follow-up TODOs: RATIFICATION_DATE to be set when officially adopted
 -->
-
-# Physical AI & Humanoid Robotics Course published via Docusaurus + GitHub Pages Constitution
+# RAG Chatbot for Docusaurus Course Book Constitution
 
 ## Core Principles
 
-### I. Spec-First & Modular Design
-Course structure, chapters, and web-site layout must be defined and approved before content creation begins. This ensures a coherent learning path and prevents "scope creep" or disorganized modules. The design must be modular to allow independent updates.
+### Grounded Response Constraint
+Answers must be grounded in Qdrant-retrieved chunks OR user-selected text; No external knowledge, browsing, assumptions, or hallucinations; Reply "I don't know based on the provided text" if context is insufficient. This ensures strict adherence to the book content and prevents any hallucinations or external knowledge usage.
 
-### II. Educational Integrity
-Course content (books, references, exercises) must be curated via verified sources. All technical claims and educational resources must be cross-referenced with authoritative materials. Agents must leverage available MCP servers to search and suggest the "best" AI-course books & resources, which must then be manually reviewed for suitability.
+### Mandatory Technology Stack Compliance
+Must use Cohere for embeddings, Qdrant Cloud (Free Tier) for vector DB, Neon Serverless Postgres for metadata/sessions/personalization, Gemini for all LLM reasoning & answers, FastAPI for backend, OpenAI Agents SDK for backend agent, OpenAI ChatKit SDK for frontend UI, uv for Python package management, Docker for containerization, Better Auth for authentication (post-Spec-4), and Context7 MCP Server for documentation source of truth. No substitutions are allowed under any circumstances.
 
-### III. Transparency and Traceability
-All included course materials and references must be clearly documented, including source, edition, and license. Users must be able to trace every piece of knowledge back to its origin.
+### Documentation-First Development
+Before using any SDK, API, or framework, fetch and verify documentation via Context7 MCP Server. Verify API signatures, configuration patterns, and required environment variables. No guessed or undocumented usage is permitted. This ensures implementation follows only documented behavior and prevents assumptions about APIs.
 
-### IV. Developer-Centric Documentation
-Content is structured and styled for readability by developers, educators, and technical learners. Avoid academic jargon where simple technical terms suffice. Focus on actionable learning outcomes and reproducible exercises.
+### RAG Pipeline Integrity
+Content URLs must be extracted only from <book-url>/sitemap, chunk size must be 400-700 tokens with overlap required, embeddings must be generated only with Cohere, vectors must be stored only in Qdrant, and versioned Qdrant collections are required. Book content is read-only and must not be altered during processing.
 
-### V. Reproducible Content Pipeline
-We enforce reproducibility using Spec-Kit Plus and MCP-server integration. The process of fetching, validating, and integrating course material must be automated and version-controlled.
+### Execution Order Compliance
+Complete Spec-1 to Spec-4 (RAG core: ingestion, retrieval, answering, UI integration) before implementing authentication. Only after Spec-4 passes should authentication be implemented in phases: Spec-5A (Better Auth setup), Spec-5B (User & session persistence), and Spec-5C (Optional protected features). Anonymous chatbot access must always remain functional regardless of authentication features.
 
-### VI. Web Ergonomics
-The home page and navigation UX must be designed for clarity. Discoverability of course modules, lessons, and resources is paramount. The site must be responsive and clean.
+### Privacy-First Architecture
+Neon Serverless Postgres must be used as the sole relational database for all metadata, ingestion state, chunk registry, user sessions (post-auth), and optional chat history. No PII should be stored without explicit user consent. Anonymous usage must remain available at all times, ensuring privacy-first design principles are maintained.
 
-## Project Standards & Constraints
+## Backend and Frontend Standards
+Backend must implement required FastAPI endpoints: POST /query, POST /select, GET /sources/{chunk_id}, POST /ingest. The backend agent must use OpenAI Agents SDK, all metadata must be stored in Neon Serverless Postgres, no external web access is allowed, and CORS must be restricted to the deployed book domain. Frontend must be integrated into the existing Docusaurus site using OpenAI ChatKit SDK, match the book's futuristic design, and support selected-text Q&A with source citations.
 
-### Standards
-- **Resource Verification**: Course resources (books, papers, tutorials) must be hand-verified: metadata (title, author, edition, publication date, license) included.
-- **Citation Format**: Inline hyperlinks + metadata (author, year, title, publisher) in a reference list (or footnote) — minimally license-compliant if content is non-public domain.
-- **Module Structure**: For each course module: provide learning objectives, required resources, optional resources, estimated time-to-complete, prerequisites (if any).
-- **Style**: Modular, navigable, and consistent with Docusaurus/MDX practices; code examples or sample diagrams when relevant.
-- **Home Page**: Highlights course overview, module list, quick start guide, and resource repository; must be responsive and clean.
-
-### Constraints
-- **Format**: Standard Docusaurus v3 project structure.
-- **Deployment**: GitHub Pages via automated CI/CD (GitHub Actions).
-- **Structure**: Course content must be organized into modules — minimum 6, maximum 15 modules.
-- **Resources**: For each module: at least 1 required resource (book or paper), up to 3 optional resources. Resources must be licensed appropriately (open license, or permissible for educational reference).
-- **Dependencies**: All content (text, metadata, links) must be stored in Git repository; no external closed-source dependencies required for core course content.
-- **Licensing**: Course content must avoid reliance on proprietary/unlicensed material for core learning (optional resources may reference commercial books if licensing allows referencing).
-
-## Success Criteria & Definition of Done
-
-- **Deployment**: Course homepage deployed successfully — shows course title, short description, module listing, quick start instructions, resource link database.
-- **Accessibility**: All modules accessible through site navigation with clearly labeled resources, learning objectives, and resource metadata.
-- **Content Quality**: Resource database (fetched via MCP-server then reviewed) contains at least 12 distinct, high-quality AI course resources (books/papers/tutorials) relevant to the course focus.
-- **Usability**: Users (educators or learners) can clone the repo and navigate modules locally or via GitHub Pages without missing files or broken links.
-- **Validation**: The entire site passes link-checks, build validation, and renders correctly on deployment.
-- **Compliance**: All resource references are traceable (metadata + link) and license-compliant.
+## Development Workflow
+All RAG pipeline components must be reproducible end-to-end. Answers from Gemini must be strictly limited to retrieved Qdrant chunks or user-selected text, with hard constraints preventing context violations. All answers must include citations (Module/Chapter/Anchor), and no citation means no answer is provided. Authentication features (Better Auth) must collect software and hardware background during signup and store user data only in Neon Serverless Postgres with explicit consent.
 
 ## Governance
+This constitution supersedes all other practices, guidelines, and convenience considerations. All implementations must verify compliance with these principles before proceeding. All work must strictly follow documented APIs verified through Context7 MCP Server. All pull requests and reviews must verify constitutional compliance. If any rule conflicts with convenience, this Constitution overrides everything.
 
-Constitution supersedes all other practices. Amendments require documentation, approval, and a migration plan.
-
-- **Resource Review**: All additions of new course resources must go through a “resource review” step: verify license, metadata, relevance, and record source details in a resource registry.
-- **Versioning**: Version control and changelog maintained — major updates to modules or resources versioned (e.g. v1.0, v1.1).
-- **Community**: Community contributions allowed via pull requests — any added modules, resources, or homepage changes must comply with core principles and standards.
-- **Maintenance**: Periodic review cycles (every 6 months) to refresh resource list, remove obsolete links, and update deprecated references.
-
-**Version**: 1.2.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06
+**Version**: 1.0.0 | **Ratified**: TODO(ratification_date): Original adoption date unknown | **Last Amended**: 2025-12-18
