@@ -1,0 +1,302 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot Backend API
+  description: API for the RAG chatbot backend with OpenAI Agents SDK integration
+  version: 1.0.0
+servers:
+  - url: https://api.rag-chatbot.com
+    description: Production server
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /query:
+    post:
+      summary: Submit a query to the RAG system
+      description: Process a user query against the knowledge base and return a grounded response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response with answer and citations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Invalid query format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - api_key: []
+
+  /select:
+    post:
+      summary: Submit user-selected text
+      description: Process user-selected text for use in the RAG system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedTextRequest'
+      responses:
+        '200':
+          description: Successfully processed selected text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectedTextResponse'
+        '400':
+          description: Invalid selected text format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - api_key: []
+
+  /sources/{chunk_id}:
+    get:
+      summary: Get source information for a chunk
+      description: Retrieve the source information for a specific content chunk
+      parameters:
+        - name: chunk_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique identifier for the content chunk
+      responses:
+        '200':
+          description: Source information for the chunk
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceReference'
+        '404':
+          description: Chunk not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /ingest:
+    post:
+      summary: Trigger content ingestion
+      description: Start the process of ingesting new content into the knowledge base
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestionRequest'
+      responses:
+        '202':
+          description: Ingestion process started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionResponse'
+        '400':
+          description: Invalid ingestion request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - api_key: []
+
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question or query text
+          example: "What are the key principles of RAG systems?"
+        context:
+          type: string
+          description: Optional additional context provided by user
+          example: "I'm interested in academic applications"
+        session_id:
+          type: string
+          description: Optional session identifier for tracking
+          example: "sess_12345"
+
+    QueryResponse:
+      type: object
+      required:
+        - answer
+        - citations
+      properties:
+        answer:
+          type: string
+          description: The generated response to the query
+          example: "Retrieval-Augmented Generation (RAG) systems combine information retrieval with text generation..."
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceReference'
+          description: List of sources used in the response
+        session_id:
+          type: string
+          description: Session identifier (if provided in request)
+          example: "sess_12345"
+
+    SelectedTextRequest:
+      type: object
+      required:
+        - text
+        - source_url
+      properties:
+        text:
+          type: string
+          description: The user-selected text
+          example: "The key principle of RAG is to ground responses in retrieved context."
+        source_url:
+          type: string
+          description: The URL where the text was selected from
+          example: "https://book.example.com/chapter-1"
+        session_id:
+          type: string
+          description: Optional session identifier
+          example: "sess_12345"
+
+    SelectedTextResponse:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+          description: Status of the operation
+        message:
+          type: string
+          description: Human-readable message about the operation
+        processed_text_id:
+          type: string
+          description: ID of the processed text (if successful)
+          example: "txt_67890"
+
+    SourceReference:
+      type: object
+      required:
+        - chunk_id
+        - module
+        - chapter
+        - url
+      properties:
+        chunk_id:
+          type: string
+          description: Reference to the content chunk
+          example: "chunk_abc123"
+        module:
+          type: string
+          description: Module where the content appears
+          example: "Foundations"
+        chapter:
+          type: string
+          description: Chapter name or identifier
+          example: "Introduction to RAG"
+        anchor:
+          type: string
+          description: Specific anchor/section within the source
+          example: "section-1.2"
+        url:
+          type: string
+          description: Full URL to the source
+          example: "https://book.example.com/chapter-1#section-1.2"
+
+    IngestionRequest:
+      type: object
+      properties:
+        sitemap_url:
+          type: string
+          description: URL to the sitemap containing content to ingest
+          example: "https://book.example.com/sitemap.xml"
+        urls:
+          type: array
+          items:
+            type: string
+          description: Specific URLs to ingest (alternative to sitemap)
+          example: ["https://book.example.com/chapter-1", "https://book.example.com/chapter-2"]
+        force_refresh:
+          type: boolean
+          description: Whether to refresh existing content
+          default: false
+
+    IngestionResponse:
+      type: object
+      required:
+        - status
+        - job_id
+      properties:
+        status:
+          type: string
+          enum: [started, queued, processing]
+          description: Status of the ingestion job
+        job_id:
+          type: string
+          description: Unique identifier for tracking the ingestion job
+          example: "job_ingest_123"
+        message:
+          type: string
+          description: Human-readable message about the ingestion process
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "INVALID_QUERY"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Query must be a non-empty string"
+
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication

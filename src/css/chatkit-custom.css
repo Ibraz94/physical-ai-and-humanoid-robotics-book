@@ -1,0 +1,33 @@
+/* Chat overlay animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatkit-overlay {
+  animation: slideInUp 0.1s ease-out;
+}
+
+/* Scrollbar styling for chat messages */
+.chatkit-overlay > div:nth-child(2)::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatkit-overlay > div:nth-child(2)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chatkit-overlay > div:nth-child(2)::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+.chatkit-overlay > div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
