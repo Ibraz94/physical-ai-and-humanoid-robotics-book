@@ -42,6 +42,20 @@
       "plugin": "plugin---physical-ai-and-humanoid-robotics-book-docusaurus-debugb-38-36a"
     }
   },
+  "/physical-ai-and-humanoid-robotics-book/signin-adb": {
+    "__comp": "__comp---site-src-pages-signin-js-2-b-9-168",
+    "__context": {
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-signina-74-99b"
+    },
+    "config": "config---physical-ai-and-humanoid-robotics-book-signin-5-e-9-fc2"
+  },
+  "/physical-ai-and-humanoid-robotics-book/signup-4e0": {
+    "__comp": "__comp---site-src-pages-signup-js-83-a-147",
+    "__context": {
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-signina-74-99b"
+    },
+    "config": "config---physical-ai-and-humanoid-robotics-book-signin-5-e-9-fc2"
+  },
   "/physical-ai-and-humanoid-robotics-book/docs-905": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
@@ -214,8 +228,8 @@
   "/physical-ai-and-humanoid-robotics-book/-f1c": {
     "__comp": "__comp---site-src-pages-index-tsx-1-df-d3e",
     "__context": {
-      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-a-74-ef2"
+      "plugin": "plugin---physical-ai-and-humanoid-robotics-book-signina-74-99b"
     },
-    "config": "config---physical-ai-and-humanoid-robotics-book-5-e-9-ba1"
+    "config": "config---physical-ai-and-humanoid-robotics-book-signin-5-e-9-fc2"
   }
 }

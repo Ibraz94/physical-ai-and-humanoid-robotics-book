@@ -1,7 +1,0 @@
-README.md
-pyproject.toml
-src/rag_chatbot_backend.egg-info/PKG-INFO
-src/rag_chatbot_backend.egg-info/SOURCES.txt
-src/rag_chatbot_backend.egg-info/dependency_links.txt
-src/rag_chatbot_backend.egg-info/requires.txt
-src/rag_chatbot_backend.egg-info/top_level.txt

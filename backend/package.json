@@ -1,0 +1,23 @@
+{
+  "name": "better-auth-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Better Auth authentication server for the RAG chatbot",
+  "main": "auth-server.ts",
+  "scripts": {
+    "dev": "tsx watch auth-server.ts",
+    "start": "tsx auth-server.ts",
+    "build": "tsc",
+    "migrate": "better-auth migrate"
+  },
+  "dependencies": {
+    "better-auth": "^1.4.7",
+    "@neondatabase/serverless": "^0.10.3",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.0"
+  }
+}

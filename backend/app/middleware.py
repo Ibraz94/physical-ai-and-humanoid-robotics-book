@@ -39,8 +39,28 @@ class SecurityMiddleware(BaseHTTPMiddleware):
 
 class APIKeyValidationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
-        # Skip validation for health checks and root endpoint
-        if request.url.path in ["/", "/health", "/docs", "/redoc"]:
+        # Skip validation for health checks, root endpoint, and auth endpoints
+        if request.url.path in ["/", "/health", "/docs", "/redoc", "/openapi.json"]:
+            return await call_next(request)
+
+        # Skip validation for all auth endpoints (Better Auth handles its own authentication)
+        if request.url.path.startswith("/api/auth") or request.url.path.startswith("/auth"):
+            return await call_next(request)
+
+        # Define public RAG endpoints that should remain accessible to anonymous users
+        public_endpoints = [
+            "/api/v1/query",
+            "/api/v1/select",
+            "/api/v1/sources",  # These might also be public depending on requirements
+        ]
+
+        # Check if this is a public RAG endpoint accessed via GET/POST/PUT/DELETE
+        is_public_rag_endpoint = any(
+            request.url.path.startswith(endpoint) for endpoint in public_endpoints
+        )
+
+        # Skip API key validation for public RAG endpoints
+        if is_public_rag_endpoint and request.method in ["GET", "POST", "PUT", "DELETE"]:
             return await call_next(request)
 
         # Validate API key for protected endpoints
@@ -70,8 +90,8 @@ class APIKeyValidationMiddleware(BaseHTTPMiddleware):
                 )
         else:
             # For endpoints that require authentication, return 401 if no auth header
-            # For now, we'll require API key for all endpoints except the public ones
-            if request.url.path.startswith("/api/"):
+            # For now, we'll require API key for all non-public endpoints
+            if request.url.path.startswith("/api/") and not is_public_rag_endpoint:
                 return JSONResponse(
                     status_code=401,
                     content={"detail": "API key is required"}
