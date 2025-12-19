@@ -1,0 +1,406 @@
+openapi: 3.0.0
+info:
+  title: Better Auth Integration API
+  description: API specification for Better Auth integration with FastAPI backend
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /auth/signup:
+    post:
+      summary: User registration
+      description: Creates a new user account with email/password authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+                - softwareBackground
+                - hardwareBackground
+                - consentGiven
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User's email address
+                password:
+                  type: string
+                  format: password
+                  description: User's password
+                softwareBackground:
+                  type: string
+                  description: User's software background information
+                hardwareBackground:
+                  type: string
+                  description: User's hardware background information
+                consentGiven:
+                  type: boolean
+                  description: Whether user has given explicit consent for data storage
+      responses:
+        '200':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  session:
+                    $ref: '#/components/schemas/Session'
+        '400':
+          description: Bad request - invalid input or user already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict - user with this email already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/signin:
+    post:
+      summary: User sign in
+      description: Authenticates user with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: User successfully authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  session:
+                    $ref: '#/components/schemas/Session'
+        '400':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/signout:
+    post:
+      summary: User sign out
+      description: Invalidates the current user session
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Successfully signed out
+        '401':
+          description: Unauthorized - invalid or expired session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/session:
+    get:
+      summary: Get current session
+      description: Retrieves information about the current authenticated session
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Current session information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  session:
+                    $ref: '#/components/schemas/Session'
+        '401':
+          description: Unauthorized - no valid session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/user-profile:
+    post:
+      summary: Create or update user profile
+      description: Creates or updates the user's profile with background information
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - softwareBackground
+                - hardwareBackground
+                - consentGiven
+              properties:
+                softwareBackground:
+                  type: string
+                  description: User's software background information
+                hardwareBackground:
+                  type: string
+                  description: User's hardware background information
+                consentGiven:
+                  type: boolean
+                  description: Whether user has given explicit consent for data storage
+      responses:
+        '200':
+          description: User profile successfully created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: Bad request - consent not given or invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - user not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Get user profile
+      description: Retrieves the current user's profile information
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          description: Unauthorized - user not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: User profile not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/query:
+    post:
+      summary: RAG Query Endpoint
+      description: Submit a query to the RAG system (accessible to all users)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The query to submit to the RAG system
+                sessionId:
+                  type: string
+                  description: Optional session ID for context (anonymous users may not have one)
+      responses:
+        '200':
+          description: Query processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The response from the RAG system
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: List of sources used in the response
+        '400':
+          description: Bad request - invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/select:
+    post:
+      summary: RAG Document Selection
+      description: Select relevant documents for a query (accessible to all users)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The query to use for document selection
+      responses:
+        '200':
+          description: Documents selected successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+        '400':
+          description: Bad request - invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token authentication
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user
+        email:
+          type: string
+          format: email
+          description: User's email address
+        emailVerified:
+          type: string
+          format: date-time
+          description: Timestamp when email was verified
+        createdAt:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    Session:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique session identifier
+        userId:
+          type: string
+          description: Foreign key to User.id
+        expiresAt:
+          type: string
+          format: date-time
+          description: Session expiration timestamp
+        createdAt:
+          type: string
+          format: date-time
+          description: Session creation timestamp
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the profile
+        userId:
+          type: string
+          description: Foreign key to Better Auth User.id
+        softwareBackground:
+          type: string
+          description: User's software background information
+        hardwareBackground:
+          type: string
+          description: User's hardware background information
+        consentGiven:
+          type: boolean
+          description: Whether explicit consent was given for data storage
+        createdAt:
+          type: string
+          format: date-time
+          description: Profile creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document identifier
+        title:
+          type: string
+          description: Document title
+        content:
+          type: string
+          description: Document content snippet
+        source:
+          type: string
+          description: Document source
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code (optional)
+
+security:
+  - BearerAuth: []

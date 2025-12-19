@@ -1,0 +1,55 @@
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.userEmail {
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+  font-weight: 500;
+}
+
+.signOutButton {
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-800);
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signOutButton:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .userEmail {
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .signOutButton {
+  color: var(--ifm-color-emphasis-700);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .signOutButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-500);
+}
+
+@media (max-width: 996px) {
+  .userMenu {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    padding: 1rem;
+    border-top: 1px solid var(--ifm-color-emphasis-300);
+  }
+}

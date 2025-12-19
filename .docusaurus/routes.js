@@ -38,6 +38,16 @@ export default [
     exact: true
   },
   {
+    path: '/physical-ai-and-humanoid-robotics-book/signin',
+    component: ComponentCreator('/physical-ai-and-humanoid-robotics-book/signin', 'adb'),
+    exact: true
+  },
+  {
+    path: '/physical-ai-and-humanoid-robotics-book/signup',
+    component: ComponentCreator('/physical-ai-and-humanoid-robotics-book/signup', '4e0'),
+    exact: true
+  },
+  {
     path: '/physical-ai-and-humanoid-robotics-book/docs',
     component: ComponentCreator('/physical-ai-and-humanoid-robotics-book/docs', '905'),
     routes: [

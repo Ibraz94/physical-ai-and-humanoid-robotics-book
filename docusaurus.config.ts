@@ -54,6 +54,10 @@ const config: Config = {
     ],
   ],
 
+  themes: [],
+  
+  plugins: [],
+
   themeConfig: {
        docs: {
         sidebar: {
@@ -77,6 +81,17 @@ const config: Config = {
           sidebarId: 'courseSidebar',
           position: 'left',
           label: 'Get Started',
+        },
+        {
+          to: '/signin',
+          label: 'Sign In',
+          position: 'right',
+        },
+        {
+          to: '/signup',
+          label: 'Sign Up',
+          position: 'right',
+          className: 'navbar-signup-button',
         },
         {
           href: 'https://github.com/ibraz94/physical-ai-and-humanoid-robotics-book',

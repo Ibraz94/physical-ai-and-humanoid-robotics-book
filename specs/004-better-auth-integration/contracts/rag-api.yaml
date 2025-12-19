@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  title: RAG API Endpoints
+  description: API specification for RAG endpoints that must remain accessible without authentication
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /api/query:
+    post:
+      summary: Query the RAG system
+      description: Submit a query to the RAG system and receive a response. This endpoint must remain accessible to anonymous users.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The query to submit to the RAG system
+                sessionId:
+                  type: string
+                  description: Optional session ID for context (anonymous users may not have one)
+                userId:
+                  type: string
+                  description: Optional user ID for authenticated users (for personalization only)
+      responses:
+        '200':
+          description: Query processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The response from the RAG system
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: List of sources used in the response
+                  sessionId:
+                    type: string
+                    description: Session ID if available
+        '400':
+          description: Bad request - invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security: []  # No authentication required
+
+  /api/select:
+    post:
+      summary: Select relevant documents
+      description: Select relevant documents for a query. This endpoint must remain accessible to anonymous users.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The query to use for document selection
+                sessionId:
+                  type: string
+                  description: Optional session ID for context (anonymous users may not have one)
+      responses:
+        '200':
+          description: Documents selected successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+                  sessionId:
+                    type: string
+                    description: Session ID if available
+        '400':
+          description: Bad request - invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security: []  # No authentication required
+
+components:
+  schemas:
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Document identifier
+        title:
+          type: string
+          description: Document title
+        content:
+          type: string
+          description: Document content snippet
+        source:
+          type: string
+          description: Document source
+        score:
+          type: number
+          description: Relevance score
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code (optional)
+
+# Explicitly state that these endpoints require NO authentication
+security: []  # Empty security array means no authentication required
