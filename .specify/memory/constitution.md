@@ -1,8 +1,8 @@
 <!--
 Sync Impact Report:
-- Version change: 1.1.0 -> 1.2.0
-- List of modified principles: II. Educational Integrity (Renamed from Technical Accuracy), IV. Developer-Centric Documentation (Renamed from Developer-Centric Clarity), VI. Web Ergonomics (New Principle)
-- Added sections: None
+- Version change: 1.2.0 -> 1.3.0
+- List of modified principles: None
+- Added sections: VI. Hugging Face Spaces Deployment Architecture (New Principle)
 - Removed sections: None
 - Templates requiring updates: None (Templates are generic)
 - Follow-up TODOs: None
@@ -27,7 +27,10 @@ Content is structured and styled for readability by developers, educators, and t
 ### V. Reproducible Content Pipeline
 We enforce reproducibility using Spec-Kit Plus and MCP-server integration. The process of fetching, validating, and integrating course material must be automated and version-controlled.
 
-### VI. Web Ergonomics
+### VI. Hugging Face Spaces Deployment Architecture
+We deploy two separate backends on Hugging Face Spaces: a Python backend and a Node.js backend. Both backends run independently as separate Spaces with their own Docker configurations. For the Python backend, a Dockerfile must set up the Python environment, install dependencies from requirements.txt, expose the appropriate port, and run the Python application. For the Node.js backend, a separate Dockerfile must set up the Node.js environment, install dependencies from package.json, expose the appropriate port, and run the Node.js server. Each Space must have its own README.md file following Hugging Face Spaces format with proper YAML frontmatter configuration specifying the SDK as 'docker', the app_port, and other necessary metadata. Both Dockerfiles must be optimized for production deployment, include proper health checks, and handle environment variables correctly.
+
+### VII. Web Ergonomics
 The home page and navigation UX must be designed for clarity. Discoverability of course modules, lessons, and resources is paramount. The site must be responsive and clean.
 
 ## Project Standards & Constraints
@@ -65,4 +68,4 @@ Constitution supersedes all other practices. Amendments require documentation, a
 - **Community**: Community contributions allowed via pull requests — any added modules, resources, or homepage changes must comply with core principles and standards.
 - **Maintenance**: Periodic review cycles (every 6 months) to refresh resource list, remove obsolete links, and update deprecated references.
 
-**Version**: 1.2.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-06
+**Version**: 1.3.0 | **Ratified**: 2025-12-06 | **Last Amended**: 2025-12-22

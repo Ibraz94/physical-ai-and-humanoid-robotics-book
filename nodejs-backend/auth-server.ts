@@ -22,6 +22,14 @@ const handler = toNodeHandler(auth);
 const server = createServer(async (req, res) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   
+  // Health check endpoint
+  if (req.url === '/health' && req.method === 'GET') {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ status: 'ok', service: 'auth-server' }));
+    return;
+  }
+  
   try {
     await handler(req, res);
   } catch (error) {

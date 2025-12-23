@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: Python Backend API
+  description: API for the Python backend service deployed on Hugging Face Spaces
+  version: 1.0.0
+servers:
+  - url: https://your-python-space.hf.space
+    description: Production server on Hugging Face Spaces
+paths:
+  /:
+    get:
+      summary: Get service status
+      responses:
+        '200':
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Python backend running on Hugging Face Spaces"
+  /health:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
