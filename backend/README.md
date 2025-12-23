@@ -1,3 +1,8 @@
+---
+sdk: docker
+app_port: 7860
+---
+
 # RAG Chatbot Backend
 
 This is the backend for the RAG (Retrieval-Augmented Generation) chatbot, designed to work with the OpenAI Agents SDK and Gemini as the reasoning engine.
