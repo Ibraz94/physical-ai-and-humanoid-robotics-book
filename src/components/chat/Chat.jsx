@@ -4,6 +4,7 @@ import ChatIcon from './ChatIcon';
 import SelectionHandler from './SelectionHandler';
 import { ChatConfigProvider } from './ChatConfig';
 import { useSession } from '../auth/auth-client';
+import sessionStorage from '../auth/session-storage';
 import { useHistory } from '@docusaurus/router';
 
 /**
@@ -18,36 +19,19 @@ const Chat = () => {
   const { data: session, isLoading } = useSession();
   const history = useHistory();
 
-  // Verify session on mount
+  // We use localStorage for sessions, so no need to verify with server
+  // Just check localStorage directly
   React.useEffect(() => {
-    const verifySession = async () => {
-      try {
-        // Try to get fresh session from server (call auth backend directly)
-        const response = await fetch('https://ibraz-auth-ai-book.hf.space/api/auth/session', {
-          credentials: 'include'
-        });
-        
-        if (!response.ok) {
-          console.log('No valid session found');
-          setIsVerifying(false);
-          return;
-        }
-        
-        const data = await response.json();
-        console.log('Session verified:', data);
-        setIsVerifying(false);
-      } catch (error) {
-        console.error('Error verifying session:', error);
-        setIsVerifying(false);
-      }
-    };
-
-    verifySession();
+    // Quick check - no server call needed since we use localStorage
+    setIsVerifying(false);
   }, []);
 
   const toggleChat = () => {
-    const hasValidSession = session?.user && session?.session;
+    // Check localStorage for authentication
+    const localSession = sessionStorage.getSession();
+    const hasValidSession = !!localSession?.user;
     console.log('Toggle chat clicked. Has valid session:', hasValidSession);
+    console.log('Local session:', localSession);
     
     // Don't open chat if not authenticated, just show tooltip
     if (!hasValidSession) {
@@ -63,7 +47,9 @@ const Chat = () => {
   };
 
   const handleAskQuestion = (text) => {
-    const hasValidSession = session?.user && session?.session;
+    // Check localStorage for authentication
+    const localSession = sessionStorage.getSession();
+    const hasValidSession = !!localSession?.user;
     if (!hasValidSession) {
       // Don't do anything if not authenticated
       return;
@@ -72,8 +58,15 @@ const Chat = () => {
     setIsChatOpen(true);
   };
 
-  // Check if session is valid (has both user and session data)
-  const isAuthenticated = !isLoading && !isVerifying && !!session?.user && !!session?.session;
+  // Check if session is valid (check localStorage since cookies don't work cross-domain)
+  const localSession = sessionStorage.getSession();
+  const isAuthenticated = !!localSession?.user;
+  
+  // Debug logging
+  React.useEffect(() => {
+    console.log('Chat component - isAuthenticated:', isAuthenticated);
+    console.log('Chat component - localSession:', localSession);
+  }, [isAuthenticated, localSession]);
 
   return (
     <>

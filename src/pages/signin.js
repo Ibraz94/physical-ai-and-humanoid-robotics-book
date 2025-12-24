@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import { authClient } from '../components/auth/auth-client';
+import sessionStorage from '../components/auth/session-storage';
 import { useHistory } from '@docusaurus/router';
 import styles from './auth.module.css';
 
@@ -40,6 +41,18 @@ export default function SigninPage() {
         setError(result.error.message || 'Failed to sign in. Please check your credentials.');
         setLoading(false);
         return;
+      }
+
+      // Store session in localStorage (since cookies don't work cross-domain)
+      console.log('Sign in result:', result);
+      if (result.data) {
+        // Better Auth returns session data in result.data
+        const sessionData = {
+          user: result.data.user || result.data,
+          session: result.data.session || result.data
+        };
+        sessionStorage.setSession(sessionData);
+        console.log('Session stored in localStorage:', sessionData);
       }
 
       // Redirect to homepage on success

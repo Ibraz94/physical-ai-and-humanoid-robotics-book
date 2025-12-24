@@ -39,6 +39,10 @@ class SecurityMiddleware(BaseHTTPMiddleware):
 
 class APIKeyValidationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        # Skip validation for OPTIONS requests (CORS preflight)
+        if request.method == "OPTIONS":
+            return await call_next(request)
+            
         # Skip validation for health checks, root endpoint, and auth endpoints
         if request.url.path in ["/", "/health", "/docs", "/redoc", "/openapi.json"]:
             return await call_next(request)

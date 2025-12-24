@@ -1,17 +1,21 @@
 /**
  * Better Auth Configuration
  *
- * This configuration sets up Better Auth with Neon Postgres database adapter
- * and defines the authentication flows for the application.
+ * This configuration sets up Better Auth with Neon Postgres database
  */
 
 import { betterAuth } from "better-auth";
 import { Pool } from "@neondatabase/serverless";
 
 // Initialize Neon database connection pool
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// neonConfig is already configured in init-neon.js
+const pool = new Pool({ 
+  connectionString: process.env.DATABASE_URL
+});
 
-// Create the Better Auth instance with configuration
+console.log('🔧 Neon Pool initialized');
+
+// Create the Better Auth instance
 export const auth = betterAuth({
   database: pool,
 

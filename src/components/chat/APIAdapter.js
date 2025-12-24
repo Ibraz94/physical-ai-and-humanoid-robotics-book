@@ -78,7 +78,7 @@ class APIAdapter {
     try {
       const backendRequest = this.mapToBackendFormat(message);
 
-      const response = await fetch(`${this.backendUrl}/api/v1/query/`, {
+      const response = await fetch(`${this.backendUrl}/api/v1/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

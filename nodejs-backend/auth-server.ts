@@ -4,6 +4,9 @@
  * Runs on port 8001 and is proxied by FastAPI on port 8000
  */
 
+// CRITICAL: Initialize Neon configuration FIRST
+import './init-neon.js';
+
 import 'dotenv/config';
 import { auth } from "./auth.config.js";
 import { toNodeHandler } from "better-auth/node";

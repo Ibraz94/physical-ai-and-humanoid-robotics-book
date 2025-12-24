@@ -16,12 +16,14 @@ RUN npm ci --only=production
 RUN npm install -g tsx
 
 # Copy application code (excluding node_modules)
+COPY init-neon.js .
 COPY auth-server.ts .
 COPY auth.config.ts .
 COPY tsconfig.json .
 
-# Set environment variable for port
+# Set environment variables
 ENV AUTH_PORT=7860
+ENV NEON_USE_HTTP=true
 
 EXPOSE 7860
 

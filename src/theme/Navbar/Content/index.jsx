@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSession, authClient } from '@site/src/components/auth/auth-client';
+import sessionStorage from '@site/src/components/auth/session-storage';
 import { useHistory } from '@docusaurus/router';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Content from '@theme-original/Navbar/Content';
@@ -8,10 +9,14 @@ export default function ContentWrapper(props) {
   const { data: session, isLoading } = useSession();
   const history = useHistory();
   const baseUrl = useBaseUrl('/');
-  const isAuthenticated = !isLoading && !!session?.user;
+  
+  // Check localStorage for session (since cookies don't work cross-domain)
+  const localSession = sessionStorage.getSession();
+  const isAuthenticated = !!localSession?.user;
 
   const handleSignOut = async () => {
     await authClient.signOut();
+    sessionStorage.clearSession(); // Clear localStorage
     history.push(baseUrl);
     setTimeout(() => window.location.reload(), 100);
   };
@@ -33,7 +38,7 @@ export default function ContentWrapper(props) {
             color: 'var(--ifm-color-emphasis-800)',
             fontWeight: '500'
           }}>
-            {session.user.email}
+            {localSession.user.email}
           </span>
           <button 
             onClick={handleSignOut}
