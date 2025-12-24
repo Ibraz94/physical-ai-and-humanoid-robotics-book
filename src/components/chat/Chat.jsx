@@ -22,8 +22,8 @@ const Chat = () => {
   React.useEffect(() => {
     const verifySession = async () => {
       try {
-        // Try to get fresh session from server
-        const response = await fetch('https://ibraz-api-ai-book.hf.space/api/auth/session', {
+        // Try to get fresh session from server (call auth backend directly)
+        const response = await fetch('https://ibraz-auth-ai-book.hf.space/api/auth/session', {
           credentials: 'include'
         });
         
