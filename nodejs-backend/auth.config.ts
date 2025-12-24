@@ -40,8 +40,12 @@ export const auth = betterAuth({
   // Trust proxy for production deployments
   trustedOrigins: [
     "http://localhost:3000", // Docusaurus frontend in development
-    "http://localhost:8000", // FastAPI backend
+    "http://localhost:8000", // FastAPI backend in development
+    "https://ibraz94.github.io", // GitHub Pages frontend (production)
+    "https://ibraz-api-ai-book.hf.space", // Python backend on HF (production)
+    "https://ibraz-auth-ai-book.hf.space", // Auth backend on HF (production)
     process.env.BOOK_DOMAIN || "",
+    process.env.BETTER_AUTH_URL || "",
   ],
 });
 

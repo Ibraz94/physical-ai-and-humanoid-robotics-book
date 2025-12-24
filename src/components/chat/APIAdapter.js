@@ -5,8 +5,8 @@
 
 class APIAdapter {
   constructor(backendUrl) {
-    // Use provided URL or default to localhost
-    this.backendUrl = backendUrl || 'http://localhost:8000';
+    // Use provided URL or default to Hugging Face Space
+    this.backendUrl = backendUrl || 'https://ibraz-api-ai-book.hf.space';
   }
 
   /**

@@ -7,7 +7,7 @@ import { createAuthClient } from "better-auth/react";
 
 // Initialize the Better Auth client with configuration
 const authClient = createAuthClient({
-    baseURL: "http://localhost:8000", // FastAPI backend that proxies to Better Auth
+    baseURL: "https://ibraz-api-ai-book.hf.space", // FastAPI backend that proxies to Better Auth
     fetchOptions: {
         credentials: 'include', // Important: include cookies for session management
     },

@@ -23,7 +23,7 @@ const Chat = () => {
     const verifySession = async () => {
       try {
         // Try to get fresh session from server
-        const response = await fetch('http://localhost:8000/api/auth/session', {
+        const response = await fetch('https://ibraz-api-ai-book.hf.space/api/auth/session', {
           credentials: 'include'
         });
         

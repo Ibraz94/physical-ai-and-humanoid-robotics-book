@@ -10,7 +10,7 @@ const ChatOverlay = ({ isOpen, onClose, selectedText }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const messagesEndRef = useRef(null);
-  const apiAdapter = useRef(new APIAdapter('http://localhost:8000')).current;
+  const apiAdapter = useRef(new APIAdapter('https://ibraz-api-ai-book.hf.space')).current;
 
   useEffect(() => {
     // Detect theme

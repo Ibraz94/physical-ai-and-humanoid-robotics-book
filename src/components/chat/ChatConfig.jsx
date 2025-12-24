@@ -4,13 +4,13 @@ import React, { createContext, useContext } from 'react';
  * Chat configuration context
  */
 const ChatConfigContext = createContext({
-  backendUrl: 'http://localhost:8000',
+  backendUrl: 'https://ibraz-api-ai-book.hf.space',
   apiKey: 'test-api-key-12345'
 });
 
 export const ChatConfigProvider = ({ children, config = {} }) => {
   const defaultConfig = {
-    backendUrl: config.backendUrl || 'http://localhost:8000',
+    backendUrl: config.backendUrl || 'https://ibraz-api-ai-book.hf.space',
     apiKey: config.apiKey || 'test-api-key-12345'
   };
 

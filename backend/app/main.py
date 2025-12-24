@@ -30,7 +30,16 @@ book_domain = os.getenv("BOOK_DOMAIN", "http://localhost:3000")  # Default to fr
 better_auth_url = os.getenv("BETTER_AUTH_URL", "http://localhost:8000")
 
 # Allow origins for both frontend and Better Auth service
-allowed_origins = [book_domain, better_auth_url, "http://localhost:3000", "http://localhost:8000", "http://127.0.0.1:3000", "http://127.0.0.1:8000"]
+allowed_origins = [
+    book_domain, 
+    better_auth_url, 
+    "http://localhost:3000", 
+    "http://localhost:8000", 
+    "http://127.0.0.1:3000", 
+    "http://127.0.0.1:8000",
+    "https://ibraz94.github.io",  # GitHub Pages frontend
+    "https://ibraz-auth-ai-book.hf.space"  # Auth backend on HF
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,7 +52,15 @@ app.add_middleware(
 )
 
 # Add trusted host middleware to prevent HTTP Host Header attacks
-allowed_hosts = [book_domain, "localhost", "127.0.0.1", "0.0.0.0"]
+# Include Hugging Face Space domain
+allowed_hosts = [
+    book_domain, 
+    "localhost", 
+    "127.0.0.1", 
+    "0.0.0.0",
+    "ibraz-api-ai-book.hf.space",  # Add your HF Space URL
+    "*.hf.space"  # Allow all HF Space subdomains
+]
 app.add_middleware(
     TrustedHostMiddleware,
     allowed_hosts=allowed_hosts
