@@ -1,0 +1,23 @@
+/* Mobile responsive navbar user info */
+
+.navbar-signout-button {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.navbar-signout-button:hover {
+  background: var(--ifm-color-primary-dark);
+}
+
+/* Hide user info in navbar on mobile (it's in the sidebar instead) */
+@media (max-width: 996px) {
+  .navbar-user-info {
+    display: none !important;
+  }
+}

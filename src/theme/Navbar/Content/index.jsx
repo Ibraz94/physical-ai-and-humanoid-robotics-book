@@ -25,18 +25,24 @@ export default function ContentWrapper(props) {
     <>
       <Content {...props} />
       {isAuthenticated && (
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '1rem',
-          marginLeft: '1rem',
-          paddingLeft: '1rem',
-          borderLeft: '1px solid var(--ifm-color-emphasis-300)'
-        }}>
+        <div 
+          className="navbar-user-info"
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.75rem',
+            marginLeft: '1rem',
+            paddingLeft: '1rem',
+            borderLeft: '1px solid var(--ifm-color-emphasis-300)'
+          }}>
           <span style={{ 
             fontSize: '0.9rem', 
             color: 'var(--ifm-color-emphasis-800)',
-            fontWeight: '500'
+            fontWeight: '500',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            maxWidth: '200px'
           }}>
             {localSession.user.email}
           </span>
